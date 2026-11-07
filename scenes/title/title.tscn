@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://ni5xbyes4vit"]
+
+[ext_resource type="Script" uid="uid://5rciwvs0ckhb" path="res://scenes/title/title.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://daikd3vq1js5f" path="res://assets/Bomber/BONUS Bomber Mini.png" id="2"]
+[ext_resource type="LabelSettings" path="res://scenes/ui/big_label.tres" id="3"]
+[ext_resource type="LabelSettings" path="res://scenes/ui/hud_label.tres" id="4"]
+
+[node name="Title" type="Control" unique_id=1585429544]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+
+[node name="Background" type="ColorRect" parent="." unique_id=944334545]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.2, 0.27, 0.18, 1)
+
+[node name="Center" type="CenterContainer" parent="." unique_id=957851300]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="Center" unique_id=495038653]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Plane" type="TextureRect" parent="Center/VBox" unique_id=194264651]
+layout_mode = 2
+texture = ExtResource("2")
+stretch_mode = 3
+flip_v = true
+
+[node name="GameTitle" type="Label" parent="Center/VBox" unique_id=767701759]
+layout_mode = 2
+text = "ATTACK RUN"
+label_settings = ExtResource("3")
+horizontal_alignment = 1
+
+[node name="OnePlayer" type="Button" parent="Center/VBox" unique_id=432323063]
+custom_minimum_size = Vector2(280, 56)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 28
+text = "1 PLAYER"
+
+[node name="TwoPlayers" type="Button" parent="Center/VBox" unique_id=2124945140]
+custom_minimum_size = Vector2(280, 56)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 28
+text = "2 PLAYERS"
+
+[node name="Controls" type="Label" parent="Center/VBox" unique_id=812429862]
+layout_mode = 2
+text = "P1: WASD move, SPACE fire
+P2: ARROWS move, ENTER fire"
+label_settings = ExtResource("4")
+horizontal_alignment = 1

@@ -1,0 +1,40 @@
+[gd_scene load_steps=14 format=3]
+
+[ext_resource type="Script" path="res://scenes/main/main.gd" id="1"]
+[ext_resource type="Script" path="res://scenes/main/chunk_spawner.gd" id="2"]
+[ext_resource type="Script" path="res://scenes/main/scroller.gd" id="3"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/enemy_plane.tscn" id="5"]
+[ext_resource type="PackedScene" path="res://scenes/chunks/chunk_start.tscn" id="6"]
+[ext_resource type="PackedScene" path="res://scenes/chunks/chunk_road.tscn" id="7"]
+[ext_resource type="PackedScene" path="res://scenes/chunks/chunk_dirt.tscn" id="8"]
+[ext_resource type="PackedScene" path="res://scenes/chunks/chunk_base.tscn" id="9"]
+[ext_resource type="PackedScene" path="res://scenes/chunks/chunk_forest.tscn" id="10"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="11"]
+[ext_resource type="PackedScene" path="res://scenes/ui/game_over.tscn" id="12"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1")
+player_scene = ExtResource("4")
+enemy_plane_scene = ExtResource("5")
+
+[node name="ChunkSpawner" type="Node2D" parent="." node_paths=PackedStringArray("camera")]
+script = ExtResource("2")
+start_chunk = ExtResource("6")
+chunks = Array[PackedScene]([ExtResource("7"), ExtResource("8"), ExtResource("9"), ExtResource("10")])
+camera = NodePath("../Scroller/Camera2D")
+
+[node name="Scroller" type="Node2D" parent="."]
+script = ExtResource("3")
+
+[node name="Camera2D" type="Camera2D" parent="Scroller"]
+anchor_mode = 0
+
+[node name="WaveTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="HUD" parent="." instance=ExtResource("11")]
+
+[node name="GameOver" parent="." instance=ExtResource("12")]
