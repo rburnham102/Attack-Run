@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" path="res://tilesets/Trees Bushes/TDS04_0022_Tree1.png" id="6_1wg63"]
 [ext_resource type="Texture2D" path="res://tilesets/Trees Bushes/TDS04_0011_Bush-02.png" id="7_n25wp"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/tank.tscn" id="8_0ohtq"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/btr.tscn" id="9_nt8ff"]
 
 [node name="ChunkDirt" type="Node2D" unique_id=1024131221]
 
@@ -49,3 +50,6 @@ texture = ExtResource("7_n25wp")
 
 [node name="Tank" parent="Enemies" unique_id=1209072764 instance=ExtResource("8_0ohtq")]
 position = Vector2(320, 240)
+
+[node name="BTR" parent="Enemies" unique_id=1326522160 instance=ExtResource("9_nt8ff")]
+position = Vector2(120, 400)

@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scenes/enemies/tank.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/ACS/Source/ACS_Base.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/ACS/Source/ACS_Tower.png" id="3"]
+[ext_resource type="PackedScene" path="res://scenes/projectiles/tank_shell.tscn" id="4"]
+[ext_resource type="Texture2D" path="res://assets/ACS/Broken/ACS_Broken_Base_01.png" id="5"]
+
+[sub_resource type="RectangleShape2D" id="shape"]
+size = Vector2(62, 84)
+
+[node name="ACS" type="Area2D"]
+z_index = 1
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+script = ExtResource("1")
+move_speed = 12.0
+turret_turn_speed = 50.0
+shell_scene = ExtResource("4")
+spread_count = 3
+spread_angle = 20.0
+wreck_texture = ExtResource("5")
+max_hp = 12
+score_value = 500
+drop_chance = 0.3
+explosion_scale = 2.5
+
+[node name="Base" type="Sprite2D" parent="."]
+texture = ExtResource("2")
+flip_v = true
+
+[node name="Turret" type="Sprite2D" parent="."]
+position = Vector2(0, -10)
+texture = ExtResource("3")
+offset = Vector2(0, 24)
+
+[node name="Muzzle" type="Marker2D" parent="Turret"]
+position = Vector2(0, 81)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("shape")
+
+[node name="FireTimer" type="Timer" parent="."]
+wait_time = 3.2
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+rect = Rect2(-36, -48, 72, 96)

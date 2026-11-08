@@ -10,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://vmax5aivfn0o" path="res://tilesets/Tiles/_0000_WTiles.png" id="7_gpyeo"]
 [ext_resource type="Texture2D" uid="uid://cuxy64gdxthgk" path="res://tilesets/House/TDS04_0000_House01.png" id="9_ltst2"]
 [ext_resource type="Texture2D" uid="uid://cghm0ntgvje2m" path="res://tilesets/House/TDS04_House02.png" id="10_gpyeo"]
-[ext_resource type="Texture2D" uid="uid://djne4shvrmobg" path="res://tilesets/SandBag/TDS04_0002_Sandbags.png" id="11_81ncx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_81ncx"]
 resource_name = "Solid (water/grass/sand/dirt/asphalt)"
@@ -522,10 +521,6 @@ texture_region_size = Vector2i(64, 64)
 2:1/0 = 0
 3:1/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lnic2"]
-texture = ExtResource("11_81ncx")
-texture_region_size = Vector2i(64, 64)
-
 [resource]
 tile_size = Vector2i(64, 64)
 sources/0 = SubResource("TileSetAtlasSource_81ncx")
@@ -537,5 +532,4 @@ sources/5 = SubResource("TileSetAtlasSource_uw126")
 sources/6 = SubResource("TileSetAtlasSource_agf63")
 sources/7 = SubResource("TileSetAtlasSource_ynqje")
 sources/8 = SubResource("TileSetAtlasSource_k2tmt")
-sources/9 = SubResource("TileSetAtlasSource_lnic2")
 sources/12 = SubResource("TileSetAtlasSource_g4hom")

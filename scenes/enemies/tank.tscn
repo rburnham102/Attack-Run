@@ -20,26 +20,25 @@ wreck_texture = ExtResource("5")
 max_hp = 6
 score_value = 250
 explosion_scale = 2.0
-drop_chance = 0.15
+drop_chance = 0.2
 
 [node name="Base" type="Sprite2D" parent="." unique_id=276850089]
 texture = ExtResource("2")
 flip_v = true
 
 [node name="Turret" type="Sprite2D" parent="." unique_id=401735423]
-position = Vector2(0.5, -28)
-scale = Vector2(0.9921875, 1)
+position = Vector2(0, -9)
 texture = ExtResource("3")
-offset = Vector2(0, 50)
+offset = Vector2(0, 31)
 
 [node name="Muzzle" type="Marker2D" parent="Turret" unique_id=956843619]
-position = Vector2(-0.503937, 106)
+position = Vector2(0, 86)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=271055349]
 shape = SubResource("shape")
 
 [node name="FireTimer" type="Timer" parent="." unique_id=128538221]
-wait_time = 2.0
+wait_time = 3.0
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=1596962607]
 rect = Rect2(-40, -50, 80, 100)

@@ -1,10 +1,11 @@
 [gd_scene format=4 uid="uid://iaay0u0b4dkd"]
 
-[ext_resource type="TileSet" uid="uid://qw17yfafpw48" path="res://tilesets/battlefield_tileset.tres" id="1_b522j"]
-[ext_resource type="Texture2D" uid="uid://cn5siuqm1uxt8" path="res://tilesets/Rocks/TDS04_0004_Rock02.png" id="2_jlofe"]
-[ext_resource type="PackedScene" uid="uid://do8e8rdr7ik4v" path="res://scenes/enemies/tank.tscn" id="3_5f6v0"]
+[ext_resource type="TileSet" path="res://tilesets/battlefield_tileset.tres" id="1_b522j"]
+[ext_resource type="Texture2D" path="res://tilesets/Rocks/TDS04_0004_Rock02.png" id="2_jlofe"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/tank.tscn" id="3_5f6v0"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/humvee.tscn" id="4_jlofe"]
 
-[node name="ChunkStart" type="Node2D" unique_id=1111651043]
+[node name="ChunkStreet" type="Node2D" unique_id=1111651043]
 
 [node name="Ground" type="TileMapLayer" parent="." unique_id=1379302649]
 tile_map_data = PackedByteArray("AAAAAAAAAQABAAEAAAABAAAAAQACAAEAAAACAAAAAQADAAEAAAADAAAAAQABAAEAAAAEAAAAAQACAAEAAAAFAAAAAQADAAEAAAAGAAAAAQABAAEAAAAHAAAAAQACAAEAAAAIAAAAAQADAAEAAAAJAAAAAQABAAEAAAAAAAcAAQABAAIAAAABAAcAAQACAAIAAAACAAcAAQADAAIAAAADAAcAAQABAAIAAAAEAAcAAQACAAIAAAAFAAcAAQADAAIAAAAGAAcAAQABAAIAAAAHAAcAAQACAAIAAAAIAAcAAQADAAIAAAAJAAcAAQABAAIAAAAAAAQAAgACAAEAAAAAAAUAAgACAAIAAAABAAQAAgACAAEAAAABAAUAAgACAAIAAAACAAQAAgACAAEAAAACAAUAAgACAAIAAAADAAQAAQACAAIAAAADAAUAAQACAAIAAAAEAAQAAQACAAIAAAAEAAUAAQACAAIAAAAFAAQAAQACAAIAAAAFAAUAAQACAAIAAAAGAAQAAQACAAIAAAAGAAUAAQACAAIAAAAHAAQAAgACAAEAAAAHAAUAAgACAAIAAAAIAAQAAgACAAEAAAAIAAUAAgACAAIAAAAJAAQAAgACAAEAAAAJAAUAAgACAAIAAAAAAAYAAQACAAIAAAABAAYAAQACAAIAAAACAAYAAQACAAIAAAADAAYAAQACAAIAAAAEAAYAAQACAAIAAAAFAAYAAQACAAIAAAAGAAYAAQACAAIAAAAHAAYAAQACAAIAAAAIAAYAAQACAAIAAAAJAAYAAQACAAIAAAAAAAEAAQACAAIAAAAAAAIAAQACAAIAAAABAAIAAQACAAIAAAACAAIAAQACAAIAAAADAAIAAQACAAIAAAAEAAIAAQACAAIAAAAFAAIAAQACAAIAAAAGAAIAAQACAAIAAAAHAAIAAQACAAIAAAAIAAIAAQACAAIAAAAJAAIAAQACAAIAAAAJAAEAAQACAAIAAAAIAAEAAQACAAIAAAAHAAEAAQACAAIAAAAGAAEAAQACAAIAAAAFAAEAAQACAAIAAAAEAAEAAQACAAIAAAADAAEAAQACAAIAAAACAAEAAQACAAIAAAABAAEAAQACAAIAAAA=")
@@ -26,8 +27,12 @@ texture = ExtResource("2_jlofe")
 
 [node name="Enemies" type="Node2D" parent="." unique_id=2040821947]
 
-[node name="Tank" parent="." unique_id=1582527876 instance=ExtResource("3_5f6v0")]
+[node name="Tank" parent="Enemies" unique_id=1582527876 instance=ExtResource("3_5f6v0")]
 position = Vector2(158, 77)
 
-[node name="Tank2" parent="." unique_id=343558572 instance=ExtResource("3_5f6v0")]
+[node name="Tank2" parent="Enemies" unique_id=343558572 instance=ExtResource("3_5f6v0")]
 position = Vector2(547, 327)
+
+[node name="Humvee" parent="Enemies" unique_id=2553794 instance=ExtResource("4_jlofe")]
+position = Vector2(620, 224)
+rotation = 1.5707964

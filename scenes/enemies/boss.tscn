@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scenes/enemies/boss.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/Bomber/Bomber_Source.png" id="2"]
+[ext_resource type="PackedScene" path="res://scenes/projectiles/enemy_bullet.tscn" id="3"]
+
+[sub_resource type="CapsuleShape2D" id="wings"]
+radius = 22.0
+height = 172.0
+
+[sub_resource type="CapsuleShape2D" id="body"]
+radius = 18.0
+height = 130.0
+
+[node name="Boss" type="Area2D"]
+z_index = 3
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+script = ExtResource("1")
+bullet_scene = ExtResource("3")
+max_hp = 70
+score_value = 5000
+explosion_scale = 3.0
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.35)
+z_index = -1
+position = Vector2(24, 40)
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(1.2, 0.75, 0.7, 1)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("2")
+
+[node name="Wings" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6)
+rotation = 1.5707964
+shape = SubResource("wings")
+
+[node name="Body" type="CollisionShape2D" parent="."]
+shape = SubResource("body")
+
+[node name="Muzzles" type="Node2D" parent="."]
+
+[node name="LeftGun" type="Marker2D" parent="Muzzles"]
+position = Vector2(-48, 10)
+
+[node name="RightGun" type="Marker2D" parent="Muzzles"]
+position = Vector2(48, 10)
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 1.6

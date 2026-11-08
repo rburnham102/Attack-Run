@@ -33,7 +33,7 @@ const MONEY_BIG := 500
 ## Keeps the plane's body from going past the screen edge.
 @export var screen_margin := Vector2(36, 36)
 ## Invulnerability after being hit, and after respawning.
-@export var hit_invuln_time := 1.0
+@export var hit_invuln_time := 1.5
 @export var respawn_invuln_time := 2.5
 
 var hp := 0
@@ -133,7 +133,7 @@ func _on_area_entered(area: Area2D) -> void:
 			collect(area.kind)
 	elif area is Enemy:
 		# We collided with an enemy plane: both of us take damage.
-		area.take_damage(99, player_id)
+		area.rammed(player_id)
 		take_damage(1, 0)
 
 

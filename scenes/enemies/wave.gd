@@ -5,7 +5,7 @@ extends Node2D
 ## shot down (none escape), a guaranteed pickup drops where the last one fell.
 
 ## Waves smaller than this never give a bonus.
-@export var bonus_min_size := 4
+@export var bonus_min_size := 3
 
 var _size := 0
 var _all_destroyed := true

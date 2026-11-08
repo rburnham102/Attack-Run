@@ -18,7 +18,11 @@ var destroyed := false
 
 
 func _ready() -> void:
-	hp = max_hp
+	# Later stages make every enemy tougher and quicker to fire.
+	hp = ceili(max_hp * Game.enemy_hp_scale())
+	var fire_timer := get_node_or_null("FireTimer") as Timer
+	if fire_timer:
+		fire_timer.wait_time /= Game.enemy_fire_rate_scale()
 
 
 ## Called by bullets (and by a player ramming this enemy).
@@ -30,6 +34,12 @@ func take_damage(amount: int, shooter_id: int) -> void:
 		die(shooter_id)
 	else:
 		_flash()
+
+
+## Called when a player's plane crashes into this enemy. Most enemies are
+## destroyed outright; the boss overrides this to take only a little damage.
+func rammed(player_id: int) -> void:
+	take_damage(999, player_id)
 
 
 func die(shooter_id: int) -> void:

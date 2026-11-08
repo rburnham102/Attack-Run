@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" path="res://tilesets/Trees Bushes/TDS04_0021_Tree2.png" id="9_np201"]
 [ext_resource type="Texture2D" path="res://tilesets/Trees Bushes/TDS04_0010_Bush-03.png" id="10_nos6e"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/tank.tscn" id="11_0c3kr"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/acs.tscn" id="12_bhw5x"]
 
 [node name="ChunkBase" type="Node2D" unique_id=1633251476]
 
@@ -70,6 +71,6 @@ texture = ExtResource("10_nos6e")
 position = Vector2(440, 260)
 move_speed = 0.0
 
-[node name="Tank2" parent="Enemies" unique_id=1373141771 instance=ExtResource("11_0c3kr")]
+[node name="ACS" parent="Enemies" unique_id=1113961316 instance=ExtResource("12_bhw5x")]
 position = Vector2(560, 300)
 move_speed = 0.0

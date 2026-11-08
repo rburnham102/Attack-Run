@@ -8,6 +8,10 @@ signal lives_changed(player_id: int, lives: int)
 ## stats holds "hp", "armor", "weapon" and "speed" for that player.
 signal player_stats_changed(player_id: int, stats: Dictionary)
 signal pickup_collected(player_id: int, kind: Pickup.Kind)
+signal stage_started(stage: int)
+signal boss_incoming
+signal boss_health_changed(hp: int, max_hp: int)
+signal boss_defeated
 signal game_over
 
 const START_LIVES := 3
@@ -17,7 +21,7 @@ const PICKUP_SCENE := preload("res://scenes/pickups/pickup.tscn")
 
 ## How likely each pickup is to drop from a destroyed enemy (relative weights).
 const DROP_WEIGHTS := {
-	Pickup.Kind.WEAPON: 8,
+	Pickup.Kind.WEAPON: 12,
 	Pickup.Kind.HEALTH: 12,
 	Pickup.Kind.ARMOR: 10,
 	Pickup.Kind.SPEED: 6,
@@ -36,6 +40,8 @@ var player_count := 1
 # Index 0 is player 1, index 1 is player 2.
 var scores: Array[int] = [0, 0]
 var lives: Array[int] = [0, 0]
+## Goes up by one each time a boss is destroyed. Enemies read it to scale up.
+var stage := 1
 
 var _rng := RandomNumberGenerator.new()
 
@@ -44,6 +50,7 @@ func start_new_game(count: int) -> void:
 	player_count = count
 	scores = [0, 0]
 	lives = [START_LIVES, START_LIVES if count == 2 else 0]
+	stage = 1
 	get_tree().change_scene_to_file(MAIN_SCENE)
 
 
@@ -102,3 +109,15 @@ func spawn_pickup(kind: Pickup.Kind, at: Vector2) -> void:
 	pickup.kind = kind
 	pickup.position = at
 	add_to_world(pickup)
+
+
+# ---- Difficulty. Each stage makes enemies tougher and faster-firing. ----
+
+## Enemy health multiplier: 1.0 on stage 1, 1.25 on stage 2, 1.5 on stage 3...
+func enemy_hp_scale() -> float:
+	return 1.0 + 0.25 * (stage - 1)
+
+
+## Enemy fire-rate multiplier: their FireTimer wait is divided by this.
+func enemy_fire_rate_scale() -> float:
+	return 1.0 + 0.1 * (stage - 1)

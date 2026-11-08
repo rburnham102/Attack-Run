@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scenes/enemies/tank.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/BTR/BTR_Base.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/BTR/BTR_Tower.png" id="3"]
+[ext_resource type="PackedScene" path="res://scenes/projectiles/enemy_bullet.tscn" id="4"]
+[ext_resource type="Texture2D" path="res://assets/BTR/BTR_Broken/BTR_BrokenBase.png" id="5"]
+
+[sub_resource type="RectangleShape2D" id="shape"]
+size = Vector2(50, 90)
+
+[node name="BTR" type="Area2D"]
+z_index = 1
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+script = ExtResource("1")
+move_speed = 40.0
+turret_turn_speed = 140.0
+shell_scene = ExtResource("4")
+burst_count = 3
+burst_delay = 0.12
+wreck_texture = ExtResource("5")
+max_hp = 4
+score_value = 200
+drop_chance = 0.15
+explosion_scale = 1.8
+
+[node name="Base" type="Sprite2D" parent="."]
+texture = ExtResource("2")
+flip_v = true
+
+[node name="Turret" type="Sprite2D" parent="."]
+position = Vector2(0, -6)
+texture = ExtResource("3")
+offset = Vector2(0, 22)
+
+[node name="Muzzle" type="Marker2D" parent="Turret"]
+position = Vector2(0, 64)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("shape")
+
+[node name="FireTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+rect = Rect2(-30, -48, 60, 96)
