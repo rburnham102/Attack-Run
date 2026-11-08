@@ -1,15 +1,15 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene format=3 uid="uid://do8e8rdr7ik4v"]
 
-[ext_resource type="Script" path="res://scenes/enemies/tank.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/Panzer/PanzerBase.png" id="2"]
-[ext_resource type="Texture2D" path="res://assets/Panzer/PanzerTower.png" id="3"]
+[ext_resource type="Script" uid="uid://cm4whuxprulss" path="res://scenes/enemies/tank.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://cfrv6qj35innn" path="res://assets/Panzer/PanzerBase.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://c3nqm6pg514p" path="res://assets/Panzer/PanzerTower.png" id="3"]
 [ext_resource type="PackedScene" path="res://scenes/projectiles/tank_shell.tscn" id="4"]
-[ext_resource type="Texture2D" path="res://assets/Panzer/Panzer_Broken/Panzer_Broken.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://b52co7snp1qyi" path="res://assets/Panzer/Panzer_Broken/Panzer_Broken.png" id="5"]
 
 [sub_resource type="RectangleShape2D" id="shape"]
 size = Vector2(60, 86)
 
-[node name="Tank" type="Area2D"]
+[node name="Tank" type="Area2D" unique_id=412634598]
 z_index = 1
 collision_layer = 8
 collision_mask = 0
@@ -19,25 +19,27 @@ shell_scene = ExtResource("4")
 wreck_texture = ExtResource("5")
 max_hp = 6
 score_value = 250
-drop_chance = 0.15
 explosion_scale = 2.0
+drop_chance = 0.15
 
-[node name="Base" type="Sprite2D" parent="."]
+[node name="Base" type="Sprite2D" parent="." unique_id=276850089]
 texture = ExtResource("2")
+flip_v = true
 
-[node name="Turret" type="Sprite2D" parent="."]
-position = Vector2(0, -28)
+[node name="Turret" type="Sprite2D" parent="." unique_id=401735423]
+position = Vector2(0.5, -28)
+scale = Vector2(0.9921875, 1)
 texture = ExtResource("3")
-offset = Vector2(0, 28)
+offset = Vector2(0, 50)
 
-[node name="Muzzle" type="Marker2D" parent="Turret"]
-position = Vector2(0, 82)
+[node name="Muzzle" type="Marker2D" parent="Turret" unique_id=956843619]
+position = Vector2(-0.503937, 106)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=271055349]
 shape = SubResource("shape")
 
-[node name="FireTimer" type="Timer" parent="."]
+[node name="FireTimer" type="Timer" parent="." unique_id=128538221]
 wait_time = 2.0
 
-[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=1596962607]
 rect = Rect2(-40, -50, 80, 100)

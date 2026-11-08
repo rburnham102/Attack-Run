@@ -1,8 +1,8 @@
-[gd_scene load_steps=14 format=3]
+[gd_scene format=3 uid="uid://cmfo0uc5synd1"]
 
-[ext_resource type="Script" path="res://scenes/main/main.gd" id="1"]
-[ext_resource type="Script" path="res://scenes/main/chunk_spawner.gd" id="2"]
-[ext_resource type="Script" path="res://scenes/main/scroller.gd" id="3"]
+[ext_resource type="Script" uid="uid://ctgbwmk0bkq13" path="res://scenes/main/main.gd" id="1"]
+[ext_resource type="Script" uid="uid://b1lf8bouvtgf2" path="res://scenes/main/chunk_spawner.gd" id="2"]
+[ext_resource type="Script" uid="uid://bfuba26k15r6j" path="res://scenes/main/scroller.gd" id="3"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="4"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/enemy_plane.tscn" id="5"]
 [ext_resource type="PackedScene" path="res://scenes/chunks/chunk_start.tscn" id="6"]
@@ -10,31 +10,32 @@
 [ext_resource type="PackedScene" path="res://scenes/chunks/chunk_dirt.tscn" id="8"]
 [ext_resource type="PackedScene" path="res://scenes/chunks/chunk_base.tscn" id="9"]
 [ext_resource type="PackedScene" path="res://scenes/chunks/chunk_forest.tscn" id="10"]
+[ext_resource type="PackedScene" uid="uid://bdk83k6jsj3cw" path="res://scenes/chunks/chunk_water.tscn" id="10_th5th"]
 [ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="11"]
 [ext_resource type="PackedScene" path="res://scenes/ui/game_over.tscn" id="12"]
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" unique_id=1860959654]
 script = ExtResource("1")
 player_scene = ExtResource("4")
 enemy_plane_scene = ExtResource("5")
 
-[node name="ChunkSpawner" type="Node2D" parent="." node_paths=PackedStringArray("camera")]
+[node name="ChunkSpawner" type="Node2D" parent="." unique_id=732774404 node_paths=PackedStringArray("camera")]
 script = ExtResource("2")
 start_chunk = ExtResource("6")
-chunks = Array[PackedScene]([ExtResource("7"), ExtResource("8"), ExtResource("9"), ExtResource("10")])
+chunks = Array[PackedScene]([ExtResource("7"), ExtResource("8"), ExtResource("9"), ExtResource("10"), ExtResource("10_th5th"), ExtResource("7")])
 camera = NodePath("../Scroller/Camera2D")
 
-[node name="Scroller" type="Node2D" parent="."]
+[node name="Scroller" type="Node2D" parent="." unique_id=1566949483]
 script = ExtResource("3")
 
-[node name="Camera2D" type="Camera2D" parent="Scroller"]
+[node name="Camera2D" type="Camera2D" parent="Scroller" unique_id=253615191]
 anchor_mode = 0
 
-[node name="WaveTimer" type="Timer" parent="."]
+[node name="WaveTimer" type="Timer" parent="." unique_id=2011253798]
 wait_time = 3.0
 one_shot = true
 autostart = true
 
-[node name="HUD" parent="." instance=ExtResource("11")]
+[node name="HUD" parent="." unique_id=1403926086 instance=ExtResource("11")]
 
-[node name="GameOver" parent="." instance=ExtResource("12")]
+[node name="GameOver" parent="." unique_id=942740144 instance=ExtResource("12")]
