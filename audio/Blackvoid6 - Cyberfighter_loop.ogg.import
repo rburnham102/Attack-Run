@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/Blackvoid6 - Cyberfighter_loop.ogg-6de6140b1b
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0
