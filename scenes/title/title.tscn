@@ -64,6 +64,6 @@ text = "2 PLAYERS"
 [node name="Controls" type="Label" parent="Center/VBox" unique_id=812429862]
 layout_mode = 2
 text = "P1: WASD move, SPACE fire
-P2: ARROWS move, ENTER fire"
+P2: ARROWS move, NUMPAD ENTER fire"
 label_settings = ExtResource("4")
 horizontal_alignment = 1

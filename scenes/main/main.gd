@@ -40,11 +40,15 @@ func _spawn_wave() -> void:
 	var center_x := randf_range(60.0 + half_width, screen_width - 60.0 - half_width)
 	var top := _camera.global_position.y - 60.0
 
+	# The planes become children of a Wave node, which drops a bonus pickup
+	# if they are all shot down.
+	var wave := Wave.new()
+	add_child(wave)
 	for i in count:
 		var offset := i * spacing - half_width
 		var plane := enemy_plane_scene.instantiate()
 		# Planes further from the middle start a little higher: a V shape.
 		plane.position = Vector2(center_x + offset, top - absf(offset) * 0.5)
-		add_child(plane)
+		wave.add_plane(plane)
 
 	_wave_timer.start(randf_range(wave_interval_min, wave_interval_max))

@@ -1,15 +1,16 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1"]
 [ext_resource type="Texture2D" path="res://assets/Bomber/BONUS Bomber Mini.png" id="2"]
 [ext_resource type="PackedScene" path="res://scenes/projectiles/player_bullet.tscn" id="3"]
+[ext_resource type="Script" path="res://scenes/player/armor_ring.gd" id="4"]
 
 [sub_resource type="CircleShape2D" id="shape"]
 radius = 12.0
 
 [node name="Player" type="Area2D"]
 z_index = 4
-collision_mask = 4
+collision_mask = 36
 script = ExtResource("1")
 bullet_scene = ExtResource("3")
 
@@ -25,6 +26,9 @@ texture = ExtResource("2")
 rotation = 3.1415927
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2")
+
+[node name="ArmorRing" type="Node2D" parent="."]
+script = ExtResource("4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("shape")

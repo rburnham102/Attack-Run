@@ -17,6 +17,7 @@ script = ExtResource("1")
 bullet_scene = ExtResource("3")
 max_hp = 3
 score_value = 100
+drop_chance = 0.03
 
 [node name="Shadow" type="Sprite2D" parent="."]
 modulate = Color(0, 0, 0, 0.35)

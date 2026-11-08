@@ -9,9 +9,12 @@ const EXPLOSION := preload("res://scenes/effects/explosion.tscn")
 @export var score_value := 100
 ## Size of the explosion when this enemy dies.
 @export var explosion_scale := 1.5
+## Chance (0 to 1) of dropping a random pickup when destroyed.
+@export_range(0.0, 1.0) var drop_chance := 0.0
 
 var hp := 0
-var _dead := false
+## True once shot down. A Wave reads this to tell kills from escapes.
+var destroyed := false
 
 
 func _ready() -> void:
@@ -20,7 +23,7 @@ func _ready() -> void:
 
 ## Called by bullets (and by a player ramming this enemy).
 func take_damage(amount: int, shooter_id: int) -> void:
-	if _dead:
+	if destroyed:
 		return
 	hp -= amount
 	if hp <= 0:
@@ -30,8 +33,10 @@ func take_damage(amount: int, shooter_id: int) -> void:
 
 
 func die(shooter_id: int) -> void:
-	_dead = true
+	destroyed = true
 	Game.add_score(shooter_id, score_value)
+	if randf() < drop_chance:
+		Game.spawn_pickup(Game.random_pickup_kind(), global_position)
 	var boom := EXPLOSION.instantiate()
 	boom.position = global_position
 	boom.scale = Vector2.ONE * explosion_scale

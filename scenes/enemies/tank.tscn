@@ -19,6 +19,7 @@ shell_scene = ExtResource("4")
 wreck_texture = ExtResource("5")
 max_hp = 6
 score_value = 250
+drop_chance = 0.15
 explosion_scale = 2.0
 
 [node name="Base" type="Sprite2D" parent="."]

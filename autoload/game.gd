@@ -5,17 +5,39 @@ extends Node
 
 signal score_changed(player_id: int, score: int)
 signal lives_changed(player_id: int, lives: int)
-signal health_changed(player_id: int, hp: int)
+## stats holds "hp", "armor", "weapon" and "speed" for that player.
+signal player_stats_changed(player_id: int, stats: Dictionary)
+signal pickup_collected(player_id: int, kind: Pickup.Kind)
 signal game_over
 
 const START_LIVES := 3
 const MAIN_SCENE := "res://scenes/main/main.tscn"
 const TITLE_SCENE := "res://scenes/title/title.tscn"
+const PICKUP_SCENE := preload("res://scenes/pickups/pickup.tscn")
+
+## How likely each pickup is to drop from a destroyed enemy (relative weights).
+const DROP_WEIGHTS := {
+	Pickup.Kind.WEAPON: 8,
+	Pickup.Kind.HEALTH: 12,
+	Pickup.Kind.ARMOR: 10,
+	Pickup.Kind.SPEED: 6,
+	Pickup.Kind.MONEY_SMALL: 40,
+	Pickup.Kind.MONEY_BIG: 20,
+}
+## Weights for the guaranteed drop after wiping out a whole wave (no money).
+const BONUS_WEIGHTS := {
+	Pickup.Kind.WEAPON: 30,
+	Pickup.Kind.HEALTH: 25,
+	Pickup.Kind.ARMOR: 25,
+	Pickup.Kind.SPEED: 20,
+}
 
 var player_count := 1
 # Index 0 is player 1, index 1 is player 2.
 var scores: Array[int] = [0, 0]
 var lives: Array[int] = [0, 0]
+
+var _rng := RandomNumberGenerator.new()
 
 
 func start_new_game(count: int) -> void:
@@ -65,3 +87,18 @@ func nearest_player(from: Vector2) -> Node2D:
 			best_dist = d
 			best = p
 	return best
+
+
+## Picks a pickup kind at random, using one of the weight tables above.
+func random_pickup_kind(weights: Dictionary = DROP_WEIGHTS) -> Pickup.Kind:
+	var kinds := weights.keys()
+	var index := _rng.rand_weighted(PackedFloat32Array(weights.values()))
+	return kinds[index]
+
+
+## Drops a pickup at a world position.
+func spawn_pickup(kind: Pickup.Kind, at: Vector2) -> void:
+	var pickup := PICKUP_SCENE.instantiate()
+	pickup.kind = kind
+	pickup.position = at
+	add_to_world(pickup)
