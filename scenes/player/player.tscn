@@ -4,6 +4,8 @@
 [ext_resource type="Texture2D" path="res://assets/Bomber/BONUS Bomber Mini.png" id="2"]
 [ext_resource type="PackedScene" path="res://scenes/projectiles/player_bullet.tscn" id="3"]
 [ext_resource type="Script" path="res://scenes/player/armor_ring.gd" id="4"]
+[ext_resource type="AudioStream" path="res://sound effects/explosions/explosion_small_01.ogg" id="snd_death"]
+[ext_resource type="AudioStream" path="res://sound effects/shotguns/sg/sg_single_near_04.wav" id="snd_gun"]
 
 [sub_resource type="CircleShape2D" id="shape"]
 radius = 12.0
@@ -12,6 +14,7 @@ radius = 12.0
 z_index = 4
 collision_mask = 36
 script = ExtResource("1")
+death_sound = ExtResource("snd_death")
 bullet_scene = ExtResource("3")
 
 [node name="Shadow" type="Sprite2D" parent="."]
@@ -39,3 +42,8 @@ position = Vector2(0, -30)
 [node name="ShotTimer" type="Timer" parent="."]
 wait_time = 0.12
 one_shot = true
+
+[node name="GunSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("snd_gun")
+volume_db = -10.0
+max_polyphony = 4

@@ -27,6 +27,7 @@ var _sweep: Tween
 
 @onready var _sprite: Sprite2D = $Sprite2D
 @onready var _attack_timer: Timer = $AttackTimer
+@onready var _gun_sound: AudioStreamPlayer2D = $GunSound
 @onready var _muzzles: Array[Node] = $Muzzles.get_children()
 
 
@@ -86,12 +87,14 @@ func _fire_aimed() -> void:
 	var target := Game.nearest_player(global_position)
 	if not target:
 		return
+	_gun_sound.play()
 	for muzzle in _muzzles:
 		shoot(bullet_scene, muzzle.global_position, target.global_position - muzzle.global_position)
 
 
 ## A fan of bullets spread straight down from the nose.
 func _fire_fan() -> void:
+	_gun_sound.play()
 	for i in fan_count:
 		var angle := deg_to_rad((i - (fan_count - 1) / 2.0) * fan_angle)
 		shoot(bullet_scene, global_position + Vector2(0, 50), Vector2.DOWN.rotated(angle))
@@ -108,6 +111,14 @@ func die(shooter_id: int) -> void:
 	_sprite.texture = BROKEN_TEXTURE
 	# Stop colliding: set_deferred because we may be inside a collision callback.
 	set_deferred("monitorable", false)
+
+	# The first, biggest explosion carries the boss's death sound (the
+	# Inspector's death_sound); the chain of smaller ones after it is silent.
+	var boom := EXPLOSION.instantiate()
+	boom.position = global_position
+	boom.scale = Vector2.ONE * explosion_scale
+	boom.sound = death_sound
+	Game.add_to_world(boom)
 
 	var death := create_tween()
 	for i in 8:

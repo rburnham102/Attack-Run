@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dw4ck6juxeqbe"
+path="res://.godot/imported/Blackvoid6 - Incoming_loop.ogg-d8fe159091b8dbb057cabdb47ee7fef2.oggvorbisstr"
+
+[deps]
+
+source_file="res://audio/Blackvoid6 - Incoming_loop.ogg"
+dest_files=["res://.godot/imported/Blackvoid6 - Incoming_loop.ogg-d8fe159091b8dbb057cabdb47ee7fef2.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

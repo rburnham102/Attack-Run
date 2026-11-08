@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bjmmodyxf62kd"
+path="res://.godot/imported/Blackvoid6 - Venom_loop.ogg-bfbe4d320b3b4a0b307d9326680bb52c.oggvorbisstr"
+
+[deps]
+
+source_file="res://audio/Blackvoid6 - Venom_loop.ogg"
+dest_files=["res://.godot/imported/Blackvoid6 - Venom_loop.ogg-bfbe4d320b3b4a0b307d9326680bb52c.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

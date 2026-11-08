@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dy75lu8aa8jrb"
+path="res://.godot/imported/sg_single_near_02.wav-f964f7e82441837e8eb558d3a42f8124.sample"
+
+[deps]
+
+source_file="res://sound effects/shotguns/sg/sg_single_near_02.wav"
+dest_files=["res://.godot/imported/sg_single_near_02.wav-f964f7e82441837e8eb558d3a42f8124.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

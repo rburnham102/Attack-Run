@@ -3,6 +3,8 @@
 [ext_resource type="Script" path="res://scenes/enemies/enemy_plane.gd" id="1"]
 [ext_resource type="Texture2D" path="res://assets/Bomber/Bomber_Source.png" id="2"]
 [ext_resource type="PackedScene" path="res://scenes/projectiles/enemy_bullet.tscn" id="3"]
+[ext_resource type="AudioStream" path="res://sound effects/explosions/explosion_small_01.ogg" id="snd_death"]
+[ext_resource type="AudioStream" path="res://sound effects/shotguns/sg/sg_single_near_04.wav" id="snd_gun"]
 
 [sub_resource type="CapsuleShape2D" id="shape"]
 radius = 16.0
@@ -14,6 +16,7 @@ collision_layer = 4
 collision_mask = 0
 monitoring = false
 script = ExtResource("1")
+death_sound = ExtResource("snd_death")
 bullet_scene = ExtResource("3")
 max_hp = 2
 score_value = 100
@@ -43,3 +46,8 @@ wait_time = 2.0
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 rect = Rect2(-42, -32, 84, 64)
+
+[node name="GunSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("snd_gun")
+volume_db = -6.0
+max_polyphony = 4

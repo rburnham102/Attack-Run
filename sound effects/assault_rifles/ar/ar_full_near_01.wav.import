@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dxwc8pucxbpxh"
+path="res://.godot/imported/ar_full_near_01.wav-0ea8a19890e930e52e534cc61cd9596b.sample"
+
+[deps]
+
+source_file="res://sound effects/assault_rifles/ar/ar_full_near_01.wav"
+dest_files=["res://.godot/imported/ar_full_near_01.wav-0ea8a19890e930e52e534cc61cd9596b.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

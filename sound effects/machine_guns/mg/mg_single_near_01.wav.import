@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://csd5kp6htvbjk"
+path="res://.godot/imported/mg_single_near_01.wav-a359ec760bb24eeb7a8704918a8045ed.sample"
+
+[deps]
+
+source_file="res://sound effects/machine_guns/mg/mg_single_near_01.wav"
+dest_files=["res://.godot/imported/mg_single_near_01.wav-a359ec760bb24eeb7a8704918a8045ed.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

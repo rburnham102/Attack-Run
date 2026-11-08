@@ -30,6 +30,8 @@ const MONEY_BIG := 500
 @export var speed_per_level := 45.0
 @export var max_hp := 3
 @export var bullet_scene: PackedScene
+## Played by the explosion when this plane is shot down.
+@export var death_sound: AudioStream
 ## Keeps the plane's body from going past the screen edge.
 @export var screen_margin := Vector2(36, 36)
 ## Invulnerability after being hit, and after respawning.
@@ -50,6 +52,7 @@ var _blink: Tween
 @onready var _muzzle: Marker2D = $Muzzle
 @onready var _shot_timer: Timer = $ShotTimer
 @onready var _armor_ring: Node2D = $ArmorRing
+@onready var _gun_sound: AudioStreamPlayer2D = $GunSound
 
 
 func _ready() -> void:
@@ -74,6 +77,7 @@ func _process(delta: float) -> void:
 
 
 func _shoot() -> void:
+	_gun_sound.play()
 	for shot in WEAPON_PATTERNS[weapon_level - 1]:
 		var bullet := bullet_scene.instantiate()
 		bullet.position = _muzzle.global_position + Vector2(shot[0], 0)
@@ -141,6 +145,7 @@ func _die() -> void:
 	var boom: Node2D = Enemy.EXPLOSION.instantiate()
 	boom.position = global_position
 	boom.scale = Vector2(2, 2)
+	boom.sound = death_sound
 	Game.add_to_world(boom)
 
 	# Dying costs one level of weapon and speed, and all armor.

@@ -16,6 +16,7 @@ extends Enemy
 @onready var _rotor: Sprite2D = $Rotor
 @onready var _muzzle: Marker2D = $Muzzle
 @onready var _fire_timer: Timer = $FireTimer
+@onready var _gun_sound: AudioStreamPlayer2D = $GunSound
 
 
 func _ready() -> void:
@@ -43,10 +44,14 @@ func _process(delta: float) -> void:
 
 
 func _fire_burst() -> void:
+	# The full-auto clip is much longer than a burst, so start it with the
+	# first shot and stop it after the last one to keep sound and bullets in sync.
+	_gun_sound.play()
 	var burst := create_tween()
 	for i in burst_count:
 		burst.tween_callback(_fire_once)
 		burst.tween_interval(burst_delay)
+	burst.tween_callback(_gun_sound.stop)
 
 
 func _fire_once() -> void:

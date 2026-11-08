@@ -7,6 +7,7 @@ extends Enemy
 @onready var _fire_timer: Timer = $FireTimer
 @onready var _on_screen: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
 @onready var _muzzle: Marker2D = $Muzzle
+@onready var _gun_sound: AudioStreamPlayer2D = $GunSound
 
 
 func _ready() -> void:
@@ -26,3 +27,4 @@ func _on_fire_timer_timeout() -> void:
 	# Only shoot while visible, and only at players still below us.
 	if target and _on_screen.is_on_screen() and target.global_position.y > global_position.y:
 		shoot(bullet_scene, _muzzle.global_position, target.global_position - _muzzle.global_position)
+		_gun_sound.play()

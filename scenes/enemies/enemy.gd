@@ -9,6 +9,8 @@ const EXPLOSION := preload("res://scenes/effects/explosion.tscn")
 @export var score_value := 100
 ## Size of the explosion when this enemy dies.
 @export var explosion_scale := 1.5
+## Sound played by the explosion when this enemy is destroyed.
+@export var death_sound: AudioStream
 ## Chance (0 to 1) of dropping a random pickup when destroyed.
 @export_range(0.0, 1.0) var drop_chance := 0.0
 
@@ -50,6 +52,7 @@ func die(shooter_id: int) -> void:
 	var boom := EXPLOSION.instantiate()
 	boom.position = global_position
 	boom.scale = Vector2.ONE * explosion_scale
+	boom.sound = death_sound
 	Game.add_to_world(boom)
 	queue_free()
 

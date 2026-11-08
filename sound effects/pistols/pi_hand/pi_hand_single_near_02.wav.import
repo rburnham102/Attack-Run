@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://671512yshce0"
+path="res://.godot/imported/pi_hand_single_near_02.wav-266e3fd8aeb1a20866bb1a6681d019b8.sample"
+
+[deps]
+
+source_file="res://sound effects/pistols/pi_hand/pi_hand_single_near_02.wav"
+dest_files=["res://.godot/imported/pi_hand_single_near_02.wav-266e3fd8aeb1a20866bb1a6681d019b8.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" path="res://assets/BTR/BTR_Tower.png" id="3"]
 [ext_resource type="PackedScene" path="res://scenes/projectiles/enemy_bullet.tscn" id="4"]
 [ext_resource type="Texture2D" path="res://assets/BTR/BTR_Broken/BTR_BrokenBase.png" id="5"]
+[ext_resource type="AudioStream" path="res://sound effects/explosions/explosion_debris_01.ogg" id="snd_death"]
 
 [sub_resource type="RectangleShape2D" id="shape"]
 size = Vector2(50, 90)
@@ -15,6 +16,7 @@ collision_layer = 8
 collision_mask = 0
 monitoring = false
 script = ExtResource("1")
+death_sound = ExtResource("snd_death")
 move_speed = 40.0
 turret_turn_speed = 140.0
 shell_scene = ExtResource("4")
