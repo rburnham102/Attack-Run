@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bt8troiew7bix"
+path="res://.godot/imported/grenade_explosion_01.ogg-6c4791f3751232b3655b252997984d17.oggvorbisstr"
+
+[deps]
+
+source_file="res://sound effects/grenades/grenade_explosion_01.ogg"
+dest_files=["res://.godot/imported/grenade_explosion_01.ogg-6c4791f3751232b3655b252997984d17.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

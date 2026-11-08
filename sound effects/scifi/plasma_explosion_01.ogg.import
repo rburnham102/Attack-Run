@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://hpvsc41hilli"
+path="res://.godot/imported/plasma_explosion_01.ogg-4a930ed77cc7a2861ccbd09dfabc35ca.oggvorbisstr"
+
+[deps]
+
+source_file="res://sound effects/scifi/plasma_explosion_01.ogg"
+dest_files=["res://.godot/imported/plasma_explosion_01.ogg-4a930ed77cc7a2861ccbd09dfabc35ca.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

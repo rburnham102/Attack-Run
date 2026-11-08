@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dlawepnt4s1qr"
+path="res://.godot/imported/firework_burst_01.ogg-d5f5e94cfab200df1fa613cab823995b.oggvorbisstr"
+
+[deps]
+
+source_file="res://sound effects/fire/firework_burst_01.ogg"
+dest_files=["res://.godot/imported/firework_burst_01.ogg-d5f5e94cfab200df1fa613cab823995b.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

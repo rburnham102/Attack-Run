@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bfgbcga8ccy71"
+path="res://.godot/imported/bomb_whistle_01.ogg-326e3900cc571892512c593088eafbce.oggvorbisstr"
+
+[deps]
+
+source_file="res://sound effects/whooshes/bomb_whistle_01.ogg"
+dest_files=["res://.godot/imported/bomb_whistle_01.ogg-326e3900cc571892512c593088eafbce.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

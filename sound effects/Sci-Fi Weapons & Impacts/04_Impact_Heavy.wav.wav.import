@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cfqxyuqi34c7"
+path="res://.godot/imported/04_Impact_Heavy.wav.wav-9fbb4e69a6d82a9a58d96e6a38957f64.sample"
+
+[deps]
+
+source_file="res://sound effects/Sci-Fi Weapons & Impacts/04_Impact_Heavy.wav.wav"
+dest_files=["res://.godot/imported/04_Impact_Heavy.wav.wav-9fbb4e69a6d82a9a58d96e6a38957f64.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

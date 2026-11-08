@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dogklswet6axp"
+path="res://.godot/imported/window_break_01.ogg-765b62b373767e54e10baea339d083c8.oggvorbisstr"
+
+[deps]
+
+source_file="res://sound effects/glass/window_break_01.ogg"
+dest_files=["res://.godot/imported/window_break_01.ogg-765b62b373767e54e10baea339d083c8.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

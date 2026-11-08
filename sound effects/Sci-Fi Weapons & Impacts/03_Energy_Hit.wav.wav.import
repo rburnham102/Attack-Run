@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ddq2aa6qqcbgh"
+path="res://.godot/imported/03_Energy_Hit.wav.wav-830b0663203fff7a900848af3dc0eda9.sample"
+
+[deps]
+
+source_file="res://sound effects/Sci-Fi Weapons & Impacts/03_Energy_Hit.wav.wav"
+dest_files=["res://.godot/imported/03_Energy_Hit.wav.wav-830b0663203fff7a900848af3dc0eda9.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

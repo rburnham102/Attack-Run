@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://2udwl2tfosxq"
+path="res://.godot/imported/explosion_debris_01.ogg-7692cd3b859681c1a27c7f1829b7dd15.oggvorbisstr"
+
+[deps]
+
+source_file="res://sound effects/explosions/explosion_debris_01.ogg"
+dest_files=["res://.godot/imported/explosion_debris_01.ogg-7692cd3b859681c1a27c7f1829b7dd15.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

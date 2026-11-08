@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cit8k1ixy7jtw"
+path="res://.godot/imported/rumble_tail_01.ogg-fb8811716952ff71403c306c63f7bd62.oggvorbisstr"
+
+[deps]
+
+source_file="res://sound effects/distant/rumble_tail_01.ogg"
+dest_files=["res://.godot/imported/rumble_tail_01.ogg-fb8811716952ff71403c306c63f7bd62.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

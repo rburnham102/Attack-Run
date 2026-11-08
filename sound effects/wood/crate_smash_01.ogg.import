@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c3mkn8tfj3mil"
+path="res://.godot/imported/crate_smash_01.ogg-42d65b68205c04315c0d3c3baaa8b23b.oggvorbisstr"
+
+[deps]
+
+source_file="res://sound effects/wood/crate_smash_01.ogg"
+dest_files=["res://.godot/imported/crate_smash_01.ogg-42d65b68205c04315c0d3c3baaa8b23b.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

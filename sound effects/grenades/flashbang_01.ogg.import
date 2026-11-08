@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://d1y64v651j0i7"
+path="res://.godot/imported/flashbang_01.ogg-ef173c9eb24553f70fd2ef54298409f0.oggvorbisstr"
+
+[deps]
+
+source_file="res://sound effects/grenades/flashbang_01.ogg"
+dest_files=["res://.godot/imported/flashbang_01.ogg-ef173c9eb24553f70fd2ef54298409f0.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

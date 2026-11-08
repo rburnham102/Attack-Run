@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://brhp0dncenvuh"
+path="res://.godot/imported/blast_whoosh_01.ogg-33169b1eb68a2d18ec942ffa4834d936.oggvorbisstr"
+
+[deps]
+
+source_file="res://sound effects/whooshes/blast_whoosh_01.ogg"
+dest_files=["res://.godot/imported/blast_whoosh_01.ogg-33169b1eb68a2d18ec942ffa4834d936.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

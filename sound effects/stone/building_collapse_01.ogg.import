@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://2usyqxmcm1h6"
+path="res://.godot/imported/building_collapse_01.ogg-5ef8d72a0a0f60021a2e24135e6731c8.oggvorbisstr"
+
+[deps]
+
+source_file="res://sound effects/stone/building_collapse_01.ogg"
+dest_files=["res://.godot/imported/building_collapse_01.ogg-5ef8d72a0a0f60021a2e24135e6731c8.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

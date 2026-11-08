@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bx6gu3xkw4haj"
+path="res://.godot/imported/metal_crash_01.ogg-cb443152878614785cfee812bb12b88b.oggvorbisstr"
+
+[deps]
+
+source_file="res://sound effects/metal/metal_crash_01.ogg"
+dest_files=["res://.godot/imported/metal_crash_01.ogg-cb443152878614785cfee812bb12b88b.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

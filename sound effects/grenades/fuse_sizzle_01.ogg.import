@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://b11ptiu74673b"
+path="res://.godot/imported/fuse_sizzle_01.ogg-54c72d9625b41e583acffdc943ce79ce.oggvorbisstr"
+
+[deps]
+
+source_file="res://sound effects/grenades/fuse_sizzle_01.ogg"
+dest_files=["res://.godot/imported/fuse_sizzle_01.ogg-54c72d9625b41e583acffdc943ce79ce.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
