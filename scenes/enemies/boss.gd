@@ -1,16 +1,20 @@
+class_name Boss
 extends Enemy
-## The Bomber boss at the end of each stage. Like helicopters it's a child of
-## the Scroller, so its position is in screen coordinates.
+## The Bomber boss at the end of a stage. Like helicopters it's a child of
+## the Scroller, so its position is in screen coordinates. The Super Bomber
+## (super_boss.gd) extends this script and adds turrets and missiles.
 ##
 ## It flies in (taking no damage), then sweeps side to side and alternates
 ## between two attacks: an aimed burst and a wide fan of bullets.
 
-const BROKEN_TEXTURE := preload("res://assets/Bomber/Broken/Bomber Broken 01.png")
 const BONUS_DROPS := 2
 ## Two players deal about twice the damage, so the boss gets extra health.
 const TWO_PLAYER_HP_SCALE := 1.7
 
 @export var bullet_scene: PackedScene
+## Sprite swapped in when the boss is destroyed. If empty, the sprite is
+## darkened instead.
+@export var broken_texture: Texture2D
 ## Screen position the boss flies to before fighting.
 @export var battle_y := 170.0
 @export var sweep_left := 150.0
@@ -19,6 +23,8 @@ const TWO_PLAYER_HP_SCALE := 1.7
 @export var aimed_burst_count := 6
 @export var fan_count := 9
 @export var fan_angle := 12.0
+## Where the fan of bullets starts, relative to the boss's center.
+@export var fan_offset := Vector2(0, 50)
 
 var _active := false
 var _max_hp := 0
@@ -92,12 +98,12 @@ func _fire_aimed() -> void:
 		shoot(bullet_scene, muzzle.global_position, target.global_position - muzzle.global_position)
 
 
-## A fan of bullets spread straight down from the nose.
+## A fan of bullets spread straight down, starting at fan_offset.
 func _fire_fan() -> void:
 	_gun_sound.play()
 	for i in fan_count:
 		var angle := deg_to_rad((i - (fan_count - 1) / 2.0) * fan_angle)
-		shoot(bullet_scene, global_position + Vector2(0, 50), Vector2.DOWN.rotated(angle))
+		shoot(bullet_scene, global_position + fan_offset, Vector2.DOWN.rotated(angle))
 
 
 ## Instead of vanishing, the boss breaks apart in a chain of explosions.
@@ -108,7 +114,10 @@ func die(shooter_id: int) -> void:
 	if _sweep:
 		_sweep.kill()
 	Game.add_score(shooter_id, score_value)
-	_sprite.texture = BROKEN_TEXTURE
+	if broken_texture:
+		_sprite.texture = broken_texture
+	else:
+		_sprite.self_modulate = Color(0.35, 0.35, 0.35)
 	# Stop colliding: set_deferred because we may be inside a collision callback.
 	set_deferred("monitorable", false)
 

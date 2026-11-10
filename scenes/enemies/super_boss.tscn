@@ -1,0 +1,89 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://scenes/enemies/super_boss.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/Bomber/super_bomber.png" id="2"]
+[ext_resource type="PackedScene" path="res://scenes/projectiles/enemy_bullet.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://scenes/projectiles/missile.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/boss_turret.tscn" id="5"]
+[ext_resource type="AudioStream" path="res://sound effects/distant/boom_distant_01.ogg" id="snd_death"]
+[ext_resource type="AudioStream" path="res://sound effects/shotguns/sg/sg_single_near_04.wav" id="snd_gun"]
+[ext_resource type="AudioStream" path="res://sound effects/whooshes/blast_whoosh_01.ogg" id="snd_missile"]
+
+[node name="SuperBoss" type="Area2D"]
+z_index = 3
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+script = ExtResource("1")
+missile_scene = ExtResource("4")
+bullet_scene = ExtResource("3")
+battle_y = 180.0
+sweep_left = 175.0
+sweep_right = 465.0
+sweep_time = 4.0
+aimed_burst_count = 5
+fan_count = 7
+fan_angle = 14.0
+fan_offset = Vector2(0, 62)
+death_sound = ExtResource("snd_death")
+max_hp = 140
+score_value = 8000
+explosion_scale = 3.5
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.35)
+z_index = -1
+position = Vector2(24, 40)
+scale = Vector2(0.85, 0.85)
+texture = ExtResource("2")
+offset = Vector2(0, -53)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2")
+offset = Vector2(0, -53)
+
+[node name="LeftWing" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-142, -60, -33, -35, -33, 39, -142, -31)
+
+[node name="RightWing" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(33, -35, 142, -60, 142, -31, 33, 39)
+
+[node name="Nose" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-6, -28, 6, -28, 6, 56, 0, 59, -6, 56)
+
+[node name="Turrets" type="Node2D" parent="."]
+
+[node name="LeftTurret" parent="Turrets" instance=ExtResource("5")]
+position = Vector2(-19, -10.5)
+
+[node name="RightTurret" parent="Turrets" instance=ExtResource("5")]
+position = Vector2(19, -10.5)
+
+[node name="Muzzles" type="Node2D" parent="."]
+
+[node name="NoseGun" type="Marker2D" parent="Muzzles"]
+position = Vector2(0, 62)
+
+[node name="MissilePods" type="Node2D" parent="."]
+
+[node name="LeftPod" type="Marker2D" parent="MissilePods"]
+position = Vector2(-126, -4)
+
+[node name="RightPod" type="Marker2D" parent="MissilePods"]
+position = Vector2(126, -4)
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="MissileTimer" type="Timer" parent="."]
+wait_time = 5.0
+
+[node name="GunSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("snd_gun")
+volume_db = -3.0
+max_polyphony = 4
+
+[node name="MissileSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("snd_missile")
+volume_db = -4.0
+max_polyphony = 2

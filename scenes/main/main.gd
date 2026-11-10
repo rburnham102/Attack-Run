@@ -7,7 +7,9 @@ extends Node2D
 @export var player_scene: PackedScene
 @export var enemy_plane_scene: PackedScene
 @export var helicopter_scene: PackedScene
-@export var boss_scene: PackedScene
+## Bosses take turns: stage 1 gets the first, stage 2 the second, and so on,
+## looping back to the start of the list.
+@export var boss_scenes: Array[PackedScene] = []
 ## Seconds of normal waves before the boss arrives.
 @export var stage_length := 90.0
 ## Seconds between waves of planes on stage 1 (a random value in this range).
@@ -108,7 +110,8 @@ func _on_stage_timer_timeout() -> void:
 
 
 func _spawn_boss() -> void:
-	var boss := boss_scene.instantiate()
+	var scene := boss_scenes[(Game.stage - 1) % boss_scenes.size()]
+	var boss := scene.instantiate()
 	boss.position = Vector2(get_viewport_rect().size.x / 2, -150.0)
 	_scroller.add_child(boss)
 

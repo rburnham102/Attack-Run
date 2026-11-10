@@ -17,13 +17,14 @@
 [ext_resource type="PackedScene" path="res://scenes/enemies/boss.tscn" id="14"]
 [ext_resource type="PackedScene" path="res://scenes/chunks/chunk_street.tscn" id="15"]
 [ext_resource type="PackedScene" path="res://scenes/chunks/chunk_river.tscn" id="16"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/super_boss.tscn" id="17"]
 
 [node name="Main" type="Node2D" unique_id=1860959654]
 script = ExtResource("1")
 player_scene = ExtResource("4")
 enemy_plane_scene = ExtResource("5")
 helicopter_scene = ExtResource("13")
-boss_scene = ExtResource("14")
+boss_scenes = Array[PackedScene]([ExtResource("14"), ExtResource("17")])
 
 [node name="ChunkSpawner" type="Node2D" parent="." unique_id=732774404 node_paths=PackedStringArray("camera")]
 script = ExtResource("2")

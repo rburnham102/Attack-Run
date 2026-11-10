@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://scenes/enemies/boss.gd" id="1"]
 [ext_resource type="Texture2D" path="res://assets/Bomber/Bomber_Source.png" id="2"]
 [ext_resource type="PackedScene" path="res://scenes/projectiles/enemy_bullet.tscn" id="3"]
+[ext_resource type="Texture2D" path="res://assets/Bomber/Broken/Bomber Broken 01.png" id="broken"]
 [ext_resource type="AudioStream" path="res://sound effects/distant/boom_distant_01.ogg" id="snd_death"]
 [ext_resource type="AudioStream" path="res://sound effects/shotguns/sg/sg_single_near_04.wav" id="snd_gun"]
 
@@ -22,6 +23,7 @@ monitoring = false
 script = ExtResource("1")
 death_sound = ExtResource("snd_death")
 bullet_scene = ExtResource("3")
+broken_texture = ExtResource("broken")
 max_hp = 70
 score_value = 5000
 explosion_scale = 3.0
