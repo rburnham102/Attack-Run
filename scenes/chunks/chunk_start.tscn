@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" path="res://tilesets/Trees Bushes/TDS04_0012_Bush-01.png" id="6_b8n2b"]
 [ext_resource type="Texture2D" path="res://tilesets/Rocks/TDS04_0004_Rock02.png" id="7_6x70i"]
 [ext_resource type="Texture2D" path="res://tilesets/Rocks/TDS04_0005_Rock01.png" id="8_6s6ka"]
+[ext_resource type="Script" uid="uid://d0d0edrquvdi8" path="res://scenes/chunks/prop_shadows.gd" id="prop_shadows"]
 
 [node name="ChunkStart" type="Node2D" unique_id=1111651043]
 
@@ -20,6 +21,7 @@ tile_map_data = PackedByteArray("AAAFAAEAAgAAAAAAAAAGAAEAAgABAAAAAAAHAAEAAgACAAA
 tile_set = ExtResource("1_3o3bw")
 
 [node name="Props" type="Node2D" parent="." unique_id=995158879]
+script = ExtResource("prop_shadows")
 
 [node name="0022_Tree1" type="Sprite2D" parent="Props" unique_id=1622660178]
 position = Vector2(110, 120)

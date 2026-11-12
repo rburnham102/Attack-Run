@@ -1,0 +1,106 @@
+[gd_scene format=3]
+
+[sub_resource type="Gradient" id="puff_gradient"]
+offsets = PackedFloat32Array(0, 0.45, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.55, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="puff_texture"]
+gradient = SubResource("puff_gradient")
+width = 128
+height = 128
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[node name="Clouds" type="Parallax2D"]
+z_index = 1
+scroll_scale = Vector2(1, 1.6)
+repeat_size = Vector2(640, 1280)
+autoscroll = Vector2(6, 0)
+repeat_times = 2
+
+[node name="Cloud1" type="Node2D" parent="."]
+modulate = Color(1, 1, 1, 0.3)
+position = Vector2(140, 160)
+
+[node name="Puff1" type="Sprite2D" parent="Cloud1"]
+position = Vector2(-60, 10)
+scale = Vector2(1.60, 0.96)
+texture = SubResource("puff_texture")
+
+[node name="Puff2" type="Sprite2D" parent="Cloud1"]
+position = Vector2(0, -10)
+scale = Vector2(2.08, 1.28)
+texture = SubResource("puff_texture")
+
+[node name="Puff3" type="Sprite2D" parent="Cloud1"]
+position = Vector2(70, 15)
+scale = Vector2(1.44, 0.88)
+texture = SubResource("puff_texture")
+
+[node name="Puff4" type="Sprite2D" parent="Cloud1"]
+position = Vector2(20, 30)
+scale = Vector2(1.76, 0.80)
+texture = SubResource("puff_texture")
+
+[node name="Cloud2" type="Node2D" parent="."]
+modulate = Color(1, 1, 1, 0.3)
+position = Vector2(500, 520)
+
+[node name="Puff1" type="Sprite2D" parent="Cloud2"]
+position = Vector2(-50, 0)
+scale = Vector2(1.44, 0.88)
+texture = SubResource("puff_texture")
+
+[node name="Puff2" type="Sprite2D" parent="Cloud2"]
+position = Vector2(10, -15)
+scale = Vector2(1.92, 1.20)
+texture = SubResource("puff_texture")
+
+[node name="Puff3" type="Sprite2D" parent="Cloud2"]
+position = Vector2(65, 10)
+scale = Vector2(1.28, 0.80)
+texture = SubResource("puff_texture")
+
+[node name="Cloud3" type="Node2D" parent="."]
+modulate = Color(1, 1, 1, 0.3)
+position = Vector2(230, 860)
+
+[node name="Puff1" type="Sprite2D" parent="Cloud3"]
+position = Vector2(-80, 15)
+scale = Vector2(1.28, 0.80)
+texture = SubResource("puff_texture")
+
+[node name="Puff2" type="Sprite2D" parent="Cloud3"]
+position = Vector2(-20, -5)
+scale = Vector2(1.92, 1.12)
+texture = SubResource("puff_texture")
+
+[node name="Puff3" type="Sprite2D" parent="Cloud3"]
+position = Vector2(50, 5)
+scale = Vector2(1.76, 1.04)
+texture = SubResource("puff_texture")
+
+[node name="Puff4" type="Sprite2D" parent="Cloud3"]
+position = Vector2(110, 20)
+scale = Vector2(1.12, 0.72)
+texture = SubResource("puff_texture")
+
+[node name="Puff5" type="Sprite2D" parent="Cloud3"]
+position = Vector2(10, 30)
+scale = Vector2(1.60, 0.72)
+texture = SubResource("puff_texture")
+
+[node name="Cloud4" type="Node2D" parent="."]
+modulate = Color(1, 1, 1, 0.3)
+position = Vector2(560, 1130)
+
+[node name="Puff1" type="Sprite2D" parent="Cloud4"]
+position = Vector2(-40, 0)
+scale = Vector2(1.60, 0.96)
+texture = SubResource("puff_texture")
+
+[node name="Puff2" type="Sprite2D" parent="Cloud4"]
+position = Vector2(30, -10)
+scale = Vector2(1.44, 0.96)
+texture = SubResource("puff_texture")

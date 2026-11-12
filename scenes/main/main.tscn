@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" path="res://scenes/chunks/chunk_street.tscn" id="15"]
 [ext_resource type="PackedScene" path="res://scenes/chunks/chunk_river.tscn" id="16"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/super_boss.tscn" id="17"]
+[ext_resource type="PackedScene" path="res://scenes/main/clouds.tscn" id="18"]
 
 [node name="Main" type="Node2D" unique_id=1860959654]
 script = ExtResource("1")
@@ -31,6 +32,8 @@ script = ExtResource("2")
 start_chunk = ExtResource("6")
 chunks = Array[PackedScene]([ExtResource("7"), ExtResource("8"), ExtResource("9"), ExtResource("10"), ExtResource("10_th5th"), ExtResource("15"), ExtResource("16")])
 camera = NodePath("../Scroller/Camera2D")
+
+[node name="Clouds" parent="." instance=ExtResource("18")]
 
 [node name="Scroller" type="Node2D" parent="." unique_id=1566949483]
 script = ExtResource("3")

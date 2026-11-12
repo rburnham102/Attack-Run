@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" path="res://tilesets/Rocks/TDS04_0003_Rock03.png" id="7_dk4b4"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/tank.tscn" id="8_p1l8s"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/btr.tscn" id="9_5w8ym"]
+[ext_resource type="Script" uid="uid://d0d0edrquvdi8" path="res://scenes/chunks/prop_shadows.gd" id="prop_shadows"]
 
 [node name="ChunkRoad" type="Node2D" unique_id=664167489]
 
@@ -21,6 +22,7 @@ tile_map_data = PackedByteArray("AAAAAAIABAABAAAAAAABAAIABAACAAAAAAACAAIABAADAAA
 tile_set = ExtResource("1_a1wse")
 
 [node name="Props" type="Node2D" parent="." unique_id=306467845]
+script = ExtResource("prop_shadows")
 
 [node name="0021_Tree2" type="Sprite2D" parent="Props" unique_id=1511023260]
 position = Vector2(90, 70)

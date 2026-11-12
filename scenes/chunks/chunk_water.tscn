@@ -3,6 +3,7 @@
 [ext_resource type="TileSet" path="res://tilesets/battlefield_tileset.tres" id="1_1tyfd"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/gunboat.tscn" id="3_kn2kv"]
 [ext_resource type="Texture2D" path="res://tilesets/Rocks/TDS04_0004_Rock02.png" id="7_raiex"]
+[ext_resource type="Script" uid="uid://d0d0edrquvdi8" path="res://scenes/chunks/prop_shadows.gd" id="prop_shadows"]
 
 [node name="ChunkWater" type="Node2D" unique_id=1111651043]
 
@@ -15,6 +16,7 @@ tile_map_data = PackedByteArray("AAAFAAEAAQADAAQAAAAGAAEAAQABAAQAAAAHAAEAAQACAAQ
 tile_set = ExtResource("1_1tyfd")
 
 [node name="Props" type="Node2D" parent="." unique_id=995158879]
+script = ExtResource("prop_shadows")
 
 [node name="0004_Rock02" type="Sprite2D" parent="Props" unique_id=403914000]
 position = Vector2(470, 200)

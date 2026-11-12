@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" path="res://tilesets/Trees Bushes/TDS04_0011_Bush-02.png" id="7_nmirv"]
 [ext_resource type="Texture2D" path="res://tilesets/Trees Bushes/TDS04_0012_Bush-01.png" id="8_ah5fm"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/tank.tscn" id="9_58fs6"]
+[ext_resource type="Script" uid="uid://d0d0edrquvdi8" path="res://scenes/chunks/prop_shadows.gd" id="prop_shadows"]
 
 [node name="ChunkForest" type="Node2D" unique_id=1973738641]
 
@@ -21,6 +22,7 @@ tile_map_data = PackedByteArray("AAADAAIAAgAAAAAAAAAEAAIAAgABAAAAAAAFAAIAAgACAAA
 tile_set = ExtResource("1_3a5g1")
 
 [node name="Props" type="Node2D" parent="." unique_id=143133589]
+script = ExtResource("prop_shadows")
 
 [node name="0022_Tree1" type="Sprite2D" parent="Props" unique_id=459415552]
 position = Vector2(80, 90)

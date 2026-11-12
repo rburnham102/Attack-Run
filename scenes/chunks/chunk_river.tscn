@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" path="res://tilesets/SandBag/TDS04_0002_Sandbags.png" id="6_1ra41"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/acs.tscn" id="7_ris1s"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/gunboat.tscn" id="8_4lgpw"]
+[ext_resource type="Script" uid="uid://d0d0edrquvdi8" path="res://scenes/chunks/prop_shadows.gd" id="prop_shadows"]
 
 [node name="ChunkRiver" type="Node2D" unique_id=173680639]
 
@@ -20,6 +21,7 @@ tile_map_data = PackedByteArray("AAAAAAIAAQABAAQAAAAAAAUAAQABAAAAAAABAAIAAQACAAQ
 tile_set = ExtResource("1_3nfo3")
 
 [node name="Props" type="Node2D" parent="." unique_id=650407714]
+script = ExtResource("prop_shadows")
 
 [node name="Sprite2D" type="Sprite2D" parent="Props" unique_id=182795813]
 position = Vector2(90, 40)
