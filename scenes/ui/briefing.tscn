@@ -1,0 +1,106 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/briefing.gd" id="1_script"]
+[ext_resource type="LabelSettings" path="res://scenes/ui/hud_label.tres" id="2_text"]
+
+[sub_resource type="StyleBoxFlat" id="box_style"]
+bg_color = Color(0.05, 0.08, 0.14, 0.88)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.85, 0.65, 0.25, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="portrait_frame"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.85, 0.65, 0.25, 1)
+
+[sub_resource type="LabelSettings" id="title_settings"]
+font_size = 16
+font_color = Color(0.6, 0.75, 0.9, 1)
+
+[sub_resource type="LabelSettings" id="speaker_settings"]
+font_size = 22
+font_color = Color(1, 0.8, 0.35, 1)
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="hint_settings"]
+font_size = 16
+font_color = Color(1, 0.8, 0.35, 1)
+
+[node name="Briefing" type="CanvasLayer"]
+layer = 5
+script = ExtResource("1_script")
+
+[node name="Box" type="PanelContainer" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = -236.0
+offset_right = -12.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("box_style")
+
+[node name="Margin" type="MarginContainer" parent="Box"]
+layout_mode = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 10
+
+[node name="HBox" type="HBoxContainer" parent="Box/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Frame" type="PanelContainer" parent="Box/Margin/HBox"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("portrait_frame")
+
+[node name="Portrait" type="TextureRect" parent="Box/Margin/HBox/Frame"]
+custom_minimum_size = Vector2(176, 176)
+layout_mode = 2
+size_flags_vertical = 0
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VBox" type="VBoxContainer" parent="Box/Margin/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="Title" type="Label" parent="Box/Margin/HBox/VBox"]
+layout_mode = 2
+text = "OPERATION"
+label_settings = SubResource("title_settings")
+
+[node name="Speaker" type="Label" parent="Box/Margin/HBox/VBox"]
+layout_mode = 2
+text = "GENERAL"
+label_settings = SubResource("speaker_settings")
+
+[node name="Text" type="Label" parent="Box/Margin/HBox/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Briefing text goes here."
+label_settings = ExtResource("2_text")
+autowrap_mode = 3
+
+[node name="Hint" type="Label" parent="Box/Margin/HBox/VBox"]
+layout_mode = 2
+text = "FIRE / ENTER  >>"
+label_settings = SubResource("hint_settings")
+horizontal_alignment = 2

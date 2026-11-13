@@ -43,12 +43,25 @@ var armor := 0
 var weapon_level := 1
 var speed_level := 0
 var invulnerable := false
+## 0 = normal attack height. 1 = high in the sky (the level intro): the plane
+## is drawn twice as big, and its shadow falls further away and fainter, the
+## way a real shadow does the higher a plane flies. Main tweens this from 1
+## to 0 for the dive at the start of a level.
+var altitude := 0.0:
+	set(value):
+		altitude = value
+		if is_node_ready():
+			_apply_altitude()
 
 var _prefix := ""
 var _spawn_position := Vector2.ZERO
 var _blink: Tween
+## The Shadow's offset and strength as set in the editor (at altitude 0).
+var _shadow_offset := Vector2.ZERO
+var _shadow_alpha := 0.0
 
 @onready var _sprite: Sprite2D = $Sprite2D
+@onready var _shadow: Sprite2D = $Shadow
 @onready var _muzzle: Marker2D = $Muzzle
 @onready var _shot_timer: Timer = $ShotTimer
 @onready var _armor_ring: Node2D = $ArmorRing
@@ -58,6 +71,8 @@ var _blink: Tween
 func _ready() -> void:
 	_prefix = "p%d_" % player_id
 	_spawn_position = position
+	_shadow_offset = _shadow.position
+	_shadow_alpha = _shadow.modulate.a
 	hp = max_hp
 	add_to_group("players")
 	area_entered.connect(_on_area_entered)
@@ -161,6 +176,20 @@ func _die() -> void:
 		_start_invulnerability(respawn_invuln_time)
 	else:
 		queue_free()
+
+
+## The spot this plane starts the level from, and respawns at.
+func get_spawn_position() -> Vector2:
+	return _spawn_position
+
+
+func _apply_altitude() -> void:
+	# Scaling the whole plane also scales the Shadow (it's a child), which
+	# already pushes it twice as far out. The extra factor here exaggerates
+	# that a bit more, and the shadow fades as the plane climbs.
+	scale = Vector2.ONE * (1.0 + altitude)
+	_shadow.position = _shadow_offset * (1.0 + altitude)
+	_shadow.modulate.a = _shadow_alpha * (1.0 - 0.6 * altitude)
 
 
 ## Tells the HUD (through the Game autoload) and the armor ring what changed.

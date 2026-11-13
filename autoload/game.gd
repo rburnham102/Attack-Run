@@ -8,11 +8,18 @@ signal lives_changed(player_id: int, lives: int)
 ## stats holds "hp", "armor", "weapon" and "speed" for that player.
 signal player_stats_changed(player_id: int, stats: Dictionary)
 signal pickup_collected(player_id: int, kind: Pickup.Kind)
-signal stage_started(stage: int)
+## A level's opening briefing is over and the fighting begins.
+signal level_started(level_number: int, title: String)
+## stage is the boss number within the current level (1, 2...), out of stage_count.
+signal stage_started(stage: int, stage_count: int)
 signal boss_incoming
 signal boss_health_changed(hp: int, max_hp: int)
 signal boss_defeated
 signal game_over
+## The level's last boss is down.
+signal level_complete
+## The last level is done: the whole campaign is won.
+signal campaign_complete
 
 const START_LIVES := 3
 const MAIN_SCENE := "res://scenes/main/main.tscn"
@@ -40,8 +47,12 @@ var player_count := 1
 # Index 0 is player 1, index 1 is player 2.
 var scores: Array[int] = [0, 0]
 var lives: Array[int] = [0, 0]
-## Goes up by one each time a boss is destroyed. Enemies read it to scale up.
+## Goes up by one each time a boss is destroyed, and keeps counting across
+## levels. Enemies read it to scale up.
 var stage := 1
+## Which level is being played: 0 is level 1. Main uses it to pick from its
+## Levels list.
+var level_index := 0
 
 var _rng := RandomNumberGenerator.new()
 
@@ -51,6 +62,14 @@ func start_new_game(count: int) -> void:
 	scores = [0, 0]
 	lives = [START_LIVES, START_LIVES if count == 2 else 0]
 	stage = 1
+	level_index = 0
+	get_tree().change_scene_to_file(MAIN_SCENE)
+
+
+## Loads the main scene again for the next level. Scores and lives live
+## here, so they carry over; the players are rebuilt, so power-ups reset.
+func go_to_next_level() -> void:
+	level_index += 1
 	get_tree().change_scene_to_file(MAIN_SCENE)
 
 

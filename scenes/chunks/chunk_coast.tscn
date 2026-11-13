@@ -1,0 +1,61 @@
+[gd_scene format=4]
+
+[ext_resource type="TileSet" path="res://tilesets/battlefield_tileset.tres" id="1_tiles"]
+[ext_resource type="Script" uid="uid://d0d0edrquvdi8" path="res://scenes/chunks/prop_shadows.gd" id="prop_shadows"]
+[ext_resource type="Texture2D" path="res://tilesets/Trees Bushes/TDS04_0022_Tree1.png" id="tree1"]
+[ext_resource type="Texture2D" path="res://tilesets/Trees Bushes/TDS04_0020_Tree3.png" id="tree3"]
+[ext_resource type="Texture2D" path="res://tilesets/Trees Bushes/TDS04_0019_Tree4.png" id="tree4"]
+[ext_resource type="Texture2D" path="res://tilesets/Trees Bushes/TDS04_0008_Tree05.png" id="tree5"]
+[ext_resource type="Texture2D" path="res://tilesets/Trees Bushes/TDS04_0012_Bush-01.png" id="bush1"]
+[ext_resource type="Texture2D" path="res://tilesets/Trees Bushes/TDS04_0011_Bush-02.png" id="bush2"]
+[ext_resource type="Texture2D" path="res://tilesets/Rocks/TDS04_0005_Rock01.png" id="rock1"]
+[ext_resource type="Texture2D" path="res://tilesets/Rocks/TDS04_0004_Rock02.png" id="rock2"]
+
+[node name="ChunkCoast" type="Node2D"]
+
+[node name="Ground" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAAAAAAAQABAAEAAAABAAAAAQACAAEAAAACAAAAAQADAAEAAAADAAAAAQABAAEAAAAEAAAAAQACAAEAAAAFAAAAAQADAAEAAAAGAAAAAQABAAEAAAAHAAAAAQACAAEAAAAIAAAAAQADAAEAAAAJAAAAAQABAAEAAAAAAAEAAQABAAIAAAABAAEAAQACAAIAAAACAAEAAQADAAIAAAADAAEAAQABAAIAAAAEAAEAAQACAAIAAAAFAAEAAQADAAIAAAAGAAEAAQABAAIAAAAHAAEAAQACAAIAAAAIAAEAAQADAAIAAAAJAAEAAQABAAIAAAAAAAIAAQABAAMAAAABAAIAAQACAAMAAAACAAIAAQADAAMAAAADAAIAAQABAAMAAAAEAAIAAQACAAMAAAAFAAIAAQADAAMAAAAGAAIAAQABAAMAAAAHAAIAAQACAAMAAAAIAAIAAQADAAMAAAAJAAIAAQABAAMAAAAAAAMAAQABAAEAAAABAAMAAQACAAEAAAACAAMAAQADAAEAAAADAAMAAQABAAEAAAAEAAMAAQACAAEAAAAFAAMAAQADAAEAAAAGAAMAAQABAAEAAAAHAAMAAQACAAEAAAAIAAMAAQADAAEAAAAJAAMAAQABAAEAAAAAAAQAAAAAAAAAAAABAAQAAAAAAAAAAAACAAQAAAAAAAAAAAADAAQAAAAAAAAAAAAEAAQAAAAAAAAAAAAFAAQAAAAAAAAAAAAGAAQAAAAAAAAAAAAHAAQAAAAAAAAAAAAIAAQAAAAAAAAAAAAJAAQAAAAAAAAAAAAAAAUAAAAAAAAAAAABAAUAAAAAAAAAAAACAAUAAAAAAAAAAAADAAUAAAAAAAAAAAAEAAUAAAAAAAAAAAAFAAUAAAAAAAAAAAAGAAUABgACAAIAAAAHAAUAAAAAAAAAAAAIAAUAAAAAAAAAAAAJAAUAAAAAAAAAAAAAAAYAAAAAAAAAAAABAAYAAAAAAAAAAAACAAYAAAAAAAAAAAADAAYAAAAAAAAAAAAEAAYAAAAAAAAAAAAFAAYAAAAAAAAAAAAGAAYABgACAAMAAAAHAAYAAAAAAAAAAAAIAAYAAAAAAAAAAAAJAAYAAAAAAAAAAAAAAAcAAAAAAAAAAAABAAcAAAAAAAAAAAACAAcAAAAAAAAAAAADAAcAAAAAAAAAAAAEAAcAAAAAAAAAAAAFAAcAAAAAAAAAAAAGAAcAAAAAAAAAAAAHAAcAAAAAAAAAAAAIAAcAAAAAAAAAAAAJAAcAAAAAAAAAAAA=")
+tile_set = ExtResource("1_tiles")
+
+[node name="Overlay" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAAAAQAAQABAAQAAAABAAQAAQACAAQAAAACAAQAAQADAAQAAAADAAQAAQABAAQAAAAEAAQAAQACAAQAAAAFAAQAAQADAAQAAAAGAAQAAQABAAQAAAAHAAQAAQACAAQAAAAIAAQAAQADAAQAAAAJAAQAAQABAAQAAAA=")
+tile_set = ExtResource("1_tiles")
+
+[node name="Props" type="Node2D" parent="."]
+script = ExtResource("prop_shadows")
+
+[node name="Tree1" type="Sprite2D" parent="Props"]
+position = Vector2(70, 70)
+texture = ExtResource("tree1")
+
+[node name="Tree4" type="Sprite2D" parent="Props"]
+position = Vector2(250, 40)
+texture = ExtResource("tree4")
+
+[node name="Tree5" type="Sprite2D" parent="Props"]
+position = Vector2(560, 90)
+texture = ExtResource("tree5")
+
+[node name="Tree3" type="Sprite2D" parent="Props"]
+position = Vector2(420, 170)
+texture = ExtResource("tree3")
+
+[node name="Bush1" type="Sprite2D" parent="Props"]
+position = Vector2(150, 200)
+texture = ExtResource("bush1")
+
+[node name="Bush2" type="Sprite2D" parent="Props"]
+position = Vector2(330, 220)
+texture = ExtResource("bush2")
+
+[node name="Bush3" type="Sprite2D" parent="Props"]
+position = Vector2(600, 230)
+texture = ExtResource("bush1")
+
+[node name="Rock1" type="Sprite2D" parent="Props"]
+position = Vector2(110, 400)
+texture = ExtResource("rock1")
+
+[node name="Rock2" type="Sprite2D" parent="Props"]
+position = Vector2(520, 440)
+texture = ExtResource("rock2")

@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="LevelData" format=3]
+
+[ext_resource type="Script" path="res://levels/level_data.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/Portraits/general.png" id="2_portrait"]
+[ext_resource type="PackedScene" path="res://scenes/chunks/chunk_ocean.tscn" id="3_ocean"]
+[ext_resource type="PackedScene" path="res://scenes/chunks/chunk_coast.tscn" id="4_coast"]
+[ext_resource type="PackedScene" path="res://scenes/chunks/chunk_road.tscn" id="5_road"]
+[ext_resource type="PackedScene" path="res://scenes/chunks/chunk_dirt.tscn" id="6_dirt"]
+[ext_resource type="PackedScene" path="res://scenes/chunks/chunk_base.tscn" id="7_base"]
+[ext_resource type="PackedScene" path="res://scenes/chunks/chunk_forest.tscn" id="8_forest"]
+[ext_resource type="PackedScene" path="res://scenes/chunks/chunk_water.tscn" id="9_water"]
+[ext_resource type="PackedScene" path="res://scenes/chunks/chunk_street.tscn" id="10_street"]
+[ext_resource type="PackedScene" path="res://scenes/chunks/chunk_river.tscn" id="11_river"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/boss.tscn" id="12_boss"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/super_boss.tscn" id="13_super"]
+
+[resource]
+script = ExtResource("1_script")
+title = "OPERATION TIDEBREAK"
+general_name = "GEN. MARCUS HALE"
+general_portrait = ExtResource("2_portrait")
+briefing = Array[String](["Listen up, pilots. The enemy has dug in along the eastern coast, and they're massing an air wing to strike our fleet.", "You'll cross the channel high, then drop low for an attack run on their coastal defenses.", "Expect fighters, gunships and armor on the ground. Recon spotted a Bomber squadron staging at their forward airfield.", "And something bigger: a new heavy bomber with gun turrets and missile pods. It cannot reach our fleet.", "Clear that coast and the beachhead is ours. Good hunting."])
+intro_chunk = ExtResource("3_ocean")
+transition_chunk = ExtResource("4_coast")
+chunks = Array[PackedScene]([ExtResource("5_road"), ExtResource("6_dirt"), ExtResource("7_base"), ExtResource("8_forest"), ExtResource("9_water"), ExtResource("10_street"), ExtResource("11_river")])
+boss_scenes = Array[PackedScene]([ExtResource("12_boss"), ExtResource("13_super")])
+stage_length = 90.0

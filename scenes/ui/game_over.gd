@@ -1,19 +1,26 @@
 extends CanvasLayer
-## Hidden until Game emits game_over. Then it pauses the game and waits for
-## Enter/Space. Its Process Mode is "Always", so it keeps running while the
+## Hidden until Game emits game_over (or campaign_complete, with a different
+## title). Then it pauses the game and waits for Enter/Space. Its Process Mode is "Always", so it keeps running while the
 ## rest of the game is paused.
 
 var _can_continue := false
+var _triggered := false
 
+@onready var _title: Label = $Center/VBox/Title
 @onready var _scores: Label = $Center/VBox/Scores
 
 
 func _ready() -> void:
 	hide()
-	Game.game_over.connect(_on_game_over)
+	Game.game_over.connect(_show_results.bind("GAME OVER"))
+	Game.campaign_complete.connect(_show_results.bind("VICTORY!"))
 
 
-func _on_game_over() -> void:
+func _show_results(title: String) -> void:
+	if _triggered:
+		return  # already on its way (e.g. game over and victory at once)
+	_triggered = true
+	_title.text = title
 	# Let the last explosion play out before freezing everything.
 	await get_tree().create_timer(1.0).timeout
 	get_tree().paused = true
