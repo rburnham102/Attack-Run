@@ -24,7 +24,6 @@ explosion_scale = 1.6
 
 [node name="Base" type="Sprite2D" parent="."]
 texture = ExtResource("2")
-flip_v = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("shape")

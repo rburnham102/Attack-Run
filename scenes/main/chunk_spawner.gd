@@ -9,6 +9,10 @@ extends Node2D
 ##   intro       - the level's intro chunk, repeated (open ocean in level 1)
 ##   transition  - the level's transition chunk, placed once (the coastline)
 ##   fighting    - random picks from the level's chunk list
+##
+## Ground and water enemies aren't saved in the chunk scenes. Each chunk has
+## SpawnPoint markers, and every time a chunk is placed a random few of them
+## get a random vehicle from the level's lists.
 
 const CHUNK_HEIGHT := 512.0
 
@@ -68,8 +72,38 @@ func _place(scene: PackedScene) -> void:
 	_top_y -= CHUNK_HEIGHT
 	var chunk := scene.instantiate()
 	chunk.position = Vector2(0, _top_y)
+	_spawn_enemies(chunk)
 	add_child(chunk)
 	_last_chunk = scene
+
+
+## Fills a random few of the chunk's SpawnPoints with random vehicles from the
+## level. The vehicles become children of the chunk, so they scroll with the
+## map and get deleted along with it.
+func _spawn_enemies(chunk: Node) -> void:
+	var spawn_points := chunk.get_node_or_null("SpawnPoints")
+	# No enemies during the briefing: the players can't shoot back yet.
+	if not spawn_points or _in_intro:
+		return
+	var points := spawn_points.get_children()
+	points.shuffle()
+	var count := randi_range(_level.min_ground_enemies,
+		_level.max_ground_enemies + Game.stage - 1)
+	# slice() stops at the end of the array, so asking for more enemies than
+	# there are points just fills every point.
+	for point: SpawnPoint in points.slice(0, count):
+		var pool := _level.water_enemies if point.water else _level.ground_enemies
+		if pool.is_empty():
+			continue
+		# pick_random() can return anything, so name the type to get a typed
+		# variable (and autocomplete) back.
+		var scene: PackedScene = pool.pick_random()
+		var enemy := scene.instantiate()
+		enemy.position = point.position
+		enemy.rotation = point.rotation
+		if point.parked:
+			enemy.move_speed = 0.0
+		chunk.add_child(enemy)
 
 
 func _pick_chunk() -> PackedScene:

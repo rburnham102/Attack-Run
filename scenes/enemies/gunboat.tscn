@@ -53,11 +53,9 @@ explosion_scale = 2.2
 [node name="Wake" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("wake_frames")
 autoplay = "default"
-flip_v = true
 
 [node name="Base" type="Sprite2D" parent="."]
 texture = ExtResource("2")
-flip_v = true
 
 [node name="Turret" type="Sprite2D" parent="."]
 position = Vector2(0, -8)

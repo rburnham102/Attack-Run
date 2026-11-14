@@ -26,7 +26,6 @@ drop_chance = 0.2
 
 [node name="Base" type="Sprite2D" parent="." unique_id=276850089]
 texture = ExtResource("2")
-flip_v = true
 
 [node name="Turret" type="Sprite2D" parent="." unique_id=401735423]
 position = Vector2(0, -9)

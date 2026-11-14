@@ -6,9 +6,8 @@
 [ext_resource type="Texture2D" path="res://tilesets/Rocks/TDS04_0004_Rock02.png" id="4_v82e1"]
 [ext_resource type="Texture2D" path="res://tilesets/Trees Bushes/TDS04_0012_Bush-01.png" id="5_k52ug"]
 [ext_resource type="Texture2D" path="res://tilesets/SandBag/TDS04_0002_Sandbags.png" id="6_1ra41"]
-[ext_resource type="PackedScene" path="res://scenes/enemies/acs.tscn" id="7_ris1s"]
-[ext_resource type="PackedScene" path="res://scenes/enemies/gunboat.tscn" id="8_4lgpw"]
 [ext_resource type="Script" uid="uid://d0d0edrquvdi8" path="res://scenes/chunks/prop_shadows.gd" id="prop_shadows"]
+[ext_resource type="Script" path="res://scenes/chunks/spawn_point.gd" id="spawn_point"]
 
 [node name="ChunkRiver" type="Node2D" unique_id=173680639]
 
@@ -43,16 +42,32 @@ texture = ExtResource("5_k52ug")
 position = Vector2(430, 100)
 texture = ExtResource("6_1ra41")
 
-[node name="Enemies" type="Node2D" parent="." unique_id=1724358564]
+[node name="SpawnPoints" type="Node2D" parent="."]
 
-[node name="ACS" parent="Enemies" unique_id=704978674 instance=ExtResource("7_ris1s")]
+[node name="SpawnPoint1" type="Marker2D" parent="SpawnPoints"]
 position = Vector2(520, 60)
-move_speed = 0.0
+script = ExtResource("spawn_point")
+parked = true
 
-[node name="Gunboat" parent="Enemies" unique_id=707521791 instance=ExtResource("8_4lgpw")]
+[node name="SpawnPoint2" type="Marker2D" parent="SpawnPoints"]
 position = Vector2(100, 205)
 rotation = -1.5707964
+script = ExtResource("spawn_point")
+water = true
 
-[node name="Gunboat2" parent="Enemies" unique_id=1931502965 instance=ExtResource("8_4lgpw")]
+[node name="SpawnPoint3" type="Marker2D" parent="SpawnPoints"]
 position = Vector2(560, 315)
 rotation = 1.5707964
+script = ExtResource("spawn_point")
+water = true
+
+[node name="SpawnPoint4" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(330, 300)
+rotation = 1.5707964
+script = ExtResource("spawn_point")
+water = true
+
+[node name="SpawnPoint5" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(400, 455)
+script = ExtResource("spawn_point")
+parked = true

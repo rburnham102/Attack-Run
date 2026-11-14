@@ -24,6 +24,19 @@ extends Resource
 ## Picked at random once the fighting starts.
 @export var chunks: Array[PackedScene] = []
 
+@export_group("Ground Enemies")
+## Vehicles that can appear on a chunk's land SpawnPoints. Add a scene more
+## than once to make it more common.
+@export var ground_enemies: Array[PackedScene] = []
+## Vehicles that can appear on SpawnPoints marked "water".
+@export var water_enemies: Array[PackedScene] = []
+## How many SpawnPoints get filled in each chunk, picked at random between
+## these. The top end also goes up by one after every boss (Game.stage), so
+## each stage is busier than the last. A chunk never gets more enemies than
+## it has SpawnPoints.
+@export var min_ground_enemies := 1
+@export var max_ground_enemies := 2
+
 @export_group("Bosses")
 ## Fought in this order. The level ends when the last one is destroyed, so
 ## the number of bosses sets how long the level is.

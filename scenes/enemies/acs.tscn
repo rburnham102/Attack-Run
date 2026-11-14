@@ -30,7 +30,6 @@ explosion_scale = 2.5
 
 [node name="Base" type="Sprite2D" parent="."]
 texture = ExtResource("2")
-flip_v = true
 
 [node name="Turret" type="Sprite2D" parent="."]
 position = Vector2(0, -10)

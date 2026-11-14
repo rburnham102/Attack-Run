@@ -13,6 +13,11 @@
 [ext_resource type="PackedScene" path="res://scenes/chunks/chunk_river.tscn" id="11_river"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/boss.tscn" id="12_boss"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/super_boss.tscn" id="13_super"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/tank.tscn" id="14_tank"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/btr.tscn" id="15_btr"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/humvee.tscn" id="16_humvee"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/acs.tscn" id="17_acs"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/gunboat.tscn" id="18_gunboat"]
 
 [resource]
 script = ExtResource("1_script")
@@ -23,5 +28,9 @@ briefing = Array[String](["Listen up, pilots. The enemy has dug in along the eas
 intro_chunk = ExtResource("3_ocean")
 transition_chunk = ExtResource("4_coast")
 chunks = Array[PackedScene]([ExtResource("5_road"), ExtResource("6_dirt"), ExtResource("7_base"), ExtResource("8_forest"), ExtResource("9_water"), ExtResource("10_street"), ExtResource("11_river")])
+ground_enemies = Array[PackedScene]([ExtResource("14_tank"), ExtResource("14_tank"), ExtResource("15_btr"), ExtResource("15_btr"), ExtResource("16_humvee"), ExtResource("17_acs")])
+water_enemies = Array[PackedScene]([ExtResource("18_gunboat")])
+min_ground_enemies = 1
+max_ground_enemies = 2
 boss_scenes = Array[PackedScene]([ExtResource("12_boss"), ExtResource("13_super")])
 stage_length = 90.0

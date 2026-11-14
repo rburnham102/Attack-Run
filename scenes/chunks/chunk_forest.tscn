@@ -8,8 +8,8 @@
 [ext_resource type="Texture2D" path="res://tilesets/Trees Bushes/TDS04_0008_Tree05.png" id="6_1k23b"]
 [ext_resource type="Texture2D" path="res://tilesets/Trees Bushes/TDS04_0011_Bush-02.png" id="7_nmirv"]
 [ext_resource type="Texture2D" path="res://tilesets/Trees Bushes/TDS04_0012_Bush-01.png" id="8_ah5fm"]
-[ext_resource type="PackedScene" path="res://scenes/enemies/tank.tscn" id="9_58fs6"]
 [ext_resource type="Script" uid="uid://d0d0edrquvdi8" path="res://scenes/chunks/prop_shadows.gd" id="prop_shadows"]
+[ext_resource type="Script" path="res://scenes/chunks/spawn_point.gd" id="spawn_point"]
 
 [node name="ChunkForest" type="Node2D" unique_id=1973738641]
 
@@ -60,7 +60,22 @@ texture = ExtResource("7_nmirv")
 position = Vector2(450, 300)
 texture = ExtResource("8_ah5fm")
 
-[node name="Enemies" type="Node2D" parent="." unique_id=1927376996]
+[node name="SpawnPoints" type="Node2D" parent="."]
 
-[node name="Tank" parent="Enemies" unique_id=772058334 instance=ExtResource("9_58fs6")]
+[node name="SpawnPoint1" type="Marker2D" parent="SpawnPoints"]
 position = Vector2(320, 256)
+script = ExtResource("spawn_point")
+
+[node name="SpawnPoint2" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(440, 170)
+script = ExtResource("spawn_point")
+parked = true
+
+[node name="SpawnPoint3" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(200, 420)
+script = ExtResource("spawn_point")
+
+[node name="SpawnPoint4" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(560, 230)
+script = ExtResource("spawn_point")
+parked = true

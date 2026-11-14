@@ -2,9 +2,8 @@
 
 [ext_resource type="TileSet" path="res://tilesets/battlefield_tileset.tres" id="1_b522j"]
 [ext_resource type="Texture2D" path="res://tilesets/Rocks/TDS04_0004_Rock02.png" id="2_jlofe"]
-[ext_resource type="PackedScene" path="res://scenes/enemies/tank.tscn" id="3_5f6v0"]
-[ext_resource type="PackedScene" path="res://scenes/enemies/humvee.tscn" id="4_jlofe"]
 [ext_resource type="Script" uid="uid://d0d0edrquvdi8" path="res://scenes/chunks/prop_shadows.gd" id="prop_shadows"]
+[ext_resource type="Script" path="res://scenes/chunks/spawn_point.gd" id="spawn_point"]
 
 [node name="ChunkStreet" type="Node2D" unique_id=1111651043]
 
@@ -27,14 +26,27 @@ tile_set = ExtResource("1_b522j")
 position = Vector2(475, 104)
 texture = ExtResource("2_jlofe")
 
-[node name="Enemies" type="Node2D" parent="." unique_id=2040821947]
+[node name="SpawnPoints" type="Node2D" parent="."]
 
-[node name="Tank" parent="Enemies" unique_id=1582527876 instance=ExtResource("3_5f6v0")]
+[node name="SpawnPoint1" type="Marker2D" parent="SpawnPoints"]
 position = Vector2(158, 77)
+script = ExtResource("spawn_point")
 
-[node name="Tank2" parent="Enemies" unique_id=343558572 instance=ExtResource("3_5f6v0")]
+[node name="SpawnPoint2" type="Marker2D" parent="SpawnPoints"]
 position = Vector2(547, 327)
+script = ExtResource("spawn_point")
 
-[node name="Humvee" parent="Enemies" unique_id=2553794 instance=ExtResource("4_jlofe")]
+[node name="SpawnPoint3" type="Marker2D" parent="SpawnPoints"]
 position = Vector2(620, 224)
 rotation = 1.5707964
+script = ExtResource("spawn_point")
+
+[node name="SpawnPoint4" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(320, 224)
+rotation = 1.5707964
+script = ExtResource("spawn_point")
+
+[node name="SpawnPoint5" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(100, 300)
+script = ExtResource("spawn_point")
+parked = true
