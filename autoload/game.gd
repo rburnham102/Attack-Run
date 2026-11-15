@@ -53,16 +53,26 @@ var stage := 1
 ## Which level is being played: 0 is level 1. Main uses it to pick from its
 ## Levels list.
 var level_index := 0
+## Testing shortcut, set from the dev menu: every stage's waves end after a
+## few seconds (Main's Dev Stage Length), so each boss arrives almost at once.
+var dev_skip_to_boss := false
 
 var _rng := RandomNumberGenerator.new()
 
 
-func start_new_game(count: int) -> void:
+## Starts a game with count players. The other values are for the dev menu,
+## which can start at any level: first_level is the level to play (0 is
+## level 1), and first_stage is the difficulty stage to start on, so a later
+## level is as tough as it would be after beating the ones before it.
+## The title screen leaves them all at their defaults.
+func start_new_game(count: int, first_level := 0, first_stage := 1,
+		skip_to_boss := false) -> void:
 	player_count = count
 	scores = [0, 0]
 	lives = [START_LIVES, START_LIVES if count == 2 else 0]
-	stage = 1
-	level_index = 0
+	stage = first_stage
+	level_index = first_level
+	dev_skip_to_boss = skip_to_boss
 	get_tree().change_scene_to_file(MAIN_SCENE)
 
 

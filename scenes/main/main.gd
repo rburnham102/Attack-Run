@@ -23,6 +23,9 @@ extends Node2D
 ## Seconds between the last end-of-mission radio line and the next level
 ## loading.
 @export var level_end_delay := 2.0
+## Seconds of waves before each boss when the dev menu's "Start at boss"
+## is ticked (instead of the level's Stage Length).
+@export var dev_stage_length := 3.0
 ## Seconds after a boss dies before the comms officer reports it, so her box
 ## doesn't hide the bonus pickups dropping where the boss was.
 @export var radio_defeated_delay := 1.0
@@ -131,7 +134,7 @@ func _play_intro() -> void:
 
 func _start_stage() -> void:
 	Game.stage_started.emit(_boss_index + 1, _level.boss_scenes.size())
-	_stage_timer.start(_level.stage_length)
+	_stage_timer.start(dev_stage_length if Game.dev_skip_to_boss else _level.stage_length)
 	_wave_timer.start(3.0)
 	_helicopter_timer.start(_helicopter_wait())
 
