@@ -1,0 +1,124 @@
+[gd_scene format=4 uid="uid://dw3ux1burtqc"]
+
+[ext_resource type="TileSet" uid="uid://qw17yfafpw48" path="res://tilesets/battlefield_tileset.tres" id="1_ehifs"]
+[ext_resource type="Script" uid="uid://d0d0edrquvdi8" path="res://scenes/chunks/prop_shadows.gd" id="2_j7261"]
+[ext_resource type="Texture2D" uid="uid://cn5siuqm1uxt8" path="res://tilesets/Rocks/TDS04_0004_Rock02.png" id="5_ga851"]
+[ext_resource type="Texture2D" uid="uid://bpy4xdubx4qay" path="res://tilesets/Rocks/TDS04_0003_Rock03.png" id="5_qkhg3"]
+[ext_resource type="Texture2D" uid="uid://y3f1pxg7r3el" path="res://tilesets/Rocks/TDS04_0005_Rock01.png" id="6_ga851"]
+[ext_resource type="Texture2D" uid="uid://cghm0ntgvje2m" path="res://tilesets/House/TDS04_House02.png" id="7_mdy2u"]
+[ext_resource type="Texture2D" uid="uid://djne4shvrmobg" path="res://tilesets/SandBag/TDS04_0002_Sandbags.png" id="7_pgvg7"]
+[ext_resource type="Script" uid="uid://dnw2cxrb1ot2v" path="res://scenes/chunks/spawn_point.gd" id="8_5pms1"]
+[ext_resource type="Texture2D" uid="uid://buvbvfa31srv5" path="res://tilesets/Crates Barrels/TDS04_0015_Barrel-oil.png" id="9_pgvg7"]
+[ext_resource type="Texture2D" uid="uid://da0i7l7ey40ik" path="res://tilesets/Crates Barrels/TDS04_0017_Box1-mini.png" id="10_5pms1"]
+[ext_resource type="Texture2D" uid="uid://b6q60omi3h8yl" path="res://tilesets/Crates Barrels/TDS04_0016_Barrel.png" id="11_ipyj0"]
+
+[node name="ChunkRiver" type="Node2D" unique_id=173680639]
+
+[node name="Ground" type="TileMapLayer" parent="." unique_id=487209141]
+tile_map_data = PackedByteArray("AAAAAAAAAQABAAEAAAABAAAAAQACAAEAAAACAAAAAQADAAEAAAADAAAAAQABAAEAAAAEAAAAAQACAAEAAAAFAAAAAQADAAEAAAAGAAAAAQABAAEAAAAHAAAAAQACAAEAAAAIAAAAAQADAAEAAAAJAAAAAQABAAEAAAAAAAYAAQABAAEAAAAJAAYAAQABAAEAAAAAAAcAAQABAAIAAAABAAcAAQACAAIAAAACAAcAAQADAAIAAAADAAcAAQABAAIAAAAEAAcAAQACAAIAAAAFAAcAAQADAAIAAAAGAAcAAQABAAIAAAAHAAcAAQACAAIAAAAIAAcAAQADAAIAAAAJAAcAAQABAAIAAAABAAYAAgACAAIAAAABAAUAAgACAAIAAAABAAQAAgACAAIAAAABAAMAAgACAAIAAAABAAIAAgACAAIAAAABAAEAAgACAAIAAAACAAEAAgACAAIAAAADAAEAAgACAAIAAAAEAAEAAgACAAIAAAAFAAEAAgACAAIAAAAGAAEAAgACAAIAAAAHAAEAAgACAAIAAAAIAAEAAgACAAIAAAAIAAIAAgACAAIAAAAIAAUAAgACAAIAAAAIAAYAAgACAAIAAAAHAAYAAgACAAIAAAAGAAYAAgACAAIAAAAFAAYAAgACAAIAAAAEAAYAAgACAAIAAAADAAYAAgACAAIAAAACAAYAAgACAAIAAAAHAAUAAgACAAIAAAAGAAUAAgACAAIAAAAFAAUAAgACAAIAAAAEAAUAAgACAAIAAAADAAUAAgACAAIAAAACAAUAAgACAAIAAAACAAQAAgACAAIAAAACAAMAAgACAAIAAAACAAIAAgACAAIAAAADAAIAAgACAAIAAAAEAAIAAgACAAIAAAAFAAIAAgACAAIAAAAGAAIAAgACAAIAAAAHAAIAAgACAAIAAAAHAAMAAgACAAIAAAAGAAMAAgACAAIAAAAGAAQAAgACAAIAAAAFAAQAAgACAAIAAAAEAAQAAgACAAIAAAADAAQAAgACAAIAAAADAAMAAgACAAIAAAAEAAMAAgACAAIAAAAFAAMAAgACAAIAAAAHAAQAAgACAAIAAAAIAAMAAgACAAIAAAAIAAQAAgACAAIAAAAAAAUAAQACAAIAAAAAAAQAAQACAAIAAAAAAAMAAQACAAIAAAAAAAIAAQACAAIAAAAAAAEAAQACAAIAAAAJAAEAAQACAAIAAAAJAAIAAQACAAIAAAAJAAMAAQACAAIAAAAJAAQAAQACAAIAAAAJAAUAAQACAAIAAAA=")
+tile_set = ExtResource("1_ehifs")
+
+[node name="Overlay" type="TileMapLayer" parent="." unique_id=1971755289]
+tile_map_data = PackedByteArray("AAABAAAAAgACAAAAAAACAAAAAgACAAAAAAADAAAAAgACAAAAAAAFAAAAAgACAAAAAAAEAAAAAgACAAAAAAAGAAAAAgACAAAAAAAHAAAAAgACAAAAAAAIAAAAAgACAAAAAAAJAAAAAgAEAAAAAAAJAAEAAgAEAAEAAAAJAAIAAgAEAAIAAAAJAAMAAgAEAAMAAAAJAAQAAgAEAAEAAAAJAAUAAgAEAAIAAAAJAAYAAgAEAAMAAAAJAAcAAgAEAAQAAAAGAAcAAgABAAQAAAAHAAcAAgACAAQAAAAIAAcAAgADAAQAAAADAAcAAgABAAQAAAAEAAcAAgACAAQAAAAFAAcAAgADAAQAAAABAAcAAgACAAQAAAACAAcAAgADAAQAAAAAAAYAAgAAAAMAAAAAAAcAAgAAAAQAAAAAAAUAAgAAAAIAAAAAAAQAAgAAAAIAAAAAAAMAAgAAAAIAAAAAAAIAAgAAAAIAAAAAAAEAAgAAAAIAAAAAAAAAAgAAAAAAAAA=")
+tile_set = ExtResource("1_ehifs")
+
+[node name="Props" type="Node2D" parent="." unique_id=650407714]
+script = ExtResource("2_j7261")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Props" unique_id=1324641754]
+position = Vector2(551, 419)
+texture = ExtResource("5_ga851")
+
+[node name="Sprite2D5" type="Sprite2D" parent="Props" unique_id=1630480612]
+position = Vector2(129, 444)
+texture = ExtResource("7_pgvg7")
+
+[node name="Tds040002Sandbags" type="Sprite2D" parent="Props" unique_id=713945030]
+position = Vector2(218, 446)
+texture = ExtResource("7_pgvg7")
+
+[node name="Tds040002Sandbags2" type="Sprite2D" parent="Props" unique_id=864431958]
+position = Vector2(306, 446)
+texture = ExtResource("7_pgvg7")
+
+[node name="Tds040002Sandbags3" type="Sprite2D" parent="Props" unique_id=1624780642]
+position = Vector2(393, 446)
+texture = ExtResource("7_pgvg7")
+
+[node name="Tds040002Sandbags4" type="Sprite2D" parent="Props" unique_id=317330409]
+position = Vector2(483, 447)
+texture = ExtResource("7_pgvg7")
+
+[node name="Tds040004Rock02" type="Sprite2D" parent="Props" unique_id=34457637]
+position = Vector2(63, 414)
+texture = ExtResource("5_ga851")
+
+[node name="Tds040003Rock03" type="Sprite2D" parent="Props" unique_id=1369261455]
+position = Vector2(65, 347)
+texture = ExtResource("5_qkhg3")
+
+[node name="Tds040005Rock01" type="Sprite2D" parent="Props" unique_id=1146825760]
+position = Vector2(563, 358)
+texture = ExtResource("6_ga851")
+
+[node name="Tds04House02" type="Sprite2D" parent="Props" unique_id=40903667]
+position = Vector2(198, 131)
+texture = ExtResource("7_mdy2u")
+
+[node name="SpawnPoints" type="Node2D" parent="." unique_id=483115459]
+
+[node name="SpawnPoint1" type="Marker2D" parent="SpawnPoints" unique_id=1784781807]
+position = Vector2(490, 223)
+script = ExtResource("8_5pms1")
+parked = true
+
+[node name="SpawnPoint2" type="Marker2D" parent="SpawnPoints" unique_id=1524229579]
+position = Vector2(137, 241)
+rotation = -1.5707964
+script = ExtResource("8_5pms1")
+water = true
+
+[node name="SpawnPoint3" type="Marker2D" parent="SpawnPoints" unique_id=2037175447]
+position = Vector2(496, 391)
+rotation = 1.5707964
+script = ExtResource("8_5pms1")
+water = true
+
+[node name="SpawnPoint4" type="Marker2D" parent="SpawnPoints" unique_id=261088871]
+position = Vector2(312, 319)
+rotation = 1.5707964
+script = ExtResource("8_5pms1")
+water = true
+
+[node name="SpawnPoint5" type="Marker2D" parent="SpawnPoints" unique_id=1198640713]
+position = Vector2(160, 387)
+script = ExtResource("8_5pms1")
+parked = true
+
+[node name="Tds040015BarrelOil" type="Sprite2D" parent="SpawnPoints" unique_id=95469495]
+position = Vector2(284, 207)
+texture = ExtResource("9_pgvg7")
+
+[node name="Tds040015BarrelOil2" type="Sprite2D" parent="SpawnPoints" unique_id=782849450]
+position = Vector2(311, 207)
+texture = ExtResource("9_pgvg7")
+
+[node name="Tds040017Box1Mini" type="Sprite2D" parent="SpawnPoints" unique_id=1816420929]
+position = Vector2(340, 170)
+texture = ExtResource("10_5pms1")
+
+[node name="Tds040017Box1Mini2" type="Sprite2D" parent="SpawnPoints" unique_id=850370040]
+position = Vector2(341, 145)
+texture = ExtResource("10_5pms1")
+
+[node name="Tds040016Barrel" type="Sprite2D" parent="SpawnPoints" unique_id=613558294]
+position = Vector2(545, 74)
+texture = ExtResource("11_ipyj0")
+
+[node name="Tds040016Barrel2" type="Sprite2D" parent="SpawnPoints" unique_id=995152655]
+position = Vector2(567, 82)
+texture = ExtResource("11_ipyj0")
+
+[node name="Tds040016Barrel3" type="Sprite2D" parent="SpawnPoints" unique_id=942605424]
+position = Vector2(547, 106)
+texture = ExtResource("11_ipyj0")

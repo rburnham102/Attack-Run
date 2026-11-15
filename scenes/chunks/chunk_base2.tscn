@@ -1,0 +1,80 @@
+[gd_scene format=4 uid="uid://b064s8mbho157"]
+
+[ext_resource type="TileSet" uid="uid://qw17yfafpw48" path="res://tilesets/battlefield_tileset.tres" id="1_7ymgl"]
+[ext_resource type="Script" uid="uid://d0d0edrquvdi8" path="res://scenes/chunks/prop_shadows.gd" id="2_ap8ge"]
+[ext_resource type="Texture2D" uid="uid://djne4shvrmobg" path="res://tilesets/SandBag/TDS04_0002_Sandbags.png" id="4_7vwpf"]
+[ext_resource type="Texture2D" uid="uid://cuxy64gdxthgk" path="res://tilesets/House/TDS04_0000_House01.png" id="4_dmwfd"]
+[ext_resource type="Texture2D" uid="uid://cmga4wvt7wwii" path="res://tilesets/Trees Bushes/TDS04_0021_Tree2.png" id="5_c1lnb"]
+[ext_resource type="Texture2D" uid="uid://c4junc06c6x77" path="res://tilesets/Trees Bushes/TDS04_0019_Tree4.png" id="6_v7wts"]
+[ext_resource type="Script" uid="uid://dnw2cxrb1ot2v" path="res://scenes/chunks/spawn_point.gd" id="8_5ynww"]
+
+[node name="ChunkRiver" type="Node2D" unique_id=173680639]
+
+[node name="Ground" type="TileMapLayer" parent="." unique_id=487209141]
+tile_map_data = PackedByteArray("AAAAAAAAAQABAAEAAAABAAAAAQACAAEAAAACAAAAAQADAAEAAAADAAAAAQABAAEAAAAEAAAAAQACAAEAAAAFAAAAAQADAAEAAAAGAAAAAQABAAEAAAAHAAAAAQACAAEAAAAIAAAAAQADAAEAAAAJAAAAAQABAAEAAAAAAAYAAQABAAEAAAAJAAYAAQABAAEAAAAAAAcAAQABAAIAAAABAAcAAQACAAIAAAACAAcAAQADAAIAAAADAAcAAQABAAIAAAAEAAcAAQACAAIAAAAFAAcAAQADAAIAAAAGAAcAAQABAAIAAAAHAAcAAQACAAIAAAAIAAcAAQADAAIAAAAJAAcAAQABAAIAAAAAAAUAAQACAAIAAAAAAAQAAQACAAIAAAAAAAMAAQACAAIAAAAAAAIAAQACAAIAAAAAAAEAAQACAAIAAAAJAAEAAQACAAIAAAAJAAIAAQACAAIAAAAJAAMAAQACAAIAAAAJAAQAAQACAAIAAAAJAAUAAQACAAIAAAACAAIABAACAAIAAAADAAIABAACAAIAAAAEAAMABAADAAIAAAAEAAIABAACAAIAAAAFAAIABAACAAIAAAAGAAIABAACAAIAAAAEAAUABAADAAIAAAAEAAYABAADAAIAAAAEAAQABAADAAIAAAADAAEABAACAAIAAAACAAEABAACAAIAAAAGAAEABAACAAIAAAAFAAEABAACAAIAAAAEAAEABAACAAIAAAADAAYAAgACAAIAAAADAAUAAgACAAIAAAADAAQAAgACAAIAAAADAAMAAgACAAIAAAAFAAYAAgACAAIAAAAFAAUAAgACAAIAAAAFAAQAAgACAAIAAAAFAAMAAgACAAIAAAACAAYAAQACAAMAAAACAAUAAQACAAMAAAACAAQAAQACAAMAAAACAAMAAQACAAMAAAABAAMAAQACAAMAAAABAAQAAQACAAMAAAABAAYAAQACAAMAAAABAAUAAQACAAMAAAABAAIAAQACAAMAAAABAAEAAQACAAMAAAAHAAEAAQACAAMAAAAHAAIAAQACAAMAAAAIAAIAAQACAAMAAAAIAAEAAQACAAMAAAAIAAMAAQACAAMAAAAHAAMAAQACAAMAAAAGAAMAAQACAAMAAAAGAAQAAQACAAMAAAAGAAUAAQACAAMAAAAHAAUAAQACAAMAAAAHAAQAAQACAAMAAAAIAAQAAQACAAMAAAAIAAUAAQACAAMAAAAIAAYAAQACAAMAAAAHAAYAAQACAAMAAAAGAAYAAQACAAMAAAA=")
+tile_set = ExtResource("1_7ymgl")
+
+[node name="Overlay" type="TileMapLayer" parent="." unique_id=1971755289]
+tile_map_data = PackedByteArray("AAAJAAAAAgAEAAAAAAAJAAcAAgAEAAQAAAADAAYABAAAAAIAAAADAAUABAAAAAIAAAADAAQABAAAAAIAAAADAAMABAAAAAIAAAAFAAYABAAEAAIAAAAFAAUABAAEAAIAAAAFAAQABAAEAAIAAAAFAAMABAAEAAIAAAACAAAABAACAAAAAAADAAAABAACAAAAAAAEAAAABAACAAAAAAAFAAAABAACAAAAAAAGAAAABAACAAAAAAAHAAAABAAEAAAAAAAHAAEABAAEAAEAAAAHAAIABAAEAAEAAAAHAAMABAAEAAQAAAAGAAMABAADAAQAAAACAAMABAADAAQAAAABAAIABAAAAAMAAAABAAEABAAAAAMAAAABAAAABAAAAAAAAAABAAMABAAAAAQAAAA=")
+tile_set = ExtResource("1_7ymgl")
+
+[node name="Overlay2" type="TileMapLayer" parent="." unique_id=475142766]
+tile_map_data = PackedByteArray("AAAJAAAAAgAEAAAAAAAJAAcAAgAEAAQAAAADAAYABAAAAAIAAAADAAUABAAAAAIAAAADAAQABAAAAAIAAAADAAMABAACAAQAAAAFAAYABAAEAAIAAAAFAAUABAAEAAIAAAAFAAQABAAEAAIAAAAFAAMABAACAAQAAAACAAAABAACAAAAAAADAAAABAACAAAAAAAEAAAABAACAAAAAAAFAAAABAACAAAAAAAGAAAABAACAAAAAAAHAAAABAAEAAAAAAAHAAEABAAEAAEAAAAHAAIABAAEAAEAAAAHAAMABAAEAAQAAAAGAAMABAADAAQAAAACAAMABAADAAQAAAABAAIABAAAAAMAAAABAAEABAAAAAMAAAABAAAABAAAAAAAAAABAAMABAAAAAQAAAA=")
+tile_set = ExtResource("1_7ymgl")
+
+[node name="Props" type="Node2D" parent="." unique_id=650407714]
+script = ExtResource("2_ap8ge")
+
+[node name="SpawnPoints" type="Node2D" parent="." unique_id=483115459]
+
+[node name="SpawnPoint1" type="Marker2D" parent="SpawnPoints" unique_id=1784781807]
+position = Vector2(402, 130)
+script = ExtResource("8_5ynww")
+parked = true
+
+[node name="SpawnPoint2" type="Marker2D" parent="SpawnPoints" unique_id=1524229579]
+position = Vector2(168, 125)
+rotation = -1.5707964
+script = ExtResource("8_5ynww")
+water = true
+
+[node name="SpawnPoint3" type="Marker2D" parent="SpawnPoints" unique_id=2037175447]
+position = Vector2(292, 420)
+rotation = 1.5707964
+script = ExtResource("8_5ynww")
+water = true
+
+[node name="SpawnPoint4" type="Marker2D" parent="SpawnPoints" unique_id=261088871]
+position = Vector2(381, 327)
+rotation = 1.5707964
+script = ExtResource("8_5ynww")
+water = true
+
+[node name="SpawnPoint5" type="Marker2D" parent="SpawnPoints" unique_id=1198640713]
+position = Vector2(207, 328)
+script = ExtResource("8_5ynww")
+parked = true
+
+[node name="Tds040000House01" type="Sprite2D" parent="." unique_id=378160462]
+position = Vector2(522, 129)
+texture = ExtResource("4_dmwfd")
+
+[node name="Tds040021Tree2" type="Sprite2D" parent="." unique_id=1473559773]
+position = Vector2(516, 276)
+texture = ExtResource("5_c1lnb")
+
+[node name="Tds040021Tree3" type="Sprite2D" parent="." unique_id=1894168834]
+position = Vector2(493, 418)
+texture = ExtResource("5_c1lnb")
+
+[node name="Tds040019Tree4" type="Sprite2D" parent="." unique_id=123762659]
+position = Vector2(95, 335)
+texture = ExtResource("6_v7wts")
+
+[node name="Tds040002Sandbags" type="Sprite2D" parent="." unique_id=1628915927]
+position = Vector2(178, 194)
+texture = ExtResource("4_7vwpf")
+
+[node name="Tds040002Sandbags2" type="Sprite2D" parent="." unique_id=2112846017]
+position = Vector2(398, 194)
+texture = ExtResource("4_7vwpf")
