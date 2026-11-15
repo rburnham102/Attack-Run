@@ -14,13 +14,16 @@ extends Resource
 @export var general_name := "GENERAL"
 @export var general_portrait: Texture2D
 ## One text box per line. The player presses fire to move to the next one.
-@export_multiline var briefing: Array[String] = []
+## Each line picks its speaker, so Lt. Lilly can chime in too.
+@export var briefing: Array[RadioLine] = []
 
 @export_group("Map")
 ## Repeats under the planes during the briefing (open ocean for level 1).
 @export var intro_chunk: PackedScene
-## Placed once when the briefing ends, joining the intro terrain to the land.
-@export var transition_chunk: PackedScene
+## Placed once each, in this order, when the briefing ends. They join the
+## intro terrain to the land (level 1: the coastline; level 2: the beach
+## landing, with the allied boats).
+@export var transition_chunks: Array[PackedScene] = []
 ## Picked at random once the fighting starts.
 @export var chunks: Array[PackedScene] = []
 
@@ -49,5 +52,8 @@ extends Resource
 ## Boss Scenes. Leave an entry out (or the whole list empty) for silence.
 @export var boss_warnings: Array[RadioLine] = []
 ## What she says after each boss is destroyed, same order as Boss Scenes.
-## The last one doubles as the end-of-mission call.
 @export var boss_defeated_lines: Array[RadioLine] = []
+## Played one after another once the last boss is down (after its line in
+## Boss Defeated Lines, if it has one). The next level waits for these to
+## finish, so they can be as long as you like.
+@export var mission_complete_lines: Array[RadioLine] = []

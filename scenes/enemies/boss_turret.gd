@@ -1,15 +1,17 @@
 extends Enemy
-## A gun turret mounted on the Super Bomber. It aims at the nearest player
-## and fires short bursts, like a tank turret.
+## A gun turret mounted on a boss (the Super Bomber, the Super Tank). It aims
+## at the nearest player and fires short bursts, like a tank turret.
 ##
 ## It's its own Enemy so it can be shot off separately. It sits on the
 ## ground_enemies layer: player bullets hit that layer, but the player's plane
 ## doesn't, so flying over a turret never counts as ramming it.
 ##
-## Damage spent on a turret is never wasted: when it's destroyed it passes its
-## full health on to the boss as damage. After that it stays on the boss as a
-## dark wreck, and any hits it takes are passed on to the boss too, so the gap
-## left in the boss's hull under each turret never becomes a blind spot.
+## Damage spent on a turret is never wasted: when it's destroyed it tells the
+## boss (Boss.turret_destroyed), passing on its full health. The Super Bomber
+## takes that as damage; the Super Tank also uses it to drop its armor once
+## every turret is gone. After that it stays on the boss as a dark wreck, and
+## any hits it takes are passed on to the boss too, so the gap left in the
+## boss's hull under each turret never becomes a blind spot.
 
 @export var bullet_scene: PackedScene
 ## How fast the turret can swing toward its target, in degrees per second.
@@ -18,7 +20,7 @@ extends Enemy
 @export var burst_delay := 0.12
 
 ## The boss this turret is mounted on. Set by the boss.
-var boss: Enemy
+var boss: Boss
 ## False while the boss is flying in and after it's destroyed.
 var active := false
 
@@ -88,4 +90,4 @@ func die(shooter_id: int) -> void:
 	boom.scale = Vector2.ONE * explosion_scale
 	boom.sound = death_sound
 	Game.add_to_world(boom)
-	boss.take_damage(_start_hp, shooter_id)
+	boss.turret_destroyed(_start_hp, shooter_id)

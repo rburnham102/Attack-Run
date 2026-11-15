@@ -71,6 +71,17 @@ position = Vector2(64, 64)
 sprite_frames = ExtResource("3_frames")
 animation = &"neutral"
 
+[node name="GeneralPortrait" type="TextureRect" parent="Box/Margin/HBox/Frame/Window"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 6
+
 [node name="VBox" type="VBoxContainer" parent="Box/Margin/HBox"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -78,7 +89,7 @@ theme_override_constants/separation = 4
 
 [node name="Speaker" type="Label" parent="Box/Margin/HBox/VBox"]
 layout_mode = 2
-text = "COMMS OFFICER"
+text = "LT. LILLY"
 label_settings = SubResource("speaker_settings")
 
 [node name="Text" type="Label" parent="Box/Margin/HBox/VBox"]

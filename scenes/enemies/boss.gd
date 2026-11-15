@@ -70,6 +70,13 @@ func take_damage(amount: int, shooter_id: int) -> void:
 	Game.boss_health_changed.emit(maxi(hp, 0), _max_hp)
 
 
+## A BossTurret mounted on this boss calls this when it's destroyed, with
+## the turret's full health. Here it simply becomes damage to the boss.
+## SuperTank overrides it (its armor would otherwise block the damage).
+func turret_destroyed(turret_hp: int, shooter_id: int) -> void:
+	take_damage(turret_hp, shooter_id)
+
+
 ## Crashing into the boss hurts it a little, not instantly.
 func rammed(player_id: int) -> void:
 	take_damage(3, player_id)

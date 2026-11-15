@@ -1,0 +1,118 @@
+[gd_scene format=4]
+
+[ext_resource type="TileSet" path="res://tilesets/battlefield_tileset.tres" id="1_007f4"]
+[ext_resource type="Script" path="res://scenes/chunks/prop_shadows.gd" id="2_tv7c1"]
+[ext_resource type="Texture2D" path="res://tilesets/SandBag/TDS04_0002_Sandbags.png" id="3_iwc2o"]
+[ext_resource type="Texture2D" path="res://tilesets/Rocks/TDS04_0005_Rock01.png" id="4_pwe63"]
+[ext_resource type="Texture2D" path="res://tilesets/Rocks/TDS04_0004_Rock02.png" id="5_18xcs"]
+[ext_resource type="Texture2D" path="res://tilesets/Crates Barrels/TDS04_0018_Box1.png" id="6_44qh8"]
+[ext_resource type="Texture2D" path="res://tilesets/Crates Barrels/TDS04_0016_Barrel.png" id="7_dkusd"]
+[ext_resource type="Texture2D" path="res://tilesets/Crates Barrels/TDS04_0015_Barrel-oil.png" id="8_d8xpp"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/tank.tscn" id="9_8cpqw"]
+[ext_resource type="PackedScene" path="res://scenes/allies/allied_boat.tscn" id="10_r0qxe"]
+
+[node name="ChunkLandingBeach" type="Node2D" unique_id=656515615]
+
+[node name="Ground" type="TileMapLayer" parent="." unique_id=1946000311]
+tile_map_data = PackedByteArray("AAAAAAAAAwABAAEAAAABAAAAAwACAAEAAAACAAAAAwADAAEAAAADAAAAAwABAAEAAAAEAAAAAwACAAEAAAAFAAAAAwADAAEAAAAGAAAAAwABAAEAAAAHAAAAAwACAAEAAAAIAAAAAwADAAEAAAAJAAAAAwABAAEAAAAAAAEAAwABAAIAAAABAAEAAwACAAIAAAACAAEAAwADAAIAAAADAAEAAwABAAIAAAAEAAEAAwACAAIAAAAFAAEAAwADAAIAAAAGAAEAAwABAAIAAAAHAAEAAwACAAIAAAAIAAEAAwADAAIAAAAJAAEAAwABAAIAAAAAAAIAAwABAAMAAAABAAIAAwACAAMAAAACAAIAAwADAAMAAAADAAIAAwABAAMAAAAEAAIAAwACAAMAAAAFAAIAAwADAAMAAAAGAAIAAwABAAMAAAAHAAIAAwACAAMAAAAIAAIAAwADAAMAAAAJAAIAAwABAAMAAAAAAAMAAwABAAEAAAABAAMAAwACAAEAAAACAAMAAwADAAEAAAADAAMAAwABAAEAAAAEAAMAAwACAAEAAAAFAAMAAwADAAEAAAAGAAMAAwABAAEAAAAHAAMAAwACAAEAAAAIAAMAAwADAAEAAAAJAAMAAwABAAEAAAAAAAQAAAAAAAAAAAABAAQAAAAAAAAAAAACAAQAAAAAAAAAAAADAAQAAAAAAAAAAAAEAAQAAAAAAAAAAAAFAAQAAAAAAAAAAAAGAAQAAAAAAAAAAAAHAAQAAAAAAAAAAAAIAAQAAAAAAAAAAAAJAAQAAAAAAAAAAAAAAAUAAAAAAAAAAAABAAUAAAAAAAAAAAACAAUAAAAAAAAAAAADAAUAAAAAAAAAAAAEAAUAAAAAAAAAAAAFAAUAAAAAAAAAAAAGAAUAAAAAAAAAAAAHAAUAAAAAAAAAAAAIAAUABgACAAIAAAAJAAUAAAAAAAAAAAAAAAYAAAAAAAAAAAABAAYAAAAAAAAAAAACAAYAAAAAAAAAAAADAAYAAAAAAAAAAAAEAAYAAAAAAAAAAAAFAAYAAAAAAAAAAAAGAAYAAAAAAAAAAAAHAAYAAAAAAAAAAAAIAAYABgACAAMAAAAJAAYAAAAAAAAAAAAAAAcAAAAAAAAAAAABAAcAAAAAAAAAAAACAAcAAAAAAAAAAAADAAcAAAAAAAAAAAAEAAcAAAAAAAAAAAAFAAcAAAAAAAAAAAAGAAcAAAAAAAAAAAAHAAcAAAAAAAAAAAAIAAcAAAAAAAAAAAAJAAcAAAAAAAAAAAA=")
+tile_set = ExtResource("1_007f4")
+
+[node name="Overlay" type="TileMapLayer" parent="." unique_id=1861685053]
+tile_map_data = PackedByteArray("AAAAAAQAAwABAAQAAAABAAQAAwACAAQAAAACAAQAAwADAAQAAAADAAQAAwABAAQAAAAEAAQAAwACAAQAAAAFAAQAAwADAAQAAAAGAAQAAwABAAQAAAAHAAQAAwACAAQAAAAIAAQAAwADAAQAAAAJAAQAAwABAAQAAAA=")
+tile_set = ExtResource("1_007f4")
+
+[node name="Props" type="Node2D" parent="." unique_id=1604361412]
+script = ExtResource("2_tv7c1")
+
+[node name="0002_Sandbags" type="Sprite2D" parent="Props" unique_id=386813684]
+position = Vector2(100, 192)
+rotation = -0.13962634
+texture = ExtResource("3_iwc2o")
+
+[node name="0002_Sandbags2" type="Sprite2D" parent="Props" unique_id=2107896120]
+position = Vector2(180, 192)
+rotation = 0.13962634
+texture = ExtResource("3_iwc2o")
+
+[node name="0002_Sandbags3" type="Sprite2D" parent="Props" unique_id=920952214]
+position = Vector2(280, 192)
+rotation = -0.13962634
+texture = ExtResource("3_iwc2o")
+
+[node name="0002_Sandbags4" type="Sprite2D" parent="Props" unique_id=635172791]
+position = Vector2(360, 192)
+rotation = 0.13962634
+texture = ExtResource("3_iwc2o")
+
+[node name="0002_Sandbags5" type="Sprite2D" parent="Props" unique_id=657646276]
+position = Vector2(460, 192)
+rotation = -0.13962634
+texture = ExtResource("3_iwc2o")
+
+[node name="0002_Sandbags6" type="Sprite2D" parent="Props" unique_id=1364901092]
+position = Vector2(540, 192)
+rotation = 0.13962634
+texture = ExtResource("3_iwc2o")
+
+[node name="0005_Rock01" type="Sprite2D" parent="Props" unique_id=639600933]
+position = Vector2(40, 210)
+texture = ExtResource("4_pwe63")
+
+[node name="0004_Rock02" type="Sprite2D" parent="Props" unique_id=61813368]
+position = Vector2(605, 60)
+texture = ExtResource("5_18xcs")
+
+[node name="0005_Rock02" type="Sprite2D" parent="Props" unique_id=421496030]
+position = Vector2(232, 40)
+texture = ExtResource("4_pwe63")
+
+[node name="0018_Box1" type="Sprite2D" parent="Props" unique_id=1537641389]
+position = Vector2(410, 70)
+texture = ExtResource("6_44qh8")
+
+[node name="0018_Box2" type="Sprite2D" parent="Props" unique_id=69383957]
+position = Vector2(432, 86)
+rotation = 0.34906584
+texture = ExtResource("6_44qh8")
+
+[node name="0016_Barrel" type="Sprite2D" parent="Props" unique_id=289937742]
+position = Vector2(70, 90)
+texture = ExtResource("7_dkusd")
+
+[node name="0015_Barrel-oil" type="Sprite2D" parent="Props" unique_id=1848489432]
+position = Vector2(88, 104)
+texture = ExtResource("8_d8xpp")
+
+[node name="0016_Barrel2" type="Sprite2D" parent="Props" unique_id=2145730368]
+position = Vector2(580, 150)
+texture = ExtResource("7_dkusd")
+
+[node name="Enemies" type="Node2D" parent="." unique_id=1764934061]
+
+[node name="BunkerTank1" parent="Enemies" unique_id=412634598 instance=ExtResource("9_8cpqw")]
+position = Vector2(140, 130)
+move_speed = 0.0
+
+[node name="BunkerTank2" parent="Enemies" unique_id=327904608 instance=ExtResource("9_8cpqw")]
+position = Vector2(320, 130)
+move_speed = 0.0
+
+[node name="BunkerTank3" parent="Enemies" unique_id=1714595228 instance=ExtResource("9_8cpqw")]
+position = Vector2(500, 130)
+move_speed = 0.0
+
+[node name="Allies" type="Node2D" parent="." unique_id=24271372]
+
+[node name="AlliedBoat1" parent="Allies" unique_id=2032926965 instance=ExtResource("10_r0qxe")]
+position = Vector2(160, 470)
+rotation = 3.1415927
+
+[node name="AlliedBoat2" parent="Allies" unique_id=406442184 instance=ExtResource("10_r0qxe")]
+position = Vector2(330, 500)
+rotation = 3.1415927
+drive_distance = 175.0
+
+[node name="AlliedBoat3" parent="Allies" unique_id=1681053446 instance=ExtResource("10_r0qxe")]
+position = Vector2(490, 480)
+rotation = 3.1415927
+drive_distance = 160.0

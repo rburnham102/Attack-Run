@@ -7,7 +7,8 @@ extends Node2D
 ##
 ## Which chunks to use comes from the level (LevelData), in three phases:
 ##   intro       - the level's intro chunk, repeated (open ocean in level 1)
-##   transition  - the level's transition chunk, placed once (the coastline)
+##   transition  - the level's transition chunks, each placed once, in order
+##                 (level 1: the coastline; level 2: the beach landing)
 ##   fighting    - random picks from the level's chunk list
 ##
 ## Ground and water enemies aren't saved in the chunk scenes. Each chunk has
@@ -23,8 +24,8 @@ var _top_y := 0.0
 var _last_chunk: PackedScene
 var _level: LevelData
 var _in_intro := true
-## True after begin_land(), until the transition chunk has been placed.
-var _transition_pending := false
+## Transition chunks still to be placed, front first. Filled by begin_land().
+var _transition_queue: Array[PackedScene] = []
 
 
 ## Main calls this from its _ready(). It can't happen in our own _ready():
@@ -37,13 +38,14 @@ func setup(level: LevelData) -> void:
 		_place(_pick_chunk())
 
 
-## The briefing is over: stop repeating the intro chunk. The next chunk is
-## the transition (if the level has one), then random level chunks.
+## The briefing is over: stop repeating the intro chunk. The next chunks are
+## the transition chunks (if the level has any), then random level chunks.
 func begin_land() -> void:
 	_in_intro = false
-	_transition_pending = _level.transition_chunk != null
+	# A copy, so taking chunks off the front doesn't change the level resource.
+	_transition_queue = _level.transition_chunks.duplicate()
 	# Intro chunks waiting above the screen haven't been seen yet, so throw
-	# them away. That way the transition chunk goes in right above the top of
+	# them away. That way the transition chunks go in right above the top of
 	# the screen, instead of after a long stretch of queued-up ocean.
 	var screen_top := camera.global_position.y
 	for chunk in get_children():
@@ -109,9 +111,8 @@ func _spawn_enemies(chunk: Node) -> void:
 func _pick_chunk() -> PackedScene:
 	if _in_intro and _level.intro_chunk:
 		return _level.intro_chunk
-	if _transition_pending:
-		_transition_pending = false
-		return _level.transition_chunk
+	if not _transition_queue.is_empty():
+		return _transition_queue.pop_front()
 	# Random chunk, avoiding the same one twice in a row.
 	var options := _level.chunks.filter(func(c): return c != _last_chunk)
 	if options.is_empty():

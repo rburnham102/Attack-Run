@@ -20,8 +20,9 @@ extends Node2D
 @export var helicopter_interval_max := 20.0
 ## Pause before the boss appears (while WARNING shows), and after it dies.
 @export var boss_delay := 3.0
-## How long "MISSION COMPLETE" shows before the next level loads.
-@export var level_end_delay := 4.0
+## Seconds between the last end-of-mission radio line and the next level
+## loading.
+@export var level_end_delay := 2.0
 ## Seconds after a boss dies before the comms officer reports it, so her box
 ## doesn't hide the bonus pickups dropping where the boss was.
 @export var radio_defeated_delay := 1.0
@@ -56,6 +57,7 @@ var _players: Array[Node2D] = []
 func _ready() -> void:
 	_level = levels[Game.level_index]
 	_chunk_spawner.setup(_level)
+	_radio.level = _level
 	var screen := get_viewport_rect().size
 	if Game.player_count == 1:
 		_spawn_player(1, Vector2(screen.x * 0.5, screen.y - 140))
@@ -187,10 +189,14 @@ func _on_stage_timer_timeout() -> void:
 	get_tree().create_timer(boss_delay, false).timeout.connect(_spawn_boss)
 
 
-## This boss's line from one of the level's Radio lists, or null (silence)
-## if the list doesn't have one for it.
-func _radio_line(lines: Array[RadioLine]) -> RadioLine:
-	return lines[_boss_index] if _boss_index < lines.size() else null
+## This boss's line from one of the level's Radio lists, as a radio call
+## (a list of lines) holding just that line. The list is empty (silence) if
+## the level doesn't have a line for this boss.
+func _radio_line(lines: Array[RadioLine]) -> Array[RadioLine]:
+	var lines_out: Array[RadioLine] = []
+	if _boss_index < lines.size() and lines[_boss_index]:
+		lines_out.append(lines[_boss_index])
+	return lines_out
 
 
 func _spawn_boss() -> void:
@@ -201,21 +207,33 @@ func _spawn_boss() -> void:
 
 func _on_boss_defeated() -> void:
 	# Before _boss_index goes up, so we get the line for the boss just beaten.
-	_radio.say(_radio_line(_level.boss_defeated_lines), radio_defeated_delay)
+	var lines := _radio_line(_level.boss_defeated_lines)
 	Game.stage += 1
 	_boss_index += 1
 	if _boss_index < _level.boss_scenes.size():
+		_radio.say(lines, radio_defeated_delay)
 		get_tree().create_timer(boss_delay, false).timeout.connect(_start_stage)
 	else:
-		_finish_level()
+		# The last boss: its line, then the end-of-mission chatter.
+		lines.append_array(_level.mission_complete_lines)
+		_finish_level(lines)
 
 
-## Last boss down. Players can't be hurt any more (stray ground fire), and
-## after a pause the next level loads, or the campaign is won.
-func _finish_level() -> void:
+## Last boss down. Players can't be hurt any more (stray ground fire). The
+## final radio call plays, and once it's over (plus a short pause) the next
+## level loads, or the campaign is won.
+func _finish_level(lines: Array[RadioLine]) -> void:
 	for player in get_tree().get_nodes_in_group("players"):
 		player.invulnerable = true
 	Game.level_complete.emit()
+	# CONNECT_ONE_SHOT disconnects after the first time, so a radio call
+	# later on (there isn't one now, but there could be) can't load the next
+	# level twice.
+	_radio.finished.connect(_on_final_call_finished, CONNECT_ONE_SHOT)
+	_radio.say(lines, radio_defeated_delay)
+
+
+func _on_final_call_finished() -> void:
 	get_tree().create_timer(level_end_delay, false).timeout.connect(_go_to_next_level)
 
 

@@ -1,0 +1,77 @@
+[gd_resource type="Resource" script_class="LevelData" format=3]
+
+[ext_resource type="Script" path="res://levels/level_data.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/Portraits/general.png" id="2_portrait"]
+[ext_resource type="PackedScene" path="res://scenes/chunks/chunk_ocean.tscn" id="3_ocean"]
+[ext_resource type="PackedScene" path="res://scenes/chunks/chunk_landing_sea.tscn" id="4_landing_sea"]
+[ext_resource type="PackedScene" path="res://scenes/chunks/chunk_landing_beach.tscn" id="5_landing_beach"]
+[ext_resource type="PackedScene" path="res://scenes/chunks/chunk_base.tscn" id="6_base"]
+[ext_resource type="PackedScene" path="res://scenes/chunks/chunk_base1.tscn" id="7_base1"]
+[ext_resource type="PackedScene" path="res://scenes/chunks/chunk_base2.tscn" id="8_base2"]
+[ext_resource type="PackedScene" path="res://scenes/chunks/chunk_road.tscn" id="9_road"]
+[ext_resource type="PackedScene" path="res://scenes/chunks/chunk_street.tscn" id="10_street"]
+[ext_resource type="PackedScene" path="res://scenes/chunks/chunk_dirt.tscn" id="11_dirt"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/super_boss.tscn" id="12_super_bomber"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/super_tank.tscn" id="13_super_tank"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/tank.tscn" id="14_tank"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/btr.tscn" id="15_btr"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/humvee.tscn" id="16_humvee"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/acs.tscn" id="17_acs"]
+[ext_resource type="Script" path="res://levels/radio_line.gd" id="18_radio"]
+
+[sub_resource type="Resource" id="brief_1"]
+script = ExtResource("18_radio")
+speaker = 1
+text = "We are making a push to the main enemy base in the region. We need you to provide fire support as our troops hit the beach."
+
+[sub_resource type="Resource" id="brief_2"]
+script = ExtResource("18_radio")
+speaker = 1
+text = "Intel is light, so rely on your Comms Officer, Lt. Lilly, for updates."
+
+[sub_resource type="Resource" id="brief_3"]
+script = ExtResource("18_radio")
+mood = 2
+text = "I'm on it. I won't let you down."
+
+[sub_resource type="Resource" id="warn_1"]
+script = ExtResource("18_radio")
+mood = 2
+text = "I'm picking up a large object on my radar. Get ready!"
+
+[sub_resource type="Resource" id="down_1"]
+script = ExtResource("18_radio")
+text = "Nice work! Head on in to the final target."
+
+[sub_resource type="Resource" id="warn_2"]
+script = ExtResource("18_radio")
+mood = 1
+text = "I don't know what to make of this. It's bigger than anything we've encountered before. Be careful!!"
+
+[sub_resource type="Resource" id="end_1"]
+script = ExtResource("18_radio")
+speaker = 1
+text = "Good work, team. I'll have R&D recover that super tank. There may be something we can learn from it."
+
+[sub_resource type="Resource" id="end_2"]
+script = ExtResource("18_radio")
+text = "Thank you, Sir! Head back to base, team, and let's get ready for the next mission."
+
+[resource]
+script = ExtResource("1_script")
+title = "OPERATION IRON SURF"
+general_name = "GEN. MARCUS HALE"
+general_portrait = ExtResource("2_portrait")
+briefing = Array[ExtResource("18_radio")]([SubResource("brief_1"), SubResource("brief_2"), SubResource("brief_3")])
+intro_chunk = ExtResource("3_ocean")
+transition_chunks = Array[PackedScene]([ExtResource("4_landing_sea"), ExtResource("5_landing_beach")])
+chunks = Array[PackedScene]([ExtResource("6_base"), ExtResource("7_base1"), ExtResource("8_base2"), ExtResource("6_base"), ExtResource("7_base1"), ExtResource("8_base2"), ExtResource("9_road"), ExtResource("10_street"), ExtResource("11_dirt")])
+ground_enemies = Array[PackedScene]([ExtResource("14_tank"), ExtResource("14_tank"), ExtResource("14_tank"), ExtResource("15_btr"), ExtResource("15_btr"), ExtResource("16_humvee"), ExtResource("17_acs"), ExtResource("17_acs")])
+water_enemies = Array[PackedScene]([])
+min_ground_enemies = 1
+max_ground_enemies = 2
+boss_scenes = Array[PackedScene]([ExtResource("12_super_bomber"), ExtResource("13_super_tank")])
+stage_length = 90.0
+boss_warnings = Array[ExtResource("18_radio")]([SubResource("warn_1"), SubResource("warn_2")])
+boss_defeated_lines = Array[ExtResource("18_radio")]([SubResource("down_1")])
+mission_complete_lines = Array[ExtResource("18_radio")]([SubResource("end_1"), SubResource("end_2")])

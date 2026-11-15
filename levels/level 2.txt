@@ -1,0 +1,31 @@
+level 2
+
+Cut to jet flying over the ocean high in the sky.
+
+Gen "We are making a push to the main enemy base in the region. We need you to provide fire support as our troops hit the beach"
+
+Gen "Intel is light, so rely on your Comms Officer, Lt. Lilly, for updates." 
+
+Lt. Lilly "I'm on it, I won't let you down"
+
+
+Planes lower over the water and under them are the allied boat tanks hitting the beach. They make contact with enemy tanks, bunkered in on the beach. This is the only time we will see allied tanks underneath the player.
+
+Before the first boss
+Lt. Lilly "I am picking up a large object on my radar, get ready"
+
+First boss is a super bomber.
+
+Boss defeated
+Lt Lilly "Nice work, head on in to the final target"
+
+
+Approaching the final boss
+Lt Lilly "I don't know what to make of this. It's bigger than anything we have encountered before. Be careful!!"
+
+Second boss is going to be a super tank (still need to design it, just use a large version of a tank for now, slap on a bunch of turret. I want the turrets to be destroyed before the main body.)
+
+Boss defeated 
+Gen " Good work team, ill have R&D recover that super tank. There may be something we can learn from it"
+
+Lt Lilly "Thank you Sir! Head back to base team and lets get ready for the next mission."

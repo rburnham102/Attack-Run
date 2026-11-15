@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://c4junc06c6x77" path="res://tilesets/Trees Bushes/TDS04_0019_Tree4.png" id="6_v7wts"]
 [ext_resource type="Script" uid="uid://dnw2cxrb1ot2v" path="res://scenes/chunks/spawn_point.gd" id="8_5ynww"]
 
-[node name="ChunkRiver" type="Node2D" unique_id=173680639]
+[node name="ChunkBase2" type="Node2D" unique_id=173680639]
 
 [node name="Ground" type="TileMapLayer" parent="." unique_id=487209141]
 tile_map_data = PackedByteArray("AAAAAAAAAQABAAEAAAABAAAAAQACAAEAAAACAAAAAQADAAEAAAADAAAAAQABAAEAAAAEAAAAAQACAAEAAAAFAAAAAQADAAEAAAAGAAAAAQABAAEAAAAHAAAAAQACAAEAAAAIAAAAAQADAAEAAAAJAAAAAQABAAEAAAAAAAYAAQABAAEAAAAJAAYAAQABAAEAAAAAAAcAAQABAAIAAAABAAcAAQACAAIAAAACAAcAAQADAAIAAAADAAcAAQABAAIAAAAEAAcAAQACAAIAAAAFAAcAAQADAAIAAAAGAAcAAQABAAIAAAAHAAcAAQACAAIAAAAIAAcAAQADAAIAAAAJAAcAAQABAAIAAAAAAAUAAQACAAIAAAAAAAQAAQACAAIAAAAAAAMAAQACAAIAAAAAAAIAAQACAAIAAAAAAAEAAQACAAIAAAAJAAEAAQACAAIAAAAJAAIAAQACAAIAAAAJAAMAAQACAAIAAAAJAAQAAQACAAIAAAAJAAUAAQACAAIAAAACAAIABAACAAIAAAADAAIABAACAAIAAAAEAAMABAADAAIAAAAEAAIABAACAAIAAAAFAAIABAACAAIAAAAGAAIABAACAAIAAAAEAAUABAADAAIAAAAEAAYABAADAAIAAAAEAAQABAADAAIAAAADAAEABAACAAIAAAACAAEABAACAAIAAAAGAAEABAACAAIAAAAFAAEABAACAAIAAAAEAAEABAACAAIAAAADAAYAAgACAAIAAAADAAUAAgACAAIAAAADAAQAAgACAAIAAAADAAMAAgACAAIAAAAFAAYAAgACAAIAAAAFAAUAAgACAAIAAAAFAAQAAgACAAIAAAAFAAMAAgACAAIAAAACAAYAAQACAAMAAAACAAUAAQACAAMAAAACAAQAAQACAAMAAAACAAMAAQACAAMAAAABAAMAAQACAAMAAAABAAQAAQACAAMAAAABAAYAAQACAAMAAAABAAUAAQACAAMAAAABAAIAAQACAAMAAAABAAEAAQACAAMAAAAHAAEAAQACAAMAAAAHAAIAAQACAAMAAAAIAAIAAQACAAMAAAAIAAEAAQACAAMAAAAIAAMAAQACAAMAAAAHAAMAAQACAAMAAAAGAAMAAQACAAMAAAAGAAQAAQACAAMAAAAGAAUAAQACAAMAAAAHAAUAAQACAAMAAAAHAAQAAQACAAMAAAAIAAQAAQACAAMAAAAIAAUAAQACAAMAAAAIAAYAAQACAAMAAAAHAAYAAQACAAMAAAAGAAYAAQACAAMAAAA=")
@@ -36,45 +36,42 @@ parked = true
 position = Vector2(168, 125)
 rotation = -1.5707964
 script = ExtResource("8_5ynww")
-water = true
 
 [node name="SpawnPoint3" type="Marker2D" parent="SpawnPoints" unique_id=2037175447]
 position = Vector2(292, 420)
 rotation = 1.5707964
 script = ExtResource("8_5ynww")
-water = true
 
 [node name="SpawnPoint4" type="Marker2D" parent="SpawnPoints" unique_id=261088871]
 position = Vector2(381, 327)
 rotation = 1.5707964
 script = ExtResource("8_5ynww")
-water = true
 
 [node name="SpawnPoint5" type="Marker2D" parent="SpawnPoints" unique_id=1198640713]
 position = Vector2(207, 328)
 script = ExtResource("8_5ynww")
 parked = true
 
-[node name="Tds040000House01" type="Sprite2D" parent="." unique_id=378160462]
+[node name="Tds040000House01" type="Sprite2D" parent="Props" unique_id=378160462]
 position = Vector2(522, 129)
 texture = ExtResource("4_dmwfd")
 
-[node name="Tds040021Tree2" type="Sprite2D" parent="." unique_id=1473559773]
+[node name="Tds040021Tree2" type="Sprite2D" parent="Props" unique_id=1473559773]
 position = Vector2(516, 276)
 texture = ExtResource("5_c1lnb")
 
-[node name="Tds040021Tree3" type="Sprite2D" parent="." unique_id=1894168834]
+[node name="Tds040021Tree3" type="Sprite2D" parent="Props" unique_id=1894168834]
 position = Vector2(493, 418)
 texture = ExtResource("5_c1lnb")
 
-[node name="Tds040019Tree4" type="Sprite2D" parent="." unique_id=123762659]
+[node name="Tds040019Tree4" type="Sprite2D" parent="Props" unique_id=123762659]
 position = Vector2(95, 335)
 texture = ExtResource("6_v7wts")
 
-[node name="Tds040002Sandbags" type="Sprite2D" parent="." unique_id=1628915927]
+[node name="Tds040002Sandbags" type="Sprite2D" parent="Props" unique_id=1628915927]
 position = Vector2(178, 194)
 texture = ExtResource("4_7vwpf")
 
-[node name="Tds040002Sandbags2" type="Sprite2D" parent="." unique_id=2112846017]
+[node name="Tds040002Sandbags2" type="Sprite2D" parent="Props" unique_id=2112846017]
 position = Vector2(398, 194)
 texture = ExtResource("4_7vwpf")

@@ -20,6 +20,31 @@
 [ext_resource type="PackedScene" path="res://scenes/enemies/gunboat.tscn" id="18_gunboat"]
 [ext_resource type="Script" path="res://levels/radio_line.gd" id="19_radio"]
 
+[sub_resource type="Resource" id="brief_1"]
+script = ExtResource("19_radio")
+speaker = 1
+text = "Listen up, pilots. The enemy has dug in along the eastern coast, and they're massing an air wing to strike our fleet."
+
+[sub_resource type="Resource" id="brief_2"]
+script = ExtResource("19_radio")
+speaker = 1
+text = "You'll cross the channel high, then drop low for an attack run on their coastal defenses."
+
+[sub_resource type="Resource" id="brief_3"]
+script = ExtResource("19_radio")
+speaker = 1
+text = "Expect fighters, gunships and armor on the ground. Recon spotted a Bomber squadron staging at their forward airfield."
+
+[sub_resource type="Resource" id="brief_4"]
+script = ExtResource("19_radio")
+speaker = 1
+text = "And something bigger: a new heavy bomber with gun turrets and missile pods. It cannot reach our fleet."
+
+[sub_resource type="Resource" id="brief_5"]
+script = ExtResource("19_radio")
+speaker = 1
+text = "Clear that coast and the beachhead is ours. Good hunting."
+
 [sub_resource type="Resource" id="warn_1"]
 script = ExtResource("19_radio")
 mood = 2
@@ -45,9 +70,9 @@ script = ExtResource("1_script")
 title = "OPERATION TIDEBREAK"
 general_name = "GEN. MARCUS HALE"
 general_portrait = ExtResource("2_portrait")
-briefing = Array[String](["Listen up, pilots. The enemy has dug in along the eastern coast, and they're massing an air wing to strike our fleet.", "You'll cross the channel high, then drop low for an attack run on their coastal defenses.", "Expect fighters, gunships and armor on the ground. Recon spotted a Bomber squadron staging at their forward airfield.", "And something bigger: a new heavy bomber with gun turrets and missile pods. It cannot reach our fleet.", "Clear that coast and the beachhead is ours. Good hunting."])
+briefing = Array[ExtResource("19_radio")]([SubResource("brief_1"), SubResource("brief_2"), SubResource("brief_3"), SubResource("brief_4"), SubResource("brief_5")])
 intro_chunk = ExtResource("3_ocean")
-transition_chunk = ExtResource("4_coast")
+transition_chunks = Array[PackedScene]([ExtResource("4_coast")])
 chunks = Array[PackedScene]([ExtResource("5_road"), ExtResource("6_dirt"), ExtResource("7_base"), ExtResource("8_forest"), ExtResource("9_water"), ExtResource("10_street"), ExtResource("11_river")])
 ground_enemies = Array[PackedScene]([ExtResource("14_tank"), ExtResource("14_tank"), ExtResource("15_btr"), ExtResource("15_btr"), ExtResource("16_humvee"), ExtResource("17_acs")])
 water_enemies = Array[PackedScene]([ExtResource("18_gunboat")])

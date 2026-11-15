@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://da0i7l7ey40ik" path="res://tilesets/Crates Barrels/TDS04_0017_Box1-mini.png" id="10_5pms1"]
 [ext_resource type="Texture2D" uid="uid://b6q60omi3h8yl" path="res://tilesets/Crates Barrels/TDS04_0016_Barrel.png" id="11_ipyj0"]
 
-[node name="ChunkRiver" type="Node2D" unique_id=173680639]
+[node name="ChunkBase1" type="Node2D" unique_id=173680639]
 
 [node name="Ground" type="TileMapLayer" parent="." unique_id=487209141]
 tile_map_data = PackedByteArray("AAAAAAAAAQABAAEAAAABAAAAAQACAAEAAAACAAAAAQADAAEAAAADAAAAAQABAAEAAAAEAAAAAQACAAEAAAAFAAAAAQADAAEAAAAGAAAAAQABAAEAAAAHAAAAAQACAAEAAAAIAAAAAQADAAEAAAAJAAAAAQABAAEAAAAAAAYAAQABAAEAAAAJAAYAAQABAAEAAAAAAAcAAQABAAIAAAABAAcAAQACAAIAAAACAAcAAQADAAIAAAADAAcAAQABAAIAAAAEAAcAAQACAAIAAAAFAAcAAQADAAIAAAAGAAcAAQABAAIAAAAHAAcAAQACAAIAAAAIAAcAAQADAAIAAAAJAAcAAQABAAIAAAABAAYAAgACAAIAAAABAAUAAgACAAIAAAABAAQAAgACAAIAAAABAAMAAgACAAIAAAABAAIAAgACAAIAAAABAAEAAgACAAIAAAACAAEAAgACAAIAAAADAAEAAgACAAIAAAAEAAEAAgACAAIAAAAFAAEAAgACAAIAAAAGAAEAAgACAAIAAAAHAAEAAgACAAIAAAAIAAEAAgACAAIAAAAIAAIAAgACAAIAAAAIAAUAAgACAAIAAAAIAAYAAgACAAIAAAAHAAYAAgACAAIAAAAGAAYAAgACAAIAAAAFAAYAAgACAAIAAAAEAAYAAgACAAIAAAADAAYAAgACAAIAAAACAAYAAgACAAIAAAAHAAUAAgACAAIAAAAGAAUAAgACAAIAAAAFAAUAAgACAAIAAAAEAAUAAgACAAIAAAADAAUAAgACAAIAAAACAAUAAgACAAIAAAACAAQAAgACAAIAAAACAAMAAgACAAIAAAACAAIAAgACAAIAAAADAAIAAgACAAIAAAAEAAIAAgACAAIAAAAFAAIAAgACAAIAAAAGAAIAAgACAAIAAAAHAAIAAgACAAIAAAAHAAMAAgACAAIAAAAGAAMAAgACAAIAAAAGAAQAAgACAAIAAAAFAAQAAgACAAIAAAAEAAQAAgACAAIAAAADAAQAAgACAAIAAAADAAMAAgACAAIAAAAEAAMAAgACAAIAAAAFAAMAAgACAAIAAAAHAAQAAgACAAIAAAAIAAMAAgACAAIAAAAIAAQAAgACAAIAAAAAAAUAAQACAAIAAAAAAAQAAQACAAIAAAAAAAMAAQACAAIAAAAAAAIAAQACAAIAAAAAAAEAAQACAAIAAAAJAAEAAQACAAIAAAAJAAIAAQACAAIAAAAJAAMAAQACAAIAAAAJAAQAAQACAAIAAAAJAAUAAQACAAIAAAA=")
@@ -76,49 +76,46 @@ parked = true
 position = Vector2(137, 241)
 rotation = -1.5707964
 script = ExtResource("8_5pms1")
-water = true
 
 [node name="SpawnPoint3" type="Marker2D" parent="SpawnPoints" unique_id=2037175447]
 position = Vector2(496, 391)
 rotation = 1.5707964
 script = ExtResource("8_5pms1")
-water = true
 
 [node name="SpawnPoint4" type="Marker2D" parent="SpawnPoints" unique_id=261088871]
 position = Vector2(312, 319)
 rotation = 1.5707964
 script = ExtResource("8_5pms1")
-water = true
 
 [node name="SpawnPoint5" type="Marker2D" parent="SpawnPoints" unique_id=1198640713]
 position = Vector2(160, 387)
 script = ExtResource("8_5pms1")
 parked = true
 
-[node name="Tds040015BarrelOil" type="Sprite2D" parent="SpawnPoints" unique_id=95469495]
+[node name="Tds040015BarrelOil" type="Sprite2D" parent="Props" unique_id=95469495]
 position = Vector2(284, 207)
 texture = ExtResource("9_pgvg7")
 
-[node name="Tds040015BarrelOil2" type="Sprite2D" parent="SpawnPoints" unique_id=782849450]
+[node name="Tds040015BarrelOil2" type="Sprite2D" parent="Props" unique_id=782849450]
 position = Vector2(311, 207)
 texture = ExtResource("9_pgvg7")
 
-[node name="Tds040017Box1Mini" type="Sprite2D" parent="SpawnPoints" unique_id=1816420929]
+[node name="Tds040017Box1Mini" type="Sprite2D" parent="Props" unique_id=1816420929]
 position = Vector2(340, 170)
 texture = ExtResource("10_5pms1")
 
-[node name="Tds040017Box1Mini2" type="Sprite2D" parent="SpawnPoints" unique_id=850370040]
+[node name="Tds040017Box1Mini2" type="Sprite2D" parent="Props" unique_id=850370040]
 position = Vector2(341, 145)
 texture = ExtResource("10_5pms1")
 
-[node name="Tds040016Barrel" type="Sprite2D" parent="SpawnPoints" unique_id=613558294]
+[node name="Tds040016Barrel" type="Sprite2D" parent="Props" unique_id=613558294]
 position = Vector2(545, 74)
 texture = ExtResource("11_ipyj0")
 
-[node name="Tds040016Barrel2" type="Sprite2D" parent="SpawnPoints" unique_id=995152655]
+[node name="Tds040016Barrel2" type="Sprite2D" parent="Props" unique_id=995152655]
 position = Vector2(567, 82)
 texture = ExtResource("11_ipyj0")
 
-[node name="Tds040016Barrel3" type="Sprite2D" parent="SpawnPoints" unique_id=942605424]
+[node name="Tds040016Barrel3" type="Sprite2D" parent="Props" unique_id=942605424]
 position = Vector2(547, 106)
 texture = ExtResource("11_ipyj0")

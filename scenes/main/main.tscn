@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" path="res://scenes/enemies/helicopter.tscn" id="13"]
 [ext_resource type="PackedScene" path="res://scenes/main/clouds.tscn" id="18"]
 [ext_resource type="Resource" path="res://levels/level_01.tres" id="19_level1"]
+[ext_resource type="Resource" path="res://levels/level_02.tres" id="22_level2"]
 [ext_resource type="PackedScene" path="res://scenes/ui/briefing.tscn" id="20_briefing"]
 [ext_resource type="PackedScene" path="res://scenes/ui/radio.tscn" id="21_radio"]
 
@@ -19,7 +20,7 @@ script = ExtResource("1")
 player_scene = ExtResource("4")
 enemy_plane_scene = ExtResource("5")
 helicopter_scene = ExtResource("13")
-levels = Array[ExtResource("21_ldscript")]([ExtResource("19_level1")])
+levels = Array[ExtResource("21_ldscript")]([ExtResource("19_level1"), ExtResource("22_level2")])
 
 [node name="ChunkSpawner" type="Node2D" parent="." unique_id=732774404 node_paths=PackedStringArray("camera")]
 script = ExtResource("2")

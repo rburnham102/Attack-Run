@@ -1,8 +1,11 @@
 extends CanvasLayer
-## The mission briefing: the general's portrait and a text box along the
-## bottom of the screen. Each line types itself out; fire (or Enter) finishes
-## the line early, or moves on to the next one once it's all shown.
+## The mission briefing: a portrait and a text box along the bottom of the
+## screen. Each line types itself out; fire (or Enter) finishes the line
+## early, or moves on to the next one once it's all shown.
 ## Emits finished after the last line, then hides itself.
+##
+## Each line is a RadioLine, which says who is talking, so the general and
+## Lt. Lilly can take turns. The portrait and name swap for every line.
 ##
 ## Main calls start(level) and awaits finished. This scene doesn't know
 ## anything about planes or the map, so it could be reused for any dialogue.
@@ -13,8 +16,13 @@ signal finished
 @export var characters_per_second := 45.0
 ## Fade time when the box appears and disappears.
 @export var fade_time := 0.3
+## Name colours, so you can tell at a glance who is talking. Lilly's matches
+## the teal of her radio box.
+@export var general_color := Color(1, 0.8, 0.35)
+@export var comms_color := Color(0.55, 1, 0.85)
 
-var _lines: Array[String] = []
+var _level: LevelData
+var _lines: Array[RadioLine] = []
 var _index := 0
 var _typing: Tween
 
@@ -37,10 +45,9 @@ func _ready() -> void:
 
 
 func start(level: LevelData) -> void:
+	_level = level
 	_lines = level.briefing
 	_title.text = level.title
-	_speaker.text = level.general_name
-	_portrait.texture = level.general_portrait
 	_index = 0
 	if _lines.is_empty():
 		finished.emit()
@@ -55,12 +62,34 @@ func start(level: LevelData) -> void:
 ## Types out the current line by animating Label.visible_ratio from 0 to 1.
 ## visible_ratio is built into Label: 0.5 shows the first half of the text.
 func _show_line() -> void:
-	_text.text = _lines[_index]
+	var line := _lines[_index]
+	_show_speaker(line)
+	_text.text = line.text
 	_text.visible_ratio = 0.0
 	_hint.hide()
 	_typing = create_tween()
 	_typing.tween_property(_text, "visible_ratio", 1.0, _text.text.length() / characters_per_second)
 	_typing.tween_callback(_hint.show)
+
+
+## Puts the right name and face up for this line.
+func _show_speaker(line: RadioLine) -> void:
+	if line.speaker == RadioLine.Speaker.GENERAL:
+		_speaker.text = _level.general_name
+		_speaker.label_settings.font_color = general_color
+		_portrait.texture = _level.general_portrait
+		# The general is a painted portrait: smooth scaling suits it.
+		_portrait.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
+	else:
+		_speaker.text = RadioLine.COMMS_NAME
+		_speaker.label_settings.font_color = comms_color
+		# A still from her mood animation. The last frame is the one with her
+		# mouth closed (see radio.gd).
+		var frames := RadioLine.COMMS_PORTRAITS
+		var anim := line.mood_animation()
+		_portrait.texture = frames.get_frame_texture(anim, frames.get_frame_count(anim) - 1)
+		# She's pixel art: nearest-neighbour keeps her crisp when scaled up.
+		_portrait.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 
 
 func _unhandled_input(event: InputEvent) -> void:
