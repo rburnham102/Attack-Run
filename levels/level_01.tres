@@ -18,6 +18,27 @@
 [ext_resource type="PackedScene" path="res://scenes/enemies/humvee.tscn" id="16_humvee"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/acs.tscn" id="17_acs"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/gunboat.tscn" id="18_gunboat"]
+[ext_resource type="Script" path="res://levels/radio_line.gd" id="19_radio"]
+
+[sub_resource type="Resource" id="warn_1"]
+script = ExtResource("19_radio")
+mood = 2
+text = "Bomber squadron on radar, closing fast! Knock it out of the sky!"
+
+[sub_resource type="Resource" id="down_1"]
+script = ExtResource("19_radio")
+mood = 0
+text = "Bomber down! Nice flying. Stay sharp, they're not done yet."
+
+[sub_resource type="Resource" id="warn_2"]
+script = ExtResource("19_radio")
+mood = 1
+text = "Wait... that contact is huge! It's the new heavy bomber. Watch those turrets!"
+
+[sub_resource type="Resource" id="down_2"]
+script = ExtResource("19_radio")
+mood = 0
+text = "Heavy bomber destroyed! The coast is ours. Great work, pilots!"
 
 [resource]
 script = ExtResource("1_script")
@@ -34,3 +55,5 @@ min_ground_enemies = 1
 max_ground_enemies = 2
 boss_scenes = Array[PackedScene]([ExtResource("12_boss"), ExtResource("13_super")])
 stage_length = 90.0
+boss_warnings = Array[ExtResource("19_radio")]([SubResource("warn_1"), SubResource("warn_2")])
+boss_defeated_lines = Array[ExtResource("19_radio")]([SubResource("down_1"), SubResource("down_2")])

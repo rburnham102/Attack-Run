@@ -1,0 +1,89 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/radio.gd" id="1_script"]
+[ext_resource type="LabelSettings" path="res://scenes/ui/hud_label.tres" id="2_text"]
+[ext_resource type="SpriteFrames" path="res://assets/Portraits/comms_officer/comms_officer.tres" id="3_frames"]
+
+[sub_resource type="StyleBoxFlat" id="box_style"]
+bg_color = Color(0.05, 0.08, 0.14, 0.88)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.45, 0.85, 0.75, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="portrait_frame"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.45, 0.85, 0.75, 1)
+
+[sub_resource type="LabelSettings" id="speaker_settings"]
+font_size = 20
+font_color = Color(0.55, 1, 0.85, 1)
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Radio" type="CanvasLayer"]
+layer = 4
+script = ExtResource("1_script")
+
+[node name="Box" type="PanelContainer" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 12.0
+offset_top = 140.0
+offset_right = -12.0
+offset_bottom = 140.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("box_style")
+
+[node name="Margin" type="MarginContainer" parent="Box"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 10
+
+[node name="HBox" type="HBoxContainer" parent="Box/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Frame" type="PanelContainer" parent="Box/Margin/HBox"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("portrait_frame")
+
+[node name="Window" type="Control" parent="Box/Margin/HBox/Frame"]
+clip_contents = true
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="Portrait" type="AnimatedSprite2D" parent="Box/Margin/HBox/Frame/Window"]
+texture_filter = 1
+position = Vector2(64, 64)
+sprite_frames = ExtResource("3_frames")
+animation = &"neutral"
+
+[node name="VBox" type="VBoxContainer" parent="Box/Margin/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="Speaker" type="Label" parent="Box/Margin/HBox/VBox"]
+layout_mode = 2
+text = "COMMS OFFICER"
+label_settings = SubResource("speaker_settings")
+
+[node name="Text" type="Label" parent="Box/Margin/HBox/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Radio text goes here."
+label_settings = ExtResource("2_text")
+autowrap_mode = 3

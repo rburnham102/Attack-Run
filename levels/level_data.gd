@@ -43,3 +43,11 @@ extends Resource
 @export var boss_scenes: Array[PackedScene] = []
 ## Seconds of normal waves before each boss arrives.
 @export var stage_length := 90.0
+
+@export_group("Radio")
+## What the comms officer says as each boss arrives, in the same order as
+## Boss Scenes. Leave an entry out (or the whole list empty) for silence.
+@export var boss_warnings: Array[RadioLine] = []
+## What she says after each boss is destroyed, same order as Boss Scenes.
+## The last one doubles as the end-of-mission call.
+@export var boss_defeated_lines: Array[RadioLine] = []

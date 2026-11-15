@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" path="res://scenes/main/clouds.tscn" id="18"]
 [ext_resource type="Resource" path="res://levels/level_01.tres" id="19_level1"]
 [ext_resource type="PackedScene" path="res://scenes/ui/briefing.tscn" id="20_briefing"]
+[ext_resource type="PackedScene" path="res://scenes/ui/radio.tscn" id="21_radio"]
 
 [node name="Main" type="Node2D" unique_id=1860959654]
 script = ExtResource("1")
@@ -47,3 +48,5 @@ one_shot = true
 [node name="GameOver" parent="." unique_id=942740144 instance=ExtResource("12")]
 
 [node name="Briefing" parent="." instance=ExtResource("20_briefing")]
+
+[node name="Radio" parent="." instance=ExtResource("21_radio")]

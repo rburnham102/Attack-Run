@@ -4,7 +4,7 @@ extends Node2D
 ##   intro -> [stage_length seconds of waves -> boss] x number of bosses -> next level
 ## What changes from level to level (briefing, map, bosses) comes from a
 ## LevelData resource in the Levels list. The map itself is handled by
-## ChunkSpawner, and the UI by HUD, Briefing and GameOver.
+## ChunkSpawner, and the UI by HUD, Briefing, Radio and GameOver.
 
 @export var player_scene: PackedScene
 @export var enemy_plane_scene: PackedScene
@@ -22,6 +22,9 @@ extends Node2D
 @export var boss_delay := 3.0
 ## How long "MISSION COMPLETE" shows before the next level loads.
 @export var level_end_delay := 4.0
+## Seconds after a boss dies before the comms officer reports it, so her box
+## doesn't hide the bonus pickups dropping where the boss was.
+@export var radio_defeated_delay := 1.0
 
 @export_group("Intro")
 ## The planes' screen height while the general talks (0.5 = middle).
@@ -47,6 +50,7 @@ var _players: Array[Node2D] = []
 @onready var _chunk_spawner: Node2D = $ChunkSpawner
 @onready var _hud: CanvasLayer = $HUD
 @onready var _briefing: CanvasLayer = $Briefing
+@onready var _radio: CanvasLayer = $Radio
 
 
 func _ready() -> void:
@@ -177,9 +181,16 @@ func _on_stage_timer_timeout() -> void:
 	_wave_timer.stop()
 	_helicopter_timer.stop()
 	Game.boss_incoming.emit()
+	_radio.say(_radio_line(_level.boss_warnings))
 	# connect() instead of await: if this scene is freed first (back to the
 	# title), Godot drops the connection and nothing runs on a freed node.
 	get_tree().create_timer(boss_delay, false).timeout.connect(_spawn_boss)
+
+
+## This boss's line from one of the level's Radio lists, or null (silence)
+## if the list doesn't have one for it.
+func _radio_line(lines: Array[RadioLine]) -> RadioLine:
+	return lines[_boss_index] if _boss_index < lines.size() else null
 
 
 func _spawn_boss() -> void:
@@ -189,6 +200,8 @@ func _spawn_boss() -> void:
 
 
 func _on_boss_defeated() -> void:
+	# Before _boss_index goes up, so we get the line for the boss just beaten.
+	_radio.say(_radio_line(_level.boss_defeated_lines), radio_defeated_delay)
 	Game.stage += 1
 	_boss_index += 1
 	if _boss_index < _level.boss_scenes.size():
