@@ -20,6 +20,12 @@ extends Enemy
 @export var wreck_texture: Texture2D
 ## Tint for the wreck. Darkening a normal sprite makes it look burnt out.
 @export var wreck_tint := Color.WHITE
+## Set above 1 when Wreck Texture is an animation strip (frames side by side,
+## like the mini-sub sinking). The wreck then plays it once and disappears,
+## instead of staying on the ground.
+@export var wreck_hframes := 1
+## Seconds each wreck frame stays on screen.
+@export var wreck_frame_time := 0.08
 
 @onready var _base: Node2D = $Base
 @onready var _turret: Node2D = get_node_or_null("Turret")
@@ -29,6 +35,9 @@ extends Enemy
 
 func _ready() -> void:
 	super()
+	# Groups are Godot's built-in tags. Level 3's sub pen boss uses this one
+	# to clear away the vehicles it covers up.
+	add_to_group("ground_vehicles")
 	if _turret and _fire_timer:
 		_fire_timer.timeout.connect(_fire)
 		_fire_timer.start(randf_range(0.8, _fire_timer.wait_time))
@@ -72,9 +81,21 @@ func die(shooter_id: int) -> void:
 	if wreck_texture:
 		var wreck := Sprite2D.new()
 		wreck.texture = wreck_texture
-		wreck.transform = transform
+		# Our transform times the hull's: the wreck lands exactly where the
+		# hull sprite was, including any scale or turn it has in the scene
+		# (level 3's pixel-art vehicles are scaled up and turned sideways).
+		wreck.transform = transform * _base.transform
 		wreck.modulate = wreck_tint
+		wreck.hframes = wreck_hframes
 		if _base is Sprite2D:
 			wreck.flip_v = _base.flip_v
+			wreck.texture_filter = _base.texture_filter
 		get_parent().add_child.call_deferred(wreck)
+		if wreck_hframes > 1:
+			# get_tree().create_tween() isn't tied to a node, so it runs even
+			# though the wreck only joins the tree at the end of this frame.
+			var anim := get_tree().create_tween()
+			anim.tween_property(wreck, "frame", wreck_hframes - 1,
+				wreck_frame_time * wreck_hframes).from(0)
+			anim.tween_callback(wreck.queue_free)
 	super(shooter_id)

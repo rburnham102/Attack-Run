@@ -2,8 +2,8 @@ extends Node2D
 ## Builds the map by stacking chunk scenes on top of each other as the
 ## camera scrolls up, and deletes chunks once they scroll off the bottom.
 ##
-## Every chunk scene must be CHUNK_HEIGHT pixels tall, with its origin (0, 0)
-## at its top-left corner.
+## Every chunk scene must be CHUNK_HEIGHT pixels tall (or set its own height,
+## see _place()), with its origin (0, 0) at its top-left corner.
 ##
 ## Which chunks to use comes from the level (LevelData), in three phases:
 ##   intro       - the level's intro chunk, repeated (open ocean in level 1)
@@ -26,6 +26,9 @@ var _level: LevelData
 var _in_intro := true
 ## Transition chunks still to be placed, front first. Filled by begin_land().
 var _transition_queue: Array[PackedScene] = []
+## While set, every new chunk is this one (a boss's own map, see LevelData's
+## Boss Chunks). Set with use_boss_chunk().
+var _boss_chunk: PackedScene
 
 
 ## Main calls this from its _ready(). It can't happen in our own _ready():
@@ -47,11 +50,26 @@ func begin_land() -> void:
 	# Intro chunks waiting above the screen haven't been seen yet, so throw
 	# them away. That way the transition chunks go in right above the top of
 	# the screen, instead of after a long stretch of queued-up ocean.
+	_discard_unseen()
+
+
+## Main calls this when a boss is coming (with the level's chunk for it) and
+## when it's beaten (with null, back to the normal chunks).
+func use_boss_chunk(scene: PackedScene) -> void:
+	_boss_chunk = scene
+	if scene:
+		_discard_unseen()
+
+
+## Deletes the chunks waiting above the screen that nobody has seen yet, so
+## the next chunk placed goes in right above the top of the screen.
+func _discard_unseen() -> void:
 	var screen_top := camera.global_position.y
 	for chunk in get_children():
-		if chunk.position.y + CHUNK_HEIGHT <= screen_top:
+		var height: float = chunk.get_meta("height", CHUNK_HEIGHT)
+		if chunk.position.y + height <= screen_top and not chunk.is_queued_for_deletion():
 			chunk.queue_free()
-			_top_y += CHUNK_HEIGHT
+			_top_y += height
 
 
 func _process(_delta: float) -> void:
@@ -71,8 +89,12 @@ func _process(_delta: float) -> void:
 
 
 func _place(scene: PackedScene) -> void:
-	_top_y -= CHUNK_HEIGHT
 	var chunk := scene.instantiate()
+	# A chunk can be taller than CHUNK_HEIGHT: give its root node a "height"
+	# metadata value (Inspector > Add Metadata) and it gets that much room.
+	# Level 3's ice shelf and coastlines use this so they aren't cut in half.
+	var height: float = chunk.get_meta("height", CHUNK_HEIGHT)
+	_top_y -= height
 	chunk.position = Vector2(0, _top_y)
 	_spawn_enemies(chunk)
 	add_child(chunk)
@@ -109,6 +131,8 @@ func _spawn_enemies(chunk: Node) -> void:
 
 
 func _pick_chunk() -> PackedScene:
+	if _boss_chunk:
+		return _boss_chunk
 	if _in_intro and _level.intro_chunk:
 		return _level.intro_chunk
 	if not _transition_queue.is_empty():

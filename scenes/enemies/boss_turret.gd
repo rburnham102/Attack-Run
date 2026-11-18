@@ -18,6 +18,13 @@ extends Enemy
 @export var turn_speed := 120.0
 @export var burst_count := 3
 @export var burst_delay := 0.12
+## Turn to follow the nearest player. Untick for guns that always fire the
+## way they face (the submarine's missile hatches).
+@export var aims := true
+## A hatch: the sprite's frames (closed to open) play once when the fight
+## starts. Otherwise, a sprite with several frames plays them as recoil
+## every shot (level 3's guns).
+@export var opens := false
 
 ## The boss this turret is mounted on. Set by the boss.
 var boss: Boss
@@ -41,6 +48,8 @@ func activate() -> void:
 	active = true
 	# A random first delay so the two turrets don't fire in unison.
 	_fire_timer.start(randf_range(0.5, _fire_timer.wait_time))
+	if opens:
+		create_tween().tween_property(_sprite, "frame", _sprite.hframes - 1, 0.6)
 
 
 func deactivate() -> void:
@@ -49,7 +58,7 @@ func deactivate() -> void:
 
 
 func _process(delta: float) -> void:
-	if not active:
+	if not active or not aims:
 		return
 	var target := Game.nearest_player(global_position)
 	if target:
@@ -68,8 +77,13 @@ func _fire() -> void:
 
 
 func _fire_once() -> void:
-	if active:  # the burst may still be running when the turret is knocked out
-		shoot(bullet_scene, _muzzle.global_position, Vector2.DOWN.rotated(global_rotation))
+	if not active:  # the burst may still be running when the turret is knocked out
+		return
+	shoot(bullet_scene, _muzzle.global_position, Vector2.DOWN.rotated(global_rotation))
+	if not opens and _sprite.hframes > 1:
+		var recoil := create_tween()
+		recoil.tween_property(_sprite, "frame", _sprite.hframes - 1, 0.15).from(0)
+		recoil.tween_property(_sprite, "frame", 0, 0.0)
 
 
 func take_damage(amount: int, shooter_id: int) -> void:

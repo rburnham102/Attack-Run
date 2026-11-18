@@ -1,0 +1,68 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://tilesets/sea ice stage/BG/Stage_Base_strip3.png" id="1_bg"]
+[ext_resource type="AnimationLibrary" path="res://scenes/chunks/sea_ice/shimmer.tres" id="2_shimmer"]
+[ext_resource type="Script" path="res://scenes/chunks/spawn_point.gd" id="3_spawn"]
+
+[node name="ChunkIceShelf" type="Node2D"]
+texture_filter = 1
+metadata/height = 1072.0
+
+[node name="Ground" type="Sprite2D" parent="."]
+scale = Vector2(2.6666667, 2.6666667)
+texture = ExtResource("1_bg")
+centered = false
+hframes = 3
+region_enabled = true
+region_rect = Rect2(0, 1314, 720, 402)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": ExtResource("2_shimmer")
+}
+autoplay = &"shimmer"
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="Ice1" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(140, 420)
+rotation = -1.5707963
+script = ExtResource("3_spawn")
+
+[node name="Ice2" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(373, 469)
+script = ExtResource("3_spawn")
+parked = true
+
+[node name="Ice3" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(520, 430)
+script = ExtResource("3_spawn")
+parked = true
+
+[node name="Ice4" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(110, 660)
+script = ExtResource("3_spawn")
+parked = true
+
+[node name="Ice5" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(560, 650)
+script = ExtResource("3_spawn")
+parked = true
+
+[node name="Water1" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(90, 900)
+rotation = -1.5707963
+script = ExtResource("3_spawn")
+water = true
+
+[node name="Water2" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(560, 70)
+rotation = 1.5707963
+script = ExtResource("3_spawn")
+water = true
+
+[node name="Water3" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(90, 150)
+rotation = -1.5707963
+script = ExtResource("3_spawn")
+water = true

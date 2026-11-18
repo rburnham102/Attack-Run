@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="LevelData" format=3]
+
+[ext_resource type="Script" path="res://levels/level_data.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/Portraits/general.png" id="2_portrait"]
+[ext_resource type="PackedScene" path="res://scenes/chunks/sea_ice/chunk_ice_water.tscn" id="3_water"]
+[ext_resource type="PackedScene" path="res://scenes/chunks/sea_ice/chunk_ice_coast.tscn" id="4_coast"]
+[ext_resource type="PackedScene" path="res://scenes/chunks/sea_ice/chunk_ice_floe_a.tscn" id="5_floe_a"]
+[ext_resource type="PackedScene" path="res://scenes/chunks/sea_ice/chunk_ice_floe_b.tscn" id="6_floe_b"]
+[ext_resource type="PackedScene" path="res://scenes/chunks/sea_ice/chunk_ice_shelf.tscn" id="7_shelf"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/sea_ice/small_tank.tscn" id="8_small_tank"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/sea_ice/turret_small.tscn" id="9_turret_small"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/sea_ice/turret_single.tscn" id="10_turret_single"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/sea_ice/turret_double_slim.tscn" id="11_turret_slim"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/sea_ice/turret_double_mid.tscn" id="12_turret_mid"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/sea_ice/ice_cannon.tscn" id="13_ice_cannon"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/sea_ice/mini_sub.tscn" id="14_mini_sub"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/enemy_plane_winter.tscn" id="15_plane"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/helicopter_winter.tscn" id="16_heli"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/submarine.tscn" id="17_submarine"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/sub_pen.tscn" id="18_sub_pen"]
+
+[resource]
+script = ExtResource("1_script")
+title = "OPERATION DEEP FREEZE"
+general_name = "GEN. MARCUS HALE"
+general_portrait = ExtResource("2_portrait")
+intro_chunk = ExtResource("3_water")
+transition_chunks = Array[PackedScene]([ExtResource("4_coast")])
+chunks = Array[PackedScene]([ExtResource("3_water"), ExtResource("4_coast"), ExtResource("5_floe_a"), ExtResource("6_floe_b"), ExtResource("7_shelf"), ExtResource("5_floe_a"), ExtResource("6_floe_b"), ExtResource("7_shelf")])
+ground_enemies = Array[PackedScene]([ExtResource("8_small_tank"), ExtResource("8_small_tank"), ExtResource("8_small_tank"), ExtResource("9_turret_small"), ExtResource("9_turret_small"), ExtResource("10_turret_single"), ExtResource("11_turret_slim"), ExtResource("12_turret_mid"), ExtResource("13_ice_cannon")])
+water_enemies = Array[PackedScene]([ExtResource("14_mini_sub")])
+min_ground_enemies = 1
+max_ground_enemies = 3
+enemy_plane_scene = ExtResource("15_plane")
+helicopter_scene = ExtResource("16_heli")
+boss_scenes = Array[PackedScene]([ExtResource("17_submarine"), ExtResource("18_sub_pen")])
+boss_chunks = Array[PackedScene]([ExtResource("3_water")])
+stage_length = 90.0

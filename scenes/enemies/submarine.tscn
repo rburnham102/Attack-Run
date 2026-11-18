@@ -1,0 +1,249 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/enemies/submarine.gd" id="script"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/boss_turret.tscn" id="turret"]
+[ext_resource type="PackedScene" path="res://scenes/projectiles/tank_shell.tscn" id="shell"]
+[ext_resource type="PackedScene" path="res://scenes/projectiles/missile.tscn" id="missile"]
+[ext_resource type="AudioStream" path="res://sound effects/distant/boom_distant_01.ogg" id="snd_death"]
+[ext_resource type="AudioStream" path="res://sound effects/explosions/explosion_small_01.ogg" id="snd_gun"]
+[ext_resource type="Texture2D" path="res://tilesets/sea ice stage/Boss/SubMarine_strip4_loopit in ping pong mode.png" id="body"]
+[ext_resource type="Texture2D" path="res://tilesets/sea ice stage/Boss/SubMarine_MainTurret_strip4.png" id="main"]
+[ext_resource type="Texture2D" path="res://assets/Winter/SubMarine_Foam_strip4.png" id="wake"]
+[ext_resource type="Texture2D" path="res://tilesets/sea ice stage/Boss/SubMarine_Head_strip4.png" id="head"]
+[ext_resource type="Texture2D" path="res://tilesets/sea ice stage/Boss/SubMarine_Turret0.png" id="gun"]
+[ext_resource type="Texture2D" path="res://tilesets/sea ice stage/Boss/SubMarine_Turret_strip7.png" id="hatch"]
+
+[sub_resource type="Animation" id="Animation_idle"]
+resource_name = "idle"
+length = 0.8
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Wake:frame")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_idle"]
+_data = {
+&"idle": SubResource("Animation_idle")
+}
+
+[sub_resource type="CircleShape2D" id="shape_GunLeft"]
+radius = 15.0
+
+[sub_resource type="CircleShape2D" id="shape_GunRight"]
+radius = 15.0
+
+[sub_resource type="CircleShape2D" id="shape_Bridge"]
+radius = 22.0
+
+[sub_resource type="CircleShape2D" id="shape_HatchFront"]
+radius = 16.0
+
+[sub_resource type="CircleShape2D" id="shape_HatchRear"]
+radius = 16.0
+
+[sub_resource type="RectangleShape2D" id="hull"]
+size = Vector2(130, 470)
+
+[node name="Submarine" type="Area2D"]
+z_index = 1
+texture_filter = 1
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+script = ExtResource("script")
+bullet_scene = ExtResource("shell")
+battle_y = 290.0
+sweep_left = 200.0
+sweep_right = 440.0
+sweep_time = 6.0
+aimed_burst_count = 3
+fan_count = 7
+fan_angle = 15.0
+fan_offset = Vector2(0, 260)
+death_sound = ExtResource("snd_death")
+max_hp = 70
+score_value = 10000
+explosion_scale = 3.5
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.7, 1.7)
+texture = ExtResource("body")
+hframes = 4
+
+[node name="Wake" type="Sprite2D" parent="."]
+scale = Vector2(1.7, 1.7)
+texture = ExtResource("wake")
+hframes = 4
+
+[node name="Hull" type="CollisionShape2D" parent="."]
+shape = SubResource("hull")
+disabled = true
+
+[node name="MainTurret" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(0, 67)
+scale = Vector2(1.7, 1.7)
+texture = ExtResource("main")
+offset = Vector2(0, 6.5)
+hframes = 4
+
+[node name="Turrets" type="Node2D" parent="."]
+z_index = 1
+
+[node name="GunLeft" parent="Turrets" instance=ExtResource("turret")]
+position = Vector2(-40, -113)
+max_hp = 10
+score_value = 750
+burst_count = 3
+
+[node name="Sprite2D" parent="Turrets/GunLeft" index="0"]
+scale = Vector2(1.7, 1.7)
+texture = ExtResource("gun")
+offset = Vector2(0, 3.5)
+hframes = 1
+
+[node name="Muzzle" parent="Turrets/GunLeft" index="1"]
+position = Vector2(0, 24)
+
+[node name="CollisionShape2D" parent="Turrets/GunLeft" index="2"]
+shape = SubResource("shape_GunLeft")
+
+[node name="FireTimer" parent="Turrets/GunLeft" index="3"]
+wait_time = 2.8
+
+[node name="GunRight" parent="Turrets" instance=ExtResource("turret")]
+position = Vector2(37, -113)
+max_hp = 10
+score_value = 750
+burst_count = 3
+
+[node name="Sprite2D" parent="Turrets/GunRight" index="0"]
+scale = Vector2(1.7, 1.7)
+texture = ExtResource("gun")
+offset = Vector2(0, 3.5)
+hframes = 1
+
+[node name="Muzzle" parent="Turrets/GunRight" index="1"]
+position = Vector2(0, 24)
+
+[node name="CollisionShape2D" parent="Turrets/GunRight" index="2"]
+shape = SubResource("shape_GunRight")
+
+[node name="FireTimer" parent="Turrets/GunRight" index="3"]
+wait_time = 2.8
+
+[node name="Bridge" parent="Turrets" instance=ExtResource("turret")]
+position = Vector2(0, -35)
+max_hp = 18
+score_value = 750
+burst_count = 4
+
+[node name="Sprite2D" parent="Turrets/Bridge" index="0"]
+scale = Vector2(1.7, 1.7)
+texture = ExtResource("head")
+offset = Vector2(0, 5)
+hframes = 4
+
+[node name="Muzzle" parent="Turrets/Bridge" index="1"]
+position = Vector2(0, 44)
+
+[node name="CollisionShape2D" parent="Turrets/Bridge" index="2"]
+shape = SubResource("shape_Bridge")
+
+[node name="FireTimer" parent="Turrets/Bridge" index="3"]
+wait_time = 2.4
+
+[node name="HatchFront" parent="Turrets" instance=ExtResource("turret")]
+position = Vector2(0, 118)
+bullet_scene = ExtResource("missile")
+max_hp = 12
+score_value = 750
+burst_count = 1
+aims = false
+opens = true
+
+[node name="Sprite2D" parent="Turrets/HatchFront" index="0"]
+scale = Vector2(1.7, 1.7)
+texture = ExtResource("hatch")
+offset = Vector2(0, 0)
+hframes = 7
+
+[node name="Muzzle" parent="Turrets/HatchFront" index="1"]
+position = Vector2(0, 8)
+
+[node name="CollisionShape2D" parent="Turrets/HatchFront" index="2"]
+shape = SubResource("shape_HatchFront")
+
+[node name="FireTimer" parent="Turrets/HatchFront" index="3"]
+wait_time = 5.0
+
+[node name="HatchRear" parent="Turrets" instance=ExtResource("turret")]
+position = Vector2(0, 144)
+bullet_scene = ExtResource("missile")
+max_hp = 12
+score_value = 750
+burst_count = 1
+aims = false
+opens = true
+
+[node name="Sprite2D" parent="Turrets/HatchRear" index="0"]
+scale = Vector2(1.7, 1.7)
+texture = ExtResource("hatch")
+offset = Vector2(0, 0)
+hframes = 7
+
+[node name="Muzzle" parent="Turrets/HatchRear" index="1"]
+position = Vector2(0, 8)
+
+[node name="CollisionShape2D" parent="Turrets/HatchRear" index="2"]
+shape = SubResource("shape_HatchRear")
+
+[node name="FireTimer" parent="Turrets/HatchRear" index="3"]
+wait_time = 5.6
+
+[node name="Muzzles" type="Node2D" parent="."]
+position = Vector2(0, 67)
+
+[node name="MainGun0" type="Marker2D" parent="Muzzles"]
+position = Vector2(0, 48)
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 2.6
+
+[node name="GunSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("snd_gun")
+volume_db = -4.0
+max_polyphony = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_idle")
+}
+autoplay = &"idle"
+
+[editable path="Turrets/GunLeft"]
+[editable path="Turrets/GunRight"]
+[editable path="Turrets/Bridge"]
+[editable path="Turrets/HatchFront"]
+[editable path="Turrets/HatchRear"]

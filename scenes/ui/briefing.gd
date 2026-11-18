@@ -50,7 +50,10 @@ func start(level: LevelData) -> void:
 	_title.text = level.title
 	_index = 0
 	if _lines.is_empty():
-		finished.emit()
+		# Deferred, like Radio.say(): Main calls start() and then awaits
+		# finished, so emitting right now would happen before anyone is
+		# listening and the level would never start.
+		finished.emit.call_deferred()
 		return
 	_box.modulate.a = 0.0
 	show()

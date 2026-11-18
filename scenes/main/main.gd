@@ -26,6 +26,10 @@ extends Node2D
 ## Seconds of waves before each boss when the dev menu's "Start at boss"
 ## is ticked (instead of the level's Stage Length).
 @export var dev_stage_length := 3.0
+## Seconds before a boss arrives that the map starts using the level's chunk
+## for that boss (LevelData > Boss Chunks), so whatever is on screen,
+## even a tall coastline, has scrolled away by the time the boss shows up.
+@export var boss_chunk_lead := 40.0
 ## Seconds after a boss dies before the comms officer reports it, so her box
 ## doesn't hide the bonus pickups dropping where the boss was.
 @export var radio_defeated_delay := 1.0
@@ -59,6 +63,12 @@ var _players: Array[Node2D] = []
 
 func _ready() -> void:
 	_level = levels[Game.level_index]
+	# The level can swap in its own planes and helicopters (level 3's white
+	# winter ones). Empty means keep the defaults set on this node.
+	if _level.enemy_plane_scene:
+		enemy_plane_scene = _level.enemy_plane_scene
+	if _level.helicopter_scene:
+		helicopter_scene = _level.helicopter_scene
 	_chunk_spawner.setup(_level)
 	_radio.level = _level
 	var screen := get_viewport_rect().size
@@ -134,7 +144,10 @@ func _play_intro() -> void:
 
 func _start_stage() -> void:
 	Game.stage_started.emit(_boss_index + 1, _level.boss_scenes.size())
-	_stage_timer.start(dev_stage_length if Game.dev_skip_to_boss else _level.stage_length)
+	var length := dev_stage_length if Game.dev_skip_to_boss else _level.stage_length
+	_stage_timer.start(length)
+	get_tree().create_timer(maxf(length - boss_chunk_lead, 0.0), false) \
+		.timeout.connect(_switch_to_boss_chunk)
 	_wave_timer.start(3.0)
 	_helicopter_timer.start(_helicopter_wait())
 
@@ -181,11 +194,18 @@ func _spawn_helicopter() -> void:
 	_helicopter_timer.start(_helicopter_wait())
 
 
+## If the level has a chunk for the coming boss, the map switches to it.
+func _switch_to_boss_chunk() -> void:
+	if _boss_index < _level.boss_chunks.size() and _level.boss_chunks[_boss_index]:
+		_chunk_spawner.use_boss_chunk(_level.boss_chunks[_boss_index])
+
+
 ## Time's up: stop the waves, warn the players, then bring in the boss.
 func _on_stage_timer_timeout() -> void:
 	_wave_timer.stop()
 	_helicopter_timer.stop()
 	Game.boss_incoming.emit()
+	_switch_to_boss_chunk()  # in case the stage was shorter than the lead
 	_radio.say(_radio_line(_level.boss_warnings))
 	# connect() instead of await: if this scene is freed first (back to the
 	# title), Godot drops the connection and nothing runs on a freed node.
@@ -213,6 +233,7 @@ func _on_boss_defeated() -> void:
 	var lines := _radio_line(_level.boss_defeated_lines)
 	Game.stage += 1
 	_boss_index += 1
+	_chunk_spawner.use_boss_chunk(null)
 	if _boss_index < _level.boss_scenes.size():
 		_radio.say(lines, radio_defeated_delay)
 		get_tree().create_timer(boss_delay, false).timeout.connect(_start_stage)

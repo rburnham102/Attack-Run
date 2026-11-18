@@ -40,10 +40,22 @@ extends Resource
 @export var min_ground_enemies := 1
 @export var max_ground_enemies := 2
 
+@export_group("Air Enemies")
+## The planes that fly in waves. Leave empty to use the one set on the Main
+## node (the red bomber). Level 3 uses a white winter version.
+@export var enemy_plane_scene: PackedScene
+## Same for the helicopters.
+@export var helicopter_scene: PackedScene
+
 @export_group("Bosses")
 ## Fought in this order. The level ends when the last one is destroyed, so
 ## the number of bosses sets how long the level is.
 @export var boss_scenes: Array[PackedScene] = []
+## Optional, same order as Boss Scenes: while that boss is on its way and
+## being fought, the map is built from this chunk only (level 3: open water
+## under the submarine). Leave an entry empty, or the list short, for the
+## normal chunks.
+@export var boss_chunks: Array[PackedScene] = []
 ## Seconds of normal waves before each boss arrives.
 @export var stage_length := 90.0
 

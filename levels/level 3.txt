@@ -1,0 +1,54 @@
+Level 3
+
+there are new asset packs and tilesets. In tilesets/sea ice stage, are the backgrounds and some of the enemies.
+
+The planes and helicopters that spawn should be white at match the new assets. 
+
+New enemy types
+Turrets in folder sea ice stage\BG
+Submarines Barco
+Small tank (use these instead of the other tanks)
+
+
+
+Operation Northern Lights
+
+Cut to the players flying over artic oceans. I want this level to be at night. I am thinking dim everything but an area around the player. 
+
+Gen "We were able to recover the location of a secret base up in the artic circle"
+
+Gen "We need you to infiltrate the base and destroy whatever they are building."
+
+Gen "Satellite imagery is showing large heat signatures but our intel division can not make out what it is."
+
+Gen "Lt. Lilly, give them a rundown of the new technology we were able to salvage from the Super Tank"
+
+Lt. Lilly Excited "Yes Sir! You should now be able to deploy small drones for additional firepower."
+
+Lt Lilly "Look for the new power ups and they will auto deploy"
+
+Lt. Lilly "Good luck out there and I will be your eyes in the sky"
+
+
+First boss
+
+Lt. Lilly Nervous "Contact! Look out!!
+
+First Boss Defeated
+
+Lt Lilly "That was close! Great work team"
+
+Final Boss
+
+Lt Lilly "There is another sub in dock, take it out before it can deploy and attack the fleet!"
+
+Final Boss defeated
+
+Gen "Great work team! Head back to base and reload and refuel. We have more work to do!"
+
+
+
+
+
+
+

@@ -19,6 +19,7 @@ const TWO_PLAYER_HP_SCALE := 1.7
 @export var battle_y := 170.0
 @export var sweep_left := 150.0
 @export var sweep_right := 490.0
+## Seconds for one side-to-side sweep. 0 = the boss holds still.
 @export var sweep_time := 3.5
 @export var aimed_burst_count := 6
 @export var fan_count := 9
@@ -45,7 +46,13 @@ func _ready() -> void:
 	_attack_timer.wait_time /= Game.enemy_fire_rate_scale()
 	_attack_timer.timeout.connect(_attack)
 	Game.boss_health_changed.emit(hp, _max_hp)
+	_enter()
 
+
+## Brings the boss onto the screen, then starts the fight. Bosses that arrive
+## a different way (level 3's submarine surfaces, the sub pen slides in with
+## the map) override this, and call _start_fight() when they're done.
+func _enter() -> void:
 	var entry := create_tween()
 	entry.tween_property(self, "position:y", battle_y, 3.0) \
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
@@ -55,6 +62,8 @@ func _ready() -> void:
 func _start_fight() -> void:
 	_active = true
 	_attack_timer.start()
+	if sweep_time <= 0.0:
+		return  # a boss that holds still (the sub pen)
 	# An endless back-and-forth sweep. set_loops() with no number loops forever.
 	_sweep = create_tween().set_loops()
 	_sweep.tween_property(self, "position:x", sweep_right, sweep_time) \
