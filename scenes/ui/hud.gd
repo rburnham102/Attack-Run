@@ -43,6 +43,12 @@ func _refresh() -> void:
 		var s := _stats[i]
 		_labels[i].text = "P%d  %07d\nHP %d   LIVES %d\nGUN %d  ARMOR %d  SPD %d" % [
 			i + 1, Game.scores[i], s.hp, Game.lives[i], s.weapon, s.armor, s.speed]
+		# A fourth line once the player has drones (G = gun, M = missile,
+		# S = shield). get() with a default: the starting stats have no
+		# "drones" entry.
+		var drones: String = s.get("drones", "")
+		if drones != "":
+			_labels[i].text += "\nDRONES %s" % drones
 
 
 func _on_level_started(level_number: int, title: String) -> void:

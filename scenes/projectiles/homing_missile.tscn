@@ -1,0 +1,56 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/projectiles/homing_bullet.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/Bullet Pack/Update/Missiles/Missile5_strip5.png" id="2_tex"]
+
+[sub_resource type="RectangleShape2D" id="shape"]
+size = Vector2(12, 28)
+
+[sub_resource type="Animation" id="Animation_burn"]
+resource_name = "burn"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06, 0.12, 0.18, 0.24),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_burn"]
+_data = {
+&"burn": SubResource("Animation_burn")
+}
+
+[node name="HomingMissile" type="Area2D"]
+z_index = 2
+texture_filter = 1
+collision_layer = 2
+collision_mask = 12
+monitorable = false
+script = ExtResource("1_script")
+speed = 480.0
+damage = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.6, 1.6)
+texture = ExtResource("2_tex")
+hframes = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("shape")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+rect = Rect2(-8, -20, 16, 40)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_burn")
+}
+autoplay = &"burn"

@@ -40,6 +40,11 @@ extends Resource
 @export var min_ground_enemies := 1
 @export var max_ground_enemies := 2
 
+@export_group("Power-ups")
+## Lets the gun, missile and shield drone pickups drop in this level. Off
+## for the early levels, so drones arrive with level 3's story.
+@export var drones_unlocked := false
+
 @export_group("Air Enemies")
 ## The planes that fly in waves. Leave empty to use the one set on the Main
 ## node (the red bomber). Level 3 uses a white winter version.

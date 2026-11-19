@@ -34,6 +34,9 @@ const DROP_WEIGHTS := {
 	Pickup.Kind.SPEED: 6,
 	Pickup.Kind.MONEY_SMALL: 40,
 	Pickup.Kind.MONEY_BIG: 20,
+	Pickup.Kind.DRONE_GUN: 4,
+	Pickup.Kind.DRONE_MISSILE: 3,
+	Pickup.Kind.DRONE_SHIELD: 3,
 }
 ## Weights for the guaranteed drop after wiping out a whole wave (no money).
 const BONUS_WEIGHTS := {
@@ -41,8 +44,14 @@ const BONUS_WEIGHTS := {
 	Pickup.Kind.HEALTH: 25,
 	Pickup.Kind.ARMOR: 25,
 	Pickup.Kind.SPEED: 20,
+	Pickup.Kind.DRONE_GUN: 12,
+	Pickup.Kind.DRONE_MISSILE: 10,
+	Pickup.Kind.DRONE_SHIELD: 10,
 }
 
+## Set by Main from the level (LevelData > Drones Unlocked). While false,
+## random drops never pick a drone.
+var drones_unlocked := false
 var player_count := 1
 # Index 0 is player 1, index 1 is player 2.
 var scores: Array[int] = [0, 0]
@@ -127,6 +136,11 @@ func nearest_player(from: Vector2) -> Node2D:
 
 ## Picks a pickup kind at random, using one of the weight tables above.
 func random_pickup_kind(weights: Dictionary = DROP_WEIGHTS) -> Pickup.Kind:
+	if not drones_unlocked:
+		# Same table without the drones. duplicate() so the const isn't touched.
+		weights = weights.duplicate()
+		for kind in Pickup.DRONE_KINDS:
+			weights.erase(kind)
 	var kinds := weights.keys()
 	var index := _rng.rand_weighted(PackedFloat32Array(weights.values()))
 	return kinds[index]

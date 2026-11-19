@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" path="res://scenes/enemies/boss_turret.tscn" id="turret"]
 [ext_resource type="PackedScene" path="res://scenes/projectiles/tank_shell.tscn" id="shell"]
 [ext_resource type="PackedScene" path="res://scenes/projectiles/missile.tscn" id="missile"]
+[ext_resource type="PackedScene" path="res://scenes/projectiles/heavy_shell.tscn" id="heavy"]
 [ext_resource type="AudioStream" path="res://sound effects/distant/boom_distant_01.ogg" id="snd_death"]
 [ext_resource type="AudioStream" path="res://sound effects/explosions/explosion_small_01.ogg" id="snd_gun"]
 [ext_resource type="Texture2D" path="res://tilesets/sea ice stage/Boss/SubMarine_strip4_loopit in ping pong mode.png" id="body"]
@@ -164,6 +165,7 @@ wait_time = 2.6
 
 [node name="DockTopRight" parent="Turrets" instance=ExtResource("turret")]
 position = Vector2(240, -220)
+bullet_scene = ExtResource("heavy")
 max_hp = 18
 score_value = 750
 burst_count = 2

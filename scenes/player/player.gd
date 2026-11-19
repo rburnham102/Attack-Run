@@ -23,6 +23,9 @@ const MAXED_WEAPON_BONUS := 500
 const MAXED_OTHER_BONUS := 200
 const MONEY_SMALL := 100
 const MONEY_BIG := 500
+## Where drones fly, relative to the plane, in the order they fill up:
+## left, right, then a pair further back.
+const DRONE_SLOTS: Array[Vector2] = [Vector2(-92, 20), Vector2(92, 20), Vector2(-48, 72), Vector2(48, 72)]
 
 @export_range(1, 2) var player_id := 1
 @export var speed := 300.0
@@ -30,6 +33,10 @@ const MONEY_BIG := 500
 @export var speed_per_level := 45.0
 @export var max_hp := 3
 @export var bullet_scene: PackedScene
+## The scene each drone pickup adds.
+@export var gun_drone_scene: PackedScene
+@export var missile_drone_scene: PackedScene
+@export var shield_drone_scene: PackedScene
 ## Played by the explosion when this plane is shot down.
 @export var death_sound: AudioStream
 ## Keeps the plane's body from going past the screen edge.
@@ -54,6 +61,8 @@ var altitude := 0.0:
 			_apply_altitude()
 
 var _prefix := ""
+## One entry per DRONE_SLOTS position: the drone flying there, or null.
+var _drones: Array[Drone] = [null, null, null, null]
 var _spawn_position := Vector2.ZERO
 var _blink: Tween
 ## The Shadow's offset and strength as set in the editor (at altitude 0).
@@ -99,6 +108,11 @@ func _shoot() -> void:
 		bullet.direction = Vector2.UP.rotated(deg_to_rad(shot[1]))
 		bullet.shooter_id = player_id
 		Game.add_to_world(bullet)
+	for drone in _drones:
+		# is_instance_valid: a drone that was shot down is freed, but our
+		# list still points at it.
+		if is_instance_valid(drone):
+			drone.fire()
 
 
 ## Called by enemy bullets. Armor absorbs a hit before HP does.
@@ -142,8 +156,40 @@ func collect(kind: Pickup.Kind) -> void:
 			Game.add_score(player_id, MONEY_SMALL)
 		Pickup.Kind.MONEY_BIG:
 			Game.add_score(player_id, MONEY_BIG)
+		Pickup.Kind.DRONE_GUN:
+			_add_drone(gun_drone_scene)
+		Pickup.Kind.DRONE_MISSILE:
+			_add_drone(missile_drone_scene)
+		Pickup.Kind.DRONE_SHIELD:
+			_add_drone(shield_drone_scene)
 	Game.pickup_collected.emit(player_id, kind)
 	_stats_changed()
+
+
+## Puts a new drone in the first free slot. With all four slots taken, the
+## pickup is worth points instead.
+func _add_drone(scene: PackedScene) -> void:
+	var slot := -1
+	for i in _drones.size():
+		if not is_instance_valid(_drones[i]):
+			slot = i
+			break
+	if slot == -1:
+		Game.add_score(player_id, MAXED_OTHER_BONUS)
+		return
+	var drone: Drone = scene.instantiate()
+	drone.player = self
+	drone.player_id = player_id
+	drone.slot_offset = DRONE_SLOTS[slot]
+	drone.position = position + DRONE_SLOTS[slot]
+	# Our parent is the Scroller, so the drone works in screen coordinates
+	# like we do. It isn't our child, so it can trail behind us smoothly
+	# instead of being locked to the plane.
+	get_parent().add_child(drone)
+	_drones[slot] = drone
+	# When it's shot down, update the HUD. call_deferred: it's still on its
+	# way out of the tree when tree_exited fires.
+	drone.tree_exited.connect(_stats_changed, CONNECT_DEFERRED)
 
 
 func _on_area_entered(area: Area2D) -> void:
@@ -200,7 +246,17 @@ func _stats_changed() -> void:
 		"armor": armor,
 		"weapon": weapon_level,
 		"speed": speed_level,
+		"drones": _drone_letters(),
 	})
+
+
+## The drones we have, as letters for the HUD: "G M S", or "" for none.
+func _drone_letters() -> String:
+	var letters := PackedStringArray()
+	for drone in _drones:
+		if is_instance_valid(drone) and not drone.is_queued_for_deletion():
+			letters.append(["G", "M", "S"][drone.kind])
+	return " ".join(letters)
 
 
 ## Blinks the plane and ignores damage for a while.

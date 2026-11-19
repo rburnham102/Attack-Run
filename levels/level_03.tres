@@ -18,12 +18,66 @@
 [ext_resource type="PackedScene" path="res://scenes/enemies/helicopter_winter.tscn" id="16_heli"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/submarine.tscn" id="17_submarine"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/sub_pen.tscn" id="18_sub_pen"]
+[ext_resource type="Script" path="res://levels/radio_line.gd" id="19_radio"]
+
+[sub_resource type="Resource" id="brief_1"]
+script = ExtResource("19_radio")
+speaker = 1
+text = "We were able to recover the location of a secret base up in the Arctic Circle."
+
+[sub_resource type="Resource" id="brief_2"]
+script = ExtResource("19_radio")
+speaker = 1
+text = "Satellite imagery is showing large heat signatures."
+
+[sub_resource type="Resource" id="brief_3"]
+script = ExtResource("19_radio")
+speaker = 1
+text = "We need you to infiltrate the base and destroy the objective."
+
+[sub_resource type="Resource" id="brief_4"]
+script = ExtResource("19_radio")
+speaker = 1
+text = "Lt. Lilly, give them a rundown of the new technology we were able to salvage from the Super Tank."
+
+[sub_resource type="Resource" id="brief_5"]
+script = ExtResource("19_radio")
+mood = 2
+text = "Yes Sir! You should now be able to deploy small drones for additional firepower."
+
+[sub_resource type="Resource" id="brief_6"]
+script = ExtResource("19_radio")
+text = "Look for the new power-ups and they will auto deploy."
+
+[sub_resource type="Resource" id="brief_7"]
+script = ExtResource("19_radio")
+text = "Good luck out there. I will be your eyes in the sky."
+
+[sub_resource type="Resource" id="warn_1"]
+script = ExtResource("19_radio")
+mood = 1
+text = "Contact! Look out!!"
+
+[sub_resource type="Resource" id="down_1"]
+script = ExtResource("19_radio")
+text = "That was close! Great work, team."
+
+[sub_resource type="Resource" id="warn_2"]
+script = ExtResource("19_radio")
+mood = 2
+text = "There is another sub in dock. Take it out before it can deploy and attack the fleet!"
+
+[sub_resource type="Resource" id="end_1"]
+script = ExtResource("19_radio")
+speaker = 1
+text = "Great work, team! Head back to base to reload and refuel. We have more work to do!"
 
 [resource]
 script = ExtResource("1_script")
-title = "OPERATION DEEP FREEZE"
+title = "OPERATION NORTHERN LIGHTS"
 general_name = "GEN. MARCUS HALE"
 general_portrait = ExtResource("2_portrait")
+briefing = Array[ExtResource("19_radio")]([SubResource("brief_1"), SubResource("brief_2"), SubResource("brief_3"), SubResource("brief_4"), SubResource("brief_5"), SubResource("brief_6"), SubResource("brief_7")])
 intro_chunk = ExtResource("3_water")
 transition_chunks = Array[PackedScene]([ExtResource("4_coast")])
 chunks = Array[PackedScene]([ExtResource("3_water"), ExtResource("4_coast"), ExtResource("5_floe_a"), ExtResource("6_floe_b"), ExtResource("7_shelf"), ExtResource("5_floe_a"), ExtResource("6_floe_b"), ExtResource("7_shelf")])
@@ -31,8 +85,12 @@ ground_enemies = Array[PackedScene]([ExtResource("8_small_tank"), ExtResource("8
 water_enemies = Array[PackedScene]([ExtResource("14_mini_sub")])
 min_ground_enemies = 1
 max_ground_enemies = 3
+drones_unlocked = true
 enemy_plane_scene = ExtResource("15_plane")
 helicopter_scene = ExtResource("16_heli")
 boss_scenes = Array[PackedScene]([ExtResource("17_submarine"), ExtResource("18_sub_pen")])
 boss_chunks = Array[PackedScene]([ExtResource("3_water")])
 stage_length = 90.0
+boss_warnings = Array[ExtResource("19_radio")]([SubResource("warn_1"), SubResource("warn_2")])
+boss_defeated_lines = Array[ExtResource("19_radio")]([SubResource("down_1")])
+mission_complete_lines = Array[ExtResource("19_radio")]([SubResource("end_1")])

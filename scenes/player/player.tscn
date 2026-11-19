@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene format=3]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1"]
 [ext_resource type="Texture2D" path="res://assets/Bomber/BONUS Bomber Mini.png" id="2"]
@@ -6,6 +6,10 @@
 [ext_resource type="Script" path="res://scenes/player/armor_ring.gd" id="4"]
 [ext_resource type="AudioStream" path="res://sound effects/explosions/explosion_small_01.ogg" id="snd_death"]
 [ext_resource type="AudioStream" path="res://sound effects/shotguns/sg/sg_single_near_04.wav" id="snd_gun"]
+
+[ext_resource type="PackedScene" path="res://scenes/player/drone_gun.tscn" id="drone_gun"]
+[ext_resource type="PackedScene" path="res://scenes/player/drone_missile.tscn" id="drone_missile"]
+[ext_resource type="PackedScene" path="res://scenes/player/drone_shield.tscn" id="drone_shield"]
 
 [sub_resource type="CircleShape2D" id="shape"]
 radius = 12.0
@@ -16,6 +20,9 @@ collision_mask = 36
 script = ExtResource("1")
 death_sound = ExtResource("snd_death")
 bullet_scene = ExtResource("3")
+gun_drone_scene = ExtResource("drone_gun")
+missile_drone_scene = ExtResource("drone_missile")
+shield_drone_scene = ExtResource("drone_shield")
 
 [node name="Shadow" type="Sprite2D" parent="."]
 modulate = Color(0, 0, 0, 0.35)

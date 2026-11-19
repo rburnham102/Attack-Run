@@ -20,6 +20,9 @@ var destroyed := false
 
 
 func _ready() -> void:
+	# A group is a built-in tag: the missile drone's missiles look through
+	# "enemies" to pick a target.
+	add_to_group("enemies")
 	# Later stages make every enemy tougher and quicker to fire.
 	hp = ceili(max_hp * Game.enemy_hp_scale())
 	var fire_timer := get_node_or_null("FireTimer") as Timer
