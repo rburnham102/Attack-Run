@@ -1,8 +1,8 @@
-[gd_resource type="SpriteFrames" format=3]
+[gd_resource type="SpriteFrames" format=3 uid="uid://mqmuuhbu2u0h"]
 
-[ext_resource type="Texture2D" path="res://assets/Portraits/comms_officer/comms_determined.png" id="1_0lhuy"]
-[ext_resource type="Texture2D" path="res://assets/Portraits/comms_officer/comms_neutral.png" id="2_f5nw8"]
-[ext_resource type="Texture2D" path="res://assets/Portraits/comms_officer/comms_shocked.png" id="3_w5n2h"]
+[ext_resource type="Texture2D" uid="uid://crtkwec80mq6l" path="res://assets/Portraits/comms_officer/comms_determined.png" id="1_0lhuy"]
+[ext_resource type="Texture2D" uid="uid://bmhebnwr0qwdh" path="res://assets/Portraits/comms_officer/comms_neutral.png" id="2_f5nw8"]
+[ext_resource type="Texture2D" uid="uid://c38tiuka1htvo" path="res://assets/Portraits/comms_officer/comms_shocked.png" id="3_w5n2h"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a0jfw"]
 atlas = ExtResource("1_0lhuy")

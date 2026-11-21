@@ -1,11 +1,11 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://ddgg16okb1jbf"]
 
-[ext_resource type="Script" path="res://scenes/player/drone.gd" id="1_script"]
-[ext_resource type="AudioStream" path="res://sound effects/explosions/explosion_debris_01.ogg" id="2_snd"]
-[ext_resource type="Texture2D" path="res://assets/Medium tiny enemies Asset pack/dp_1.png" id="t0"]
-[ext_resource type="Texture2D" path="res://assets/Medium tiny enemies Asset pack/dp_2.png" id="t1"]
-[ext_resource type="Texture2D" path="res://assets/Medium tiny enemies Asset pack/dp_3.png" id="t2"]
-[ext_resource type="Texture2D" path="res://assets/Medium tiny enemies Asset pack/dp_4.png" id="t3"]
+[ext_resource type="Script" uid="uid://dpkhdoifcbhdq" path="res://scenes/player/drone.gd" id="1_script"]
+[ext_resource type="AudioStream" uid="uid://2udwl2tfosxq" path="res://sound effects/explosions/explosion_debris_01.ogg" id="2_snd"]
+[ext_resource type="Texture2D" uid="uid://dddrsgb7ov7jo" path="res://assets/Medium tiny enemies Asset pack/dp_1.png" id="t0"]
+[ext_resource type="Texture2D" uid="uid://dbc71gqx4rehf" path="res://assets/Medium tiny enemies Asset pack/dp_2.png" id="t1"]
+[ext_resource type="Texture2D" uid="uid://cppvos2k73bt8" path="res://assets/Medium tiny enemies Asset pack/dp_3.png" id="t2"]
+[ext_resource type="Texture2D" uid="uid://bvbteg54fs0al" path="res://assets/Medium tiny enemies Asset pack/dp_4.png" id="t3"]
 
 [sub_resource type="SpriteFrames" id="frames"]
 animations = [{
@@ -22,7 +22,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("t3")
 }],
-"loop": false,
+"loop": 0,
 "name": &"charges",
 "speed": 0.0
 }]
@@ -33,7 +33,7 @@ radius = 16.0
 [sub_resource type="CircleShape2D" id="bubble"]
 radius = 52.0
 
-[node name="ShieldDrone" type="Area2D"]
+[node name="ShieldDrone" type="Area2D" unique_id=19115597]
 z_index = 3
 texture_filter = 1
 collision_mask = 0
@@ -42,20 +42,21 @@ script = ExtResource("1_script")
 kind = 2
 death_sound = ExtResource("2_snd")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1056207525]
+rotation = 3.1415927
 scale = Vector2(1.4, 1.4)
 sprite_frames = SubResource("frames")
 animation = &"charges"
 frame = 3
 
-[node name="Body" type="CollisionShape2D" parent="."]
+[node name="Body" type="CollisionShape2D" parent="." unique_id=1835784829]
 shape = SubResource("body")
 
-[node name="Bubble" type="CollisionShape2D" parent="."]
+[node name="Bubble" type="CollisionShape2D" parent="." unique_id=2052945644]
 shape = SubResource("bubble")
 
-[node name="Muzzle" type="Marker2D" parent="."]
+[node name="Muzzle" type="Marker2D" parent="." unique_id=1097969800]
 position = Vector2(0, -26)
 
-[node name="Cooldown" type="Timer" parent="."]
+[node name="Cooldown" type="Timer" parent="." unique_id=345698276]
 wait_time = 6.0

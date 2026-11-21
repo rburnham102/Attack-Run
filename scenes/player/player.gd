@@ -26,6 +26,9 @@ const MONEY_BIG := 500
 ## Where drones fly, relative to the plane, in the order they fill up:
 ## left, right, then a pair further back.
 const DRONE_SLOTS: Array[Vector2] = [Vector2(-92, 20), Vector2(92, 20), Vector2(-48, 72), Vector2(48, 72)]
+## Shield drones fly out in front instead, so their bubbles catch bullets
+## before they reach the plane.
+const SHIELD_DRONE_SLOTS: Array[Vector2] = [Vector2(-44, -88), Vector2(44, -88), Vector2(-112, -60), Vector2(112, -60)]
 
 @export_range(1, 2) var player_id := 1
 @export var speed := 300.0
@@ -180,8 +183,9 @@ func _add_drone(scene: PackedScene) -> void:
 	var drone: Drone = scene.instantiate()
 	drone.player = self
 	drone.player_id = player_id
-	drone.slot_offset = DRONE_SLOTS[slot]
-	drone.position = position + DRONE_SLOTS[slot]
+	var slots := SHIELD_DRONE_SLOTS if drone.kind == Drone.Kind.SHIELD else DRONE_SLOTS
+	drone.slot_offset = _free_offset(slots)
+	drone.position = position + drone.slot_offset
 	# Our parent is the Scroller, so the drone works in screen coordinates
 	# like we do. It isn't our child, so it can trail behind us smoothly
 	# instead of being locked to the plane.
@@ -191,6 +195,18 @@ func _add_drone(scene: PackedScene) -> void:
 	# way out of the tree when tree_exited fires.
 	drone.tree_exited.connect(_stats_changed, CONNECT_DEFERRED)
 
+
+
+## The first spot in slots that no living drone is flying in.
+func _free_offset(slots: Array[Vector2]) -> Vector2:
+	for offset in slots:
+		var taken := false
+		for other in _drones:
+			if is_instance_valid(other) and other.slot_offset == offset:
+				taken = true
+		if not taken:
+			return offset
+	return slots[0]
 
 func _on_area_entered(area: Area2D) -> void:
 	if area is Pickup:
