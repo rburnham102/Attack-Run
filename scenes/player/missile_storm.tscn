@@ -1,0 +1,20 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/player/missile_storm.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://scenes/projectiles/homing_missile.tscn" id="2_missile"]
+[ext_resource type="AudioStream" path="res://sound effects/whooshes/blast_whoosh_01.ogg" id="3_sound"]
+
+[node name="MissileStorm" type="Node2D"]
+script = ExtResource("1_script")
+missile_scene = ExtResource("2_missile")
+
+[node name="LeftWing" type="Marker2D" parent="."]
+position = Vector2(-26, 6)
+
+[node name="RightWing" type="Marker2D" parent="."]
+position = Vector2(26, 6)
+
+[node name="LaunchSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_sound")
+volume_db = -8.0
+max_polyphony = 3

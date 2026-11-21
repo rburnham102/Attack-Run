@@ -48,11 +48,24 @@ const SHIELD_DRONE_SLOTS: Array[Vector2] = [Vector2(-44, -88), Vector2(44, -88),
 @export var hit_invuln_time := 1.5
 @export var respawn_invuln_time := 2.5
 
+@export_group("Special")
+## Each player has their own special weapon, pressed with "p1_special" or
+## "p2_special". The plane adds the one for its player as a child when the
+## level allows specials (LevelData > Specials Unlocked). A special scene
+## needs an activate() function, a duration and a finished signal.
+@export var p1_special_scene: PackedScene
+@export var p2_special_scene: PackedScene
+## Seconds for the special to charge back up after it's used.
+@export var special_recharge := 30.0
+@export_group("")
+
 var hp := 0
 var armor := 0
 var weapon_level := 1
 var speed_level := 0
 var invulnerable := false
+## Set by the laser while it fires: the normal guns hold their fire.
+var guns_paused := false
 ## 0 = normal attack height. 1 = high in the sky (the level intro): the plane
 ## is drawn twice as big, and its shadow falls further away and fainter, the
 ## way a real shadow does the higher a plane flies. Main tweens this from 1
@@ -71,6 +84,11 @@ var _blink: Tween
 ## The Shadow's offset and strength as set in the editor (at altitude 0).
 var _shadow_offset := Vector2.ZERO
 var _shadow_alpha := 0.0
+## Our special weapon (a child node), or null on levels without specials.
+var _special: Node = null
+## 1 = ready. It drains while the special runs, then refills.
+var _special_charge := 1.0
+var _special_running := false
 
 @onready var _sprite: Sprite2D = $Sprite2D
 @onready var _shadow: Sprite2D = $Shadow
@@ -90,6 +108,13 @@ func _ready() -> void:
 	area_entered.connect(_on_area_entered)
 	if player_id == 2:
 		_sprite.self_modulate = Color(0.55, 0.8, 2.0)  # blue tint for player 2
+	var special_scene := p1_special_scene if player_id == 1 else p2_special_scene
+	if Game.specials_unlocked and special_scene:
+		_special = special_scene.instantiate()
+		_special.player = self
+		add_child(_special)
+		_special.finished.connect(_on_special_finished)
+		Game.special_charge_changed.emit(player_id, _special_charge)
 	_stats_changed()
 
 
@@ -98,9 +123,34 @@ func _process(delta: float) -> void:
 	position += dir * (speed + speed_level * speed_per_level) * delta
 	position = position.clamp(screen_margin, get_viewport_rect().size - screen_margin)
 
-	if Input.is_action_pressed(_prefix + "fire") and _shot_timer.is_stopped():
+	if Input.is_action_pressed(_prefix + "fire") and _shot_timer.is_stopped() and not guns_paused:
 		_shoot()
 		_shot_timer.start()
+
+	if _special:
+		_update_special(delta)
+
+
+## Charges the special, drains the bar while it runs, and fires it when the
+## button is pressed with a full bar.
+func _update_special(delta: float) -> void:
+	var before := _special_charge
+	if _special_running:
+		# The bar empties over the special's run time.
+		_special_charge = maxf(_special_charge - delta / _special.duration, 0.0)
+	elif _special_charge < 1.0:
+		_special_charge = minf(_special_charge + delta / special_recharge, 1.0)
+	elif Input.is_action_just_pressed(_prefix + "special"):
+		_special_running = true
+		_special.activate()
+	if _special_charge != before:
+		Game.special_charge_changed.emit(player_id, _special_charge)
+
+
+func _on_special_finished() -> void:
+	_special_running = false
+	_special_charge = 0.0
+	Game.special_charge_changed.emit(player_id, _special_charge)
 
 
 func _shoot() -> void:
@@ -259,7 +309,9 @@ func _stats_changed() -> void:
 	_armor_ring.level = armor
 	Game.player_stats_changed.emit(player_id, {
 		"hp": maxi(hp, 0),
+		"max_hp": max_hp,
 		"armor": armor,
+		"max_armor": MAX_ARMOR,
 		"weapon": weapon_level,
 		"speed": speed_level,
 		"drones": _drone_letters(),

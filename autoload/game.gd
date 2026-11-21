@@ -8,6 +8,10 @@ signal lives_changed(player_id: int, lives: int)
 ## stats holds "hp", "armor", "weapon" and "speed" for that player.
 signal player_stats_changed(player_id: int, stats: Dictionary)
 signal pickup_collected(player_id: int, kind: Pickup.Kind)
+## A player's special weapon charge, from 0 (just used) to 1 (ready). Only
+## sent by planes that carry a special (level 4 on), so the HUD only shows
+## the special bar once this arrives.
+signal special_charge_changed(player_id: int, charge: float)
 ## A level's opening briefing is over and the fighting begins.
 signal level_started(level_number: int, title: String)
 ## stage is the boss number within the current level (1, 2...), out of stage_count.
@@ -52,6 +56,9 @@ const BONUS_WEIGHTS := {
 ## Set by Main from the level (LevelData > Drones Unlocked). While false,
 ## random drops never pick a drone.
 var drones_unlocked := false
+## Set by Main from the level (LevelData > Specials Unlocked). Planes only
+## get their special weapon while this is true.
+var specials_unlocked := false
 var player_count := 1
 # Index 0 is player 1, index 1 is player 2.
 var scores: Array[int] = [0, 0]

@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene format=3]
 
 [ext_resource type="Script" path="res://scenes/ui/hud.gd" id="1"]
 [ext_resource type="LabelSettings" path="res://scenes/ui/hud_label.tres" id="2"]
 [ext_resource type="LabelSettings" path="res://scenes/ui/banner_label.tres" id="3"]
+[ext_resource type="PackedScene" path="res://scenes/ui/player_status.tscn" id="4_status"]
 
 [sub_resource type="StyleBoxFlat" id="bar_bg"]
 bg_color = Color(0, 0, 0, 0.6)
@@ -35,8 +36,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 1.4
 text = "P1  0000000
-HP 3   LIVES 3
-GUN 1  ARMOR 0  SPD 0"
+GUN 1  SPD 0"
 label_settings = ExtResource("2")
 
 [node name="Center" type="VBoxContainer" parent="Margin/HBox"]
@@ -62,10 +62,41 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 1.4
 text = "P2  0000000
-HP 3   LIVES 3
-GUN 1  ARMOR 0  SPD 0"
+GUN 1  SPD 0"
 label_settings = ExtResource("2")
 horizontal_alignment = 2
+
+[node name="Bottom" type="MarginContainer" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -80.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 10
+
+[node name="HBox" type="HBoxContainer" parent="Bottom"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="P1Status" parent="Bottom/HBox" instance=ExtResource("4_status")]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="Spacer" type="Control" parent="Bottom/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="P2Status" parent="Bottom/HBox" instance=ExtResource("4_status")]
+layout_mode = 2
+size_flags_vertical = 8
+icon_tint = Color(0.55, 0.8, 2, 1)
+right_aligned = true
 
 [node name="Banner" type="Label" parent="."]
 anchors_preset = 14

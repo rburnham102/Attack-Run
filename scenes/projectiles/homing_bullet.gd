@@ -11,9 +11,15 @@ extends "res://scenes/projectiles/bullet.gd"
 ## Only enemies closer than this are chased.
 @export var seek_range := 700.0
 
+## Optional: the enemy to chase, set by whoever fires us (the missile storm
+## spreads its missiles over different enemies this way). Once it's gone,
+## we chase the nearest enemy instead.
+var target: Node2D = null
+
 
 func _process(delta: float) -> void:
-	var target := _nearest_enemy()
+	if not _can_chase(target):
+		target = _nearest_enemy()
 	if target:
 		var wanted := (target.global_position - global_position).angle()
 		var angle := rotate_toward(direction.angle(), wanted, deg_to_rad(turn_speed) * delta)
@@ -28,10 +34,18 @@ func _nearest_enemy() -> Node2D:
 	for enemy in get_tree().get_nodes_in_group("enemies"):
 		# monitorable is off for knocked-out boss turrets and the like:
 		# nothing could hit them, so don't chase them.
-		if enemy.destroyed or not enemy.monitorable:
+		if not _can_chase(enemy):
 			continue
 		var distance := global_position.distance_to(enemy.global_position)
 		if distance < best_distance:
 			best = enemy
 			best_distance = distance
 	return best
+
+
+## False once an enemy is freed or destroyed, or for knocked-out boss turrets
+## and the like (monitorable is off): nothing could hit them, so don't chase.
+## The argument has no type on purpose: a typed one refuses a freed enemy
+## before is_instance_valid() gets to check it.
+func _can_chase(enemy) -> bool:
+	return is_instance_valid(enemy) and not enemy.destroyed and enemy.monitorable

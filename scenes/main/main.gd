@@ -66,6 +66,8 @@ func _ready() -> void:
 	# The level can swap in its own planes and helicopters (level 3's white
 	# winter ones). Empty means keep the defaults set on this node.
 	Game.drones_unlocked = _level.drones_unlocked
+	# Before the players spawn: they check this when they're created.
+	Game.specials_unlocked = _level.specials_unlocked
 	if _level.enemy_plane_scene:
 		enemy_plane_scene = _level.enemy_plane_scene
 	if _level.helicopter_scene:

@@ -2,11 +2,16 @@ extends CanvasLayer
 ## Shows each player's score, health, lives and power-ups, the stage number,
 ## the boss health bar and big center-screen banners. It never asks other
 ## nodes for anything; it just listens to the Game autoload's signals.
+##
+## Score, gun, speed and drones are text at the top. Health and shield
+## blocks, the special bar and the lives are in the bottom corners
+## (player_status.tscn), where they're easy to see while flying.
 
 @onready var _labels: Array[Label] = [$Margin/HBox/P1Label, $Margin/HBox/P2Label]
 @onready var _stage_label: Label = $Margin/HBox/Center/StageLabel
 @onready var _boss_bar: ProgressBar = $Margin/HBox/Center/BossBar
 @onready var _banner: Label = $Banner
+@onready var _statuses: Array[Node] = [$Bottom/HBox/P1Status, $Bottom/HBox/P2Status]
 
 ## Latest stats for each player, as sent by player_stats_changed.
 var _stats: Array[Dictionary] = [
@@ -19,11 +24,15 @@ var _level_number := 1
 
 func _ready() -> void:
 	$Margin/HBox/P2Label.modulate.a = 1.0 if Game.player_count == 2 else 0.0
+	# modulate.a hides player 2's corner but keeps its space, like the label.
+	_statuses[1].modulate.a = 1.0 if Game.player_count == 2 else 0.0
 	_boss_bar.hide()
 	_banner.hide()
 	Game.score_changed.connect(func(_id, _score): _refresh())
 	Game.lives_changed.connect(func(_id, _lives): _refresh())
 	Game.player_stats_changed.connect(_on_player_stats_changed)
+	Game.special_charge_changed.connect(
+		func(id: int, charge: float) -> void: _statuses[id - 1].set_special(charge))
 	Game.level_started.connect(_on_level_started)
 	Game.stage_started.connect(_on_stage_started)
 	Game.level_complete.connect(_on_level_complete)
@@ -41,11 +50,13 @@ func _on_player_stats_changed(player_id: int, stats: Dictionary) -> void:
 func _refresh() -> void:
 	for i in 2:
 		var s := _stats[i]
-		_labels[i].text = "P%d  %07d\nHP %d   LIVES %d\nGUN %d  ARMOR %d  SPD %d" % [
-			i + 1, Game.scores[i], s.hp, Game.lives[i], s.weapon, s.armor, s.speed]
-		# A fourth line once the player has drones (G = gun, M = missile,
-		# S = shield). get() with a default: the starting stats have no
-		# "drones" entry.
+		_labels[i].text = "P%d  %07d\nGUN %d  SPD %d" % [
+			i + 1, Game.scores[i], s.weapon, s.speed]
+		# get() with a default: the starting stats above don't have these.
+		_statuses[i].set_health(s.hp, s.get("max_hp", 3), s.armor, s.get("max_armor", 3))
+		_statuses[i].set_lives(Game.lives[i])
+		# A third line once the player has drones (G = gun, M = missile,
+		# S = shield).
 		var drones: String = s.get("drones", "")
 		if drones != "":
 			_labels[i].text += "\nDRONES %s" % drones

@@ -87,6 +87,7 @@ rail_enemies = Array[PackedScene]([ExtResource("8_train_short"), ExtResource("8_
 min_ground_enemies = 1
 max_ground_enemies = 2
 drones_unlocked = true
+specials_unlocked = true
 enemy_plane_scene = ExtResource("11_plane")
 helicopter_scene = ExtResource("12_heli")
 boss_scenes = Array[PackedScene]([ExtResource("13_fortress"), ExtResource("14_train_a"), ExtResource("15_train_b")])

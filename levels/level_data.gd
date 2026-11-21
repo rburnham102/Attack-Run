@@ -46,6 +46,9 @@ extends Resource
 ## Lets the gun, missile and shield drone pickups drop in this level. Off
 ## for the early levels, so drones arrive with level 3's story.
 @export var drones_unlocked := false
+## Gives each plane its special weapon (player 1's missile storm, player 2's
+## laser). On from level 4.
+@export var specials_unlocked := false
 
 @export_group("Air Enemies")
 ## The planes that fly in waves. Leave empty to use the one set on the Main
