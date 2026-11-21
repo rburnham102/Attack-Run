@@ -1,0 +1,34 @@
+Level 4
+
+
+
+The background is going to be tileset\train stage. Stage_lower & Stage_top are the first halve. Loop This at the end will be the second halve leading up to the final train boss.
+
+The first half of the level should be filled from the small train folder. Fill it with trains and wagons with guns on them. Add some of the tanks from level 3 too. I would also use the white planes and helicopters. This looks like a mountain stage, so the white vehicles will looks good.
+
+
+
+Gen "Our intel reports that the enemy is moving a large shipment by train."
+
+Gen "Our intel shows it may be armaments but be careful"
+
+
+Planes descend into the valley over the tracks.
+
+Lt Lilly "Look out! There is a fortress ahead"
+
+First boss should be a large base at the end of the first stage. Use the asset from Mid boss to make a wall with guns.
+
+Lt Lilly "Great work team, I think I see the train ahead"
+
+The second part of the stage should be the track background and we come up onto the train boss. Each train should be an engine (Wagon_main_strip7) and 4 wagons. The base layer is wheels-base_strip2. Each one bristling with turrets. Leading too The engine. I want to have the second half of the level to be composed of 2 of these.
+
+After the second one is defeated. The planes fly past the train and a huge explosion can be seen behind them (as in a large flash) and the screen should shake.
+
+Lt Lilly "What was that!" 
+
+Gen "It looks like they were transporting more than just weapons."
+
+Gen "We need to see where these trains were heading"
+
+Lt Lilly "Right! Lets refuel and we will be heading right back out"
