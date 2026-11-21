@@ -145,7 +145,8 @@ func _play_intro() -> void:
 
 func _start_stage() -> void:
 	Game.stage_started.emit(_boss_index + 1, _level.boss_scenes.size())
-	var length := dev_stage_length if Game.dev_skip_to_boss else _level.stage_length
+	var length := dev_stage_length if Game.dev_skip_to_boss \
+		else _level.stage_length_for(_boss_index)
 	_stage_timer.start(length)
 	get_tree().create_timer(maxf(length - boss_chunk_lead, 0.0), false) \
 		.timeout.connect(_switch_to_boss_chunk)
@@ -232,7 +233,7 @@ func _spawn_boss() -> void:
 func _on_boss_defeated() -> void:
 	# Before _boss_index goes up, so we get the line for the boss just beaten.
 	var lines := _radio_line(_level.boss_defeated_lines)
-	Game.stage += 1
+	Game.stage += _level.stage_up_for(_boss_index)
 	_boss_index += 1
 	_chunk_spawner.use_boss_chunk(null)
 	if _boss_index < _level.boss_scenes.size():

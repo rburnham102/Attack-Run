@@ -164,3 +164,40 @@ func enemy_hp_scale() -> float:
 ## Enemy fire-rate multiplier: their FireTimer wait is divided by this.
 func enemy_fire_rate_scale() -> float:
 	return 1.0 + 0.1 * (stage - 1)
+
+
+# ---- Screen effects. Any boss can use these (level 4's last train does). ----
+
+## Shakes the screen: the camera's offset jumps around, smaller and smaller,
+## for duration seconds. The tween belongs to the camera, so it stops if the
+## level is left.
+func shake_camera(strength := 12.0, duration := 0.6) -> void:
+	var camera := get_viewport().get_camera_2d()
+	if not camera:
+		return
+	const STEP := 0.04
+	var shake := camera.create_tween()
+	var steps := int(duration / STEP)
+	for i in steps:
+		var fade := 1.0 - float(i) / steps
+		var jolt := Vector2(randf_range(-1.0, 1.0), randf_range(-1.0, 1.0)) * strength * fade
+		shake.tween_property(camera, "offset", jolt, STEP)
+	shake.tween_property(camera, "offset", Vector2.ZERO, STEP)
+
+
+## Fills the screen with a colour that fades away over duration seconds.
+## It's a ColorRect on its own CanvasLayer (drawn over everything, HUD too),
+## added to the level, so it goes away with it.
+func flash_screen(color := Color.WHITE, duration := 1.0) -> void:
+	var layer := CanvasLayer.new()
+	layer.layer = 50
+	var rect := ColorRect.new()
+	rect.color = color
+	rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	rect.set_anchors_preset(Control.PRESET_FULL_RECT)
+	layer.add_child(rect)
+	get_tree().current_scene.add_child(layer)
+	var fade := layer.create_tween()
+	fade.tween_property(rect, "color:a", 0.0, duration) \
+		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	fade.tween_callback(layer.queue_free)

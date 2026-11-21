@@ -1,0 +1,365 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/enemies/train/fortress.gd" id="script"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/boss_turret.tscn" id="turret"]
+[ext_resource type="PackedScene" path="res://scenes/projectiles/tank_shell.tscn" id="shell"]
+[ext_resource type="PackedScene" path="res://scenes/projectiles/heavy_shell.tscn" id="heavy"]
+[ext_resource type="PackedScene" path="res://scenes/projectiles/enemy_bullet.tscn" id="bullet"]
+[ext_resource type="AudioStream" path="res://sound effects/stone/building_collapse_01.ogg" id="snd_death"]
+[ext_resource type="AudioStream" path="res://sound effects/explosions/explosion_small_01.ogg" id="snd_gun"]
+[ext_resource type="Texture2D" path="res://tilesets/train stage/Mid Boss/MidBoss_Base.png" id="base"]
+[ext_resource type="Texture2D" path="res://tilesets/train stage/Mid Boss/MidBoss_Head.png" id="head"]
+[ext_resource type="Texture2D" path="res://tilesets/train stage/Mid Boss/MidBoss_Cannon_strip6.png" id="cannon"]
+
+[sub_resource type="CircleShape2D" id="shape_head"]
+radius = 36.0
+
+[sub_resource type="CircleShape2D" id="shape_cannon"]
+radius = 12.0
+
+[sub_resource type="RectangleShape2D" id="hull"]
+size = Vector2(200, 110)
+
+[node name="Fortress" type="Area2D"]
+texture_filter = 1
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+script = ExtResource("script")
+cover_rect = Rect2(-330, -70, 660, 140)
+bullet_scene = ExtResource("heavy")
+battle_y = 230.0
+sweep_time = 0.0
+aimed_burst_count = 3
+fan_count = 7
+fan_angle = 15.0
+fan_offset = Vector2(0, 40)
+main_turret_turn_speed = 60.0
+death_sound = ExtResource("snd_death")
+max_hp = 60
+score_value = 12000
+explosion_scale = 3.5
+
+[node name="Garage" type="Node2D" parent="."]
+z_index = 2
+
+[node name="LeftBunker" type="Sprite2D" parent="Garage"]
+position = Vector2(-216, 0)
+scale = Vector2(2, 2)
+texture = ExtResource("base")
+
+[node name="RightBunker" type="Sprite2D" parent="Garage"]
+position = Vector2(216, 0)
+scale = Vector2(2, 2)
+texture = ExtResource("base")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 2
+scale = Vector2(2, 2)
+texture = ExtResource("base")
+
+[node name="Hull" type="CollisionShape2D" parent="."]
+shape = SubResource("hull")
+disabled = true
+
+[node name="MainTurret" type="Sprite2D" parent="."]
+z_index = 3
+position = Vector2(-4, -22)
+scale = Vector2(2, 2)
+texture = ExtResource("head")
+offset = Vector2(0, 7)
+flip_v = true
+
+[node name="Turrets" type="Node2D" parent="."]
+z_index = 3
+
+[node name="LeftHead" parent="Turrets" instance=ExtResource("turret")]
+position = Vector2(-220, -22)
+bullet_scene = ExtResource("shell")
+max_hp = 18
+score_value = 1000
+turn_speed = 90.0
+burst_count = 3
+
+[node name="Sprite2D" parent="Turrets/LeftHead" index="0"]
+scale = Vector2(2, 2)
+texture = ExtResource("head")
+offset = Vector2(0, 7)
+flip_v = true
+
+[node name="Muzzle" parent="Turrets/LeftHead" index="1"]
+position = Vector2(0, 60)
+
+[node name="CollisionShape2D" parent="Turrets/LeftHead" index="2"]
+shape = SubResource("shape_head")
+
+[node name="FireTimer" parent="Turrets/LeftHead" index="3"]
+wait_time = 2.8
+
+[node name="RightHead" parent="Turrets" instance=ExtResource("turret")]
+position = Vector2(212, -22)
+bullet_scene = ExtResource("shell")
+max_hp = 18
+score_value = 1000
+turn_speed = 90.0
+burst_count = 3
+
+[node name="Sprite2D" parent="Turrets/RightHead" index="0"]
+scale = Vector2(2, 2)
+texture = ExtResource("head")
+offset = Vector2(0, 7)
+flip_v = true
+
+[node name="Muzzle" parent="Turrets/RightHead" index="1"]
+position = Vector2(0, 60)
+
+[node name="CollisionShape2D" parent="Turrets/RightHead" index="2"]
+shape = SubResource("shape_head")
+
+[node name="FireTimer" parent="Turrets/RightHead" index="3"]
+wait_time = 2.8
+
+[node name="LeftCannon1" parent="Turrets" instance=ExtResource("turret")]
+position = Vector2(-253, 36)
+bullet_scene = ExtResource("bullet")
+max_hp = 6
+score_value = 400
+burst_count = 2
+aims = false
+opens = true
+
+[node name="Sprite2D" parent="Turrets/LeftCannon1" index="0"]
+scale = Vector2(2, 2)
+texture = ExtResource("cannon")
+offset = Vector2(0, 0)
+hframes = 6
+
+[node name="Muzzle" parent="Turrets/LeftCannon1" index="1"]
+position = Vector2(0, 14)
+
+[node name="CollisionShape2D" parent="Turrets/LeftCannon1" index="2"]
+shape = SubResource("shape_cannon")
+
+[node name="FireTimer" parent="Turrets/LeftCannon1" index="3"]
+wait_time = 3.4
+
+[node name="LeftCannon2" parent="Turrets" instance=ExtResource("turret")]
+position = Vector2(-221, 36)
+bullet_scene = ExtResource("bullet")
+max_hp = 6
+score_value = 400
+burst_count = 2
+aims = false
+opens = true
+
+[node name="Sprite2D" parent="Turrets/LeftCannon2" index="0"]
+scale = Vector2(2, 2)
+texture = ExtResource("cannon")
+offset = Vector2(0, 0)
+hframes = 6
+
+[node name="Muzzle" parent="Turrets/LeftCannon2" index="1"]
+position = Vector2(0, 14)
+
+[node name="CollisionShape2D" parent="Turrets/LeftCannon2" index="2"]
+shape = SubResource("shape_cannon")
+
+[node name="FireTimer" parent="Turrets/LeftCannon2" index="3"]
+wait_time = 3.8
+
+[node name="LeftCannon3" parent="Turrets" instance=ExtResource("turret")]
+position = Vector2(-189, 36)
+bullet_scene = ExtResource("bullet")
+max_hp = 6
+score_value = 400
+burst_count = 2
+aims = false
+opens = true
+
+[node name="Sprite2D" parent="Turrets/LeftCannon3" index="0"]
+scale = Vector2(2, 2)
+texture = ExtResource("cannon")
+offset = Vector2(0, 0)
+hframes = 6
+
+[node name="Muzzle" parent="Turrets/LeftCannon3" index="1"]
+position = Vector2(0, 14)
+
+[node name="CollisionShape2D" parent="Turrets/LeftCannon3" index="2"]
+shape = SubResource("shape_cannon")
+
+[node name="FireTimer" parent="Turrets/LeftCannon3" index="3"]
+wait_time = 3.0
+
+[node name="MidCannon1" parent="Turrets" instance=ExtResource("turret")]
+position = Vector2(-37, 36)
+bullet_scene = ExtResource("bullet")
+max_hp = 6
+score_value = 400
+burst_count = 2
+aims = false
+opens = true
+
+[node name="Sprite2D" parent="Turrets/MidCannon1" index="0"]
+scale = Vector2(2, 2)
+texture = ExtResource("cannon")
+offset = Vector2(0, 0)
+hframes = 6
+
+[node name="Muzzle" parent="Turrets/MidCannon1" index="1"]
+position = Vector2(0, 14)
+
+[node name="CollisionShape2D" parent="Turrets/MidCannon1" index="2"]
+shape = SubResource("shape_cannon")
+
+[node name="FireTimer" parent="Turrets/MidCannon1" index="3"]
+wait_time = 3.0
+
+[node name="MidCannon2" parent="Turrets" instance=ExtResource("turret")]
+position = Vector2(-5, 36)
+bullet_scene = ExtResource("bullet")
+max_hp = 6
+score_value = 400
+burst_count = 2
+aims = false
+opens = true
+
+[node name="Sprite2D" parent="Turrets/MidCannon2" index="0"]
+scale = Vector2(2, 2)
+texture = ExtResource("cannon")
+offset = Vector2(0, 0)
+hframes = 6
+
+[node name="Muzzle" parent="Turrets/MidCannon2" index="1"]
+position = Vector2(0, 14)
+
+[node name="CollisionShape2D" parent="Turrets/MidCannon2" index="2"]
+shape = SubResource("shape_cannon")
+
+[node name="FireTimer" parent="Turrets/MidCannon2" index="3"]
+wait_time = 3.4
+
+[node name="MidCannon3" parent="Turrets" instance=ExtResource("turret")]
+position = Vector2(27, 36)
+bullet_scene = ExtResource("bullet")
+max_hp = 6
+score_value = 400
+burst_count = 2
+aims = false
+opens = true
+
+[node name="Sprite2D" parent="Turrets/MidCannon3" index="0"]
+scale = Vector2(2, 2)
+texture = ExtResource("cannon")
+offset = Vector2(0, 0)
+hframes = 6
+
+[node name="Muzzle" parent="Turrets/MidCannon3" index="1"]
+position = Vector2(0, 14)
+
+[node name="CollisionShape2D" parent="Turrets/MidCannon3" index="2"]
+shape = SubResource("shape_cannon")
+
+[node name="FireTimer" parent="Turrets/MidCannon3" index="3"]
+wait_time = 3.8
+
+[node name="RightCannon1" parent="Turrets" instance=ExtResource("turret")]
+position = Vector2(179, 36)
+bullet_scene = ExtResource("bullet")
+max_hp = 6
+score_value = 400
+burst_count = 2
+aims = false
+opens = true
+
+[node name="Sprite2D" parent="Turrets/RightCannon1" index="0"]
+scale = Vector2(2, 2)
+texture = ExtResource("cannon")
+offset = Vector2(0, 0)
+hframes = 6
+
+[node name="Muzzle" parent="Turrets/RightCannon1" index="1"]
+position = Vector2(0, 14)
+
+[node name="CollisionShape2D" parent="Turrets/RightCannon1" index="2"]
+shape = SubResource("shape_cannon")
+
+[node name="FireTimer" parent="Turrets/RightCannon1" index="3"]
+wait_time = 3.8
+
+[node name="RightCannon2" parent="Turrets" instance=ExtResource("turret")]
+position = Vector2(211, 36)
+bullet_scene = ExtResource("bullet")
+max_hp = 6
+score_value = 400
+burst_count = 2
+aims = false
+opens = true
+
+[node name="Sprite2D" parent="Turrets/RightCannon2" index="0"]
+scale = Vector2(2, 2)
+texture = ExtResource("cannon")
+offset = Vector2(0, 0)
+hframes = 6
+
+[node name="Muzzle" parent="Turrets/RightCannon2" index="1"]
+position = Vector2(0, 14)
+
+[node name="CollisionShape2D" parent="Turrets/RightCannon2" index="2"]
+shape = SubResource("shape_cannon")
+
+[node name="FireTimer" parent="Turrets/RightCannon2" index="3"]
+wait_time = 3.0
+
+[node name="RightCannon3" parent="Turrets" instance=ExtResource("turret")]
+position = Vector2(243, 36)
+bullet_scene = ExtResource("bullet")
+max_hp = 6
+score_value = 400
+burst_count = 2
+aims = false
+opens = true
+
+[node name="Sprite2D" parent="Turrets/RightCannon3" index="0"]
+scale = Vector2(2, 2)
+texture = ExtResource("cannon")
+offset = Vector2(0, 0)
+hframes = 6
+
+[node name="Muzzle" parent="Turrets/RightCannon3" index="1"]
+position = Vector2(0, 14)
+
+[node name="CollisionShape2D" parent="Turrets/RightCannon3" index="2"]
+shape = SubResource("shape_cannon")
+
+[node name="FireTimer" parent="Turrets/RightCannon3" index="3"]
+wait_time = 3.4
+
+[node name="Muzzles" type="Node2D" parent="."]
+position = Vector2(-4, -22)
+
+[node name="MainGun0" type="Marker2D" parent="Muzzles"]
+position = Vector2(-10, 62)
+
+[node name="MainGun1" type="Marker2D" parent="Muzzles"]
+position = Vector2(10, 62)
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="GunSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("snd_gun")
+volume_db = -4.0
+max_polyphony = 4
+
+[editable path="Turrets/LeftHead"]
+[editable path="Turrets/RightHead"]
+[editable path="Turrets/LeftCannon1"]
+[editable path="Turrets/LeftCannon2"]
+[editable path="Turrets/LeftCannon3"]
+[editable path="Turrets/MidCannon1"]
+[editable path="Turrets/MidCannon2"]
+[editable path="Turrets/MidCannon3"]
+[editable path="Turrets/RightCannon1"]
+[editable path="Turrets/RightCannon2"]
+[editable path="Turrets/RightCannon3"]

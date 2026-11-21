@@ -1,0 +1,98 @@
+[gd_resource type="Resource" script_class="LevelData" format=3]
+
+[ext_resource type="Script" path="res://levels/level_data.gd" id="1_script"]
+[ext_resource type="Script" path="res://levels/radio_line.gd" id="2_radio"]
+[ext_resource type="Texture2D" path="res://assets/Portraits/general.png" id="3_portrait"]
+[ext_resource type="PackedScene" path="res://scenes/chunks/train/chunk_tracks.tscn" id="4_tracks"]
+[ext_resource type="PackedScene" path="res://scenes/chunks/train/chunk_yard_01.tscn" id="yard_01"]
+[ext_resource type="PackedScene" path="res://scenes/chunks/train/chunk_yard_02.tscn" id="yard_02"]
+[ext_resource type="PackedScene" path="res://scenes/chunks/train/chunk_yard_03.tscn" id="yard_03"]
+[ext_resource type="PackedScene" path="res://scenes/chunks/train/chunk_yard_04.tscn" id="yard_04"]
+[ext_resource type="PackedScene" path="res://scenes/chunks/train/chunk_yard_05.tscn" id="yard_05"]
+[ext_resource type="PackedScene" path="res://scenes/chunks/train/chunk_yard_06.tscn" id="yard_06"]
+[ext_resource type="PackedScene" path="res://scenes/chunks/train/chunk_yard_07.tscn" id="yard_07"]
+[ext_resource type="PackedScene" path="res://scenes/chunks/train/chunk_yard_08.tscn" id="yard_08"]
+[ext_resource type="PackedScene" path="res://scenes/chunks/train/chunk_yard_09.tscn" id="yard_09"]
+[ext_resource type="PackedScene" path="res://scenes/chunks/train/chunk_yard_10.tscn" id="yard_10"]
+[ext_resource type="PackedScene" path="res://scenes/chunks/train/chunk_yard_11.tscn" id="yard_11"]
+[ext_resource type="PackedScene" path="res://scenes/chunks/train/chunk_yard_12.tscn" id="yard_12"]
+[ext_resource type="PackedScene" path="res://scenes/chunks/train/chunk_yard_13.tscn" id="yard_13"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/sea_ice/small_tank.tscn" id="5_small_tank"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/train/big_tank.tscn" id="6_big_tank"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/train/truck.tscn" id="7_truck"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/train/small_train_short.tscn" id="8_train_short"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/train/small_train_freight.tscn" id="9_train_freight"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/train/small_train_armored.tscn" id="10_train_armored"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/enemy_plane_winter.tscn" id="11_plane"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/helicopter_winter.tscn" id="12_heli"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/train/fortress.tscn" id="13_fortress"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/train/armored_train_a.tscn" id="14_train_a"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/train/armored_train_b.tscn" id="15_train_b"]
+
+[sub_resource type="Resource" id="brief_1"]
+script = ExtResource("2_radio")
+speaker = 1
+text = "Our intel reports that the enemy is moving a large shipment by train."
+
+[sub_resource type="Resource" id="brief_2"]
+script = ExtResource("2_radio")
+speaker = 1
+text = "Our intel shows it may be armaments, but be careful."
+
+[sub_resource type="Resource" id="warn_1"]
+script = ExtResource("2_radio")
+mood = 1
+text = "Look out! There is a fortress ahead!"
+
+[sub_resource type="Resource" id="down_1"]
+script = ExtResource("2_radio")
+text = "Great work, team! I think I see the train ahead."
+
+[sub_resource type="Resource" id="warn_3"]
+script = ExtResource("2_radio")
+mood = 1
+text = "Another train on the next track!"
+
+[sub_resource type="Resource" id="end_1"]
+script = ExtResource("2_radio")
+mood = 1
+text = "What was that!?"
+
+[sub_resource type="Resource" id="end_2"]
+script = ExtResource("2_radio")
+speaker = 1
+text = "It looks like they were transporting more than just weapons."
+
+[sub_resource type="Resource" id="end_3"]
+script = ExtResource("2_radio")
+speaker = 1
+text = "We need to see where these trains were heading."
+
+[sub_resource type="Resource" id="end_4"]
+script = ExtResource("2_radio")
+mood = 2
+text = "Right! Let's refuel, and we'll head right back out."
+
+[resource]
+script = ExtResource("1_script")
+title = "OPERATION IRON RAIL"
+general_name = "GEN. MARCUS HALE"
+general_portrait = ExtResource("3_portrait")
+briefing = Array[ExtResource("2_radio")]([SubResource("brief_1"), SubResource("brief_2")])
+intro_chunk = ExtResource("4_tracks")
+transition_chunks = Array[PackedScene]([ExtResource("yard_01"), ExtResource("yard_02"), ExtResource("yard_03"), ExtResource("yard_04"), ExtResource("yard_05"), ExtResource("yard_06"), ExtResource("yard_07"), ExtResource("yard_08"), ExtResource("yard_09"), ExtResource("yard_10"), ExtResource("yard_11"), ExtResource("yard_12"), ExtResource("yard_13")])
+chunks = Array[PackedScene]([ExtResource("4_tracks")])
+ground_enemies = Array[PackedScene]([ExtResource("5_small_tank"), ExtResource("5_small_tank"), ExtResource("5_small_tank"), ExtResource("6_big_tank"), ExtResource("7_truck"), ExtResource("7_truck")])
+rail_enemies = Array[PackedScene]([ExtResource("8_train_short"), ExtResource("8_train_short"), ExtResource("9_train_freight"), ExtResource("10_train_armored")])
+min_ground_enemies = 1
+max_ground_enemies = 2
+drones_unlocked = true
+enemy_plane_scene = ExtResource("11_plane")
+helicopter_scene = ExtResource("12_heli")
+boss_scenes = Array[PackedScene]([ExtResource("13_fortress"), ExtResource("14_train_a"), ExtResource("15_train_b")])
+stage_length = 40.0
+stage_lengths = Array[float]([145.0, 40.0, 15.0])
+stage_ups = Array[int]([1, 0, 1])
+boss_warnings = Array[ExtResource("2_radio")]([SubResource("warn_1"), null, SubResource("warn_3")])
+boss_defeated_lines = Array[ExtResource("2_radio")]([SubResource("down_1")])
+mission_complete_lines = Array[ExtResource("2_radio")]([SubResource("end_1"), SubResource("end_2"), SubResource("end_3"), SubResource("end_4")])

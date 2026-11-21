@@ -14,6 +14,10 @@ extends Marker2D
 ## Spawn a boat (from the level's Water Enemies list) instead of a land vehicle.
 ## Only tick this on markers that sit on water.
 @export var water := false
+## Spawn a train (from the level's Rail Enemies list) instead of a land
+## vehicle. Only tick this on markers that sit on the middle of a track, and
+## rotate it to run along the rails.
+@export var track := false
 ## The vehicle stays still here instead of driving. Its turret still aims
 ## and fires. Good for vehicles dug in at a base.
 @export var parked := false

@@ -33,6 +33,8 @@ extends Resource
 @export var ground_enemies: Array[PackedScene] = []
 ## Vehicles that can appear on SpawnPoints marked "water".
 @export var water_enemies: Array[PackedScene] = []
+## Trains that can appear on SpawnPoints marked "track" (level 4).
+@export var rail_enemies: Array[PackedScene] = []
 ## How many SpawnPoints get filled in each chunk, picked at random between
 ## these. The top end also goes up by one after every boss (Game.stage), so
 ## each stage is busier than the last. A chunk never gets more enemies than
@@ -63,6 +65,15 @@ extends Resource
 @export var boss_chunks: Array[PackedScene] = []
 ## Seconds of normal waves before each boss arrives.
 @export var stage_length := 90.0
+## Optional, same order as Boss Scenes: a different Stage Length for that
+## boss. Level 4 uses this so the fortress waits until the whole rail yard
+## has gone by, and the second train comes right after the first. Leave an
+## entry at 0 (or the list short) to use Stage Length.
+@export var stage_lengths: Array[float] = []
+## Optional, same order as Boss Scenes: how much the difficulty (Game.stage)
+## goes up when that boss is destroyed. Leave the list short for the usual 1.
+## Level 4's two trains count as one stage, so the first train has 0.
+@export var stage_ups: Array[int] = []
 
 @export_group("Radio")
 ## What the comms officer says as each boss arrives, in the same order as
@@ -74,3 +85,17 @@ extends Resource
 ## Boss Defeated Lines, if it has one). The next level waits for these to
 ## finish, so they can be as long as you like.
 @export var mission_complete_lines: Array[RadioLine] = []
+
+
+## Seconds of waves before boss number index (0 is the first boss).
+func stage_length_for(index: int) -> float:
+	if index < stage_lengths.size() and stage_lengths[index] > 0.0:
+		return stage_lengths[index]
+	return stage_length
+
+
+## How much Game.stage goes up after boss number index is destroyed.
+func stage_up_for(index: int) -> int:
+	if index < stage_ups.size():
+		return stage_ups[index]
+	return 1

@@ -1,0 +1,29 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/enemies/train/small_train.gd" id="script"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/train/boxcar_blue.tscn" id="boxcar_blue"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/train/boxcar_tan.tscn" id="boxcar_tan"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/train/engine.tscn" id="engine"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/train/gun_car.tscn" id="gun_car"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/train/tanker.tscn" id="tanker"]
+
+[node name="SmallTrainFreight" type="Node2D"]
+script = ExtResource("script")
+
+[node name="Engine" parent="." instance=ExtResource("engine")]
+position = Vector2(0, -95)
+
+[node name="BoxcarBlue" parent="." instance=ExtResource("boxcar_blue")]
+position = Vector2(0, -256)
+
+[node name="Tanker" parent="." instance=ExtResource("tanker")]
+position = Vector2(0, -399)
+
+[node name="GunCar" parent="." instance=ExtResource("gun_car")]
+position = Vector2(0, -543)
+
+[node name="BoxcarTan" parent="." instance=ExtResource("boxcar_tan")]
+position = Vector2(0, -688)
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+rect = Rect2(-40, -757, 80, 757)

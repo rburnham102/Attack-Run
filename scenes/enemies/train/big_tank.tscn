@@ -1,0 +1,55 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/enemies/tank.gd" id="script"]
+[ext_resource type="PackedScene" path="res://scenes/projectiles/heavy_shell.tscn" id="shell"]
+[ext_resource type="AudioStream" path="res://sound effects/explosions/explosion_medium_01.ogg" id="snd"]
+[ext_resource type="Texture2D" path="res://tilesets/train stage/Big_Enm_strip2.png" id="t_body"]
+[ext_resource type="Texture2D" path="res://tilesets/train stage/Big_Enm_Head.png" id="t_head"]
+[ext_resource type="Texture2D" path="res://tilesets/train stage/Big_Enm_RIP.png" id="t_rip"]
+
+[sub_resource type="RectangleShape2D" id="shape"]
+size = Vector2(100, 150)
+
+[node name="BigTank" type="Area2D"]
+z_index = 1
+texture_filter = 1
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+script = ExtResource("script")
+move_speed = 12.0
+turret_turn_speed = 50.0
+shell_scene = ExtResource("shell")
+burst_count = 2
+burst_delay = 0.25
+wreck_texture = ExtResource("t_rip")
+death_sound = ExtResource("snd")
+max_hp = 14
+score_value = 800
+explosion_scale = 2.4
+drop_chance = 0.35
+
+[node name="Base" type="Sprite2D" parent="."]
+scale = Vector2(1.3333334, 1.3333334)
+texture = ExtResource("t_body")
+offset = Vector2(0, -1)
+hframes = 2
+
+[node name="Turret" type="Node2D" parent="."]
+
+[node name="Head" type="Sprite2D" parent="Turret"]
+scale = Vector2(1.3333334, 1.3333334)
+texture = ExtResource("t_head")
+offset = Vector2(0, -1)
+
+[node name="Muzzle" type="Marker2D" parent="Turret"]
+position = Vector2(0, 42)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("shape")
+
+[node name="FireTimer" type="Timer" parent="."]
+wait_time = 3.2
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+rect = Rect2(-60, -90, 120, 180)

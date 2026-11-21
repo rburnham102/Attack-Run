@@ -1,0 +1,567 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/enemies/train/train_boss.gd" id="script"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/boss_turret.tscn" id="turret"]
+[ext_resource type="PackedScene" path="res://scenes/projectiles/tank_shell.tscn" id="shell"]
+[ext_resource type="PackedScene" path="res://scenes/projectiles/heavy_shell.tscn" id="heavy"]
+[ext_resource type="PackedScene" path="res://scenes/projectiles/enemy_bullet.tscn" id="bullet"]
+[ext_resource type="AudioStream" path="res://sound effects/metal/metal_crash_01.ogg" id="snd_death"]
+[ext_resource type="AudioStream" path="res://sound effects/explosions/explosion_small_01.ogg" id="snd_gun"]
+[ext_resource type="AudioStream" path="res://sound effects/explosions/explosion_large_01.ogg" id="snd_blast"]
+[ext_resource type="Texture2D" path="res://tilesets/train stage/Train Boss/Wheels-Base_Strip2.png" id="t_wheels"]
+[ext_resource type="Texture2D" path="res://tilesets/train stage/Train Boss/Wagon_Main_strip7.png" id="t_engine"]
+[ext_resource type="Texture2D" path="res://tilesets/train stage/Train Boss/Main_Cannon_2_strip7.png" id="t_cannon"]
+[ext_resource type="Texture2D" path="res://tilesets/train stage/Train Boss/Wagon_0.png" id="t_w0"]
+[ext_resource type="Texture2D" path="res://tilesets/train stage/Train Boss/Wagon_1.png" id="t_w1"]
+[ext_resource type="Texture2D" path="res://tilesets/train stage/Train Boss/Wagon_2.png" id="t_w2"]
+[ext_resource type="Texture2D" path="res://tilesets/train stage/Train Boss/Wagon_3.png" id="t_w3"]
+[ext_resource type="Texture2D" path="res://tilesets/train stage/Train Boss/Wagon_1_Top0.png" id="t_top0"]
+[ext_resource type="Texture2D" path="res://tilesets/train stage/Train Boss/Wagon_1_Top1.png" id="t_top1"]
+[ext_resource type="Texture2D" path="res://tilesets/train stage/Train Boss/Wgn_Turret_DoubleCannon_strip6.png" id="t_double"]
+[ext_resource type="Texture2D" path="res://tilesets/train stage/Train Boss/Wgn_Turret_SingleCannon_strip7.png" id="t_single"]
+[ext_resource type="Texture2D" path="res://tilesets/train stage/Train Boss/Wgn_Turret_Small_strip6.png" id="t_small"]
+[ext_resource type="Texture2D" path="res://tilesets/train stage/Train Boss/Cannon_Main_L_strip7.png" id="t_side_l"]
+[ext_resource type="Texture2D" path="res://tilesets/train stage/Train Boss/Cannon_Main_R_strip7.png" id="t_side_r"]
+
+[sub_resource type="CircleShape2D" id="shape_double"]
+radius = 24.0
+
+[sub_resource type="CircleShape2D" id="shape_single"]
+radius = 22.0
+
+[sub_resource type="CircleShape2D" id="shape_small"]
+radius = 17.0
+
+[sub_resource type="CircleShape2D" id="shape_side"]
+radius = 14.0
+
+[sub_resource type="RectangleShape2D" id="hull"]
+size = Vector2(200, 500)
+
+[node name="ArmoredTrainB" type="Area2D"]
+z_index = 2
+texture_filter = 1
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+script = ExtResource("script")
+track_x = 470.0
+travel_speed = 190.0
+big_finish = true
+big_finish_sound = ExtResource("snd_blast")
+bullet_scene = ExtResource("heavy")
+battle_y = 300.0
+sweep_time = 0.0
+aimed_burst_count = 4
+fan_count = 9
+fan_angle = 14.0
+fan_offset = Vector2(0, 50)
+fade_out = false
+main_turret_turn_speed = 40.0
+death_sound = ExtResource("snd_death")
+max_hp = 48
+score_value = 15000
+explosion_scale = 3.5
+
+[node name="Wheels" type="Sprite2D" parent="."]
+position = Vector2(0, 798.7)
+scale = Vector2(1.3333334, 1.3333334)
+texture = ExtResource("t_wheels")
+hframes = 2
+
+[node name="Cars" type="Node2D" parent="."]
+
+[node name="Wagon2" type="Sprite2D" parent="Cars"]
+position = Vector2(0, 499.3)
+scale = Vector2(1.3333334, 1.3333334)
+texture = ExtResource("t_w2")
+
+[node name="Wagon3" type="Sprite2D" parent="Cars"]
+position = Vector2(0, 890.0)
+scale = Vector2(1.3333334, 1.3333334)
+texture = ExtResource("t_w3")
+
+[node name="Wagon0" type="Sprite2D" parent="Cars"]
+position = Vector2(0, 1278.7)
+scale = Vector2(1.3333334, 1.3333334)
+texture = ExtResource("t_w0")
+
+[node name="Wagon1" type="Sprite2D" parent="Cars"]
+position = Vector2(0, 1675.3)
+scale = Vector2(1.3333334, 1.3333334)
+texture = ExtResource("t_w1")
+
+[node name="GunDeck" type="Sprite2D" parent="Cars/Wagon1"]
+position = Vector2(0, -90.5)
+texture = ExtResource("t_top1")
+
+[node name="LowDeck" type="Sprite2D" parent="Cars/Wagon1"]
+position = Vector2(0, 56.5)
+texture = ExtResource("t_top0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 10.0)
+scale = Vector2(1.3333334, 1.3333334)
+texture = ExtResource("t_engine")
+hframes = 7
+
+[node name="Hull" type="CollisionShape2D" parent="."]
+position = Vector2(0, 10.0)
+shape = SubResource("hull")
+disabled = true
+
+[node name="MainTurret" type="Sprite2D" parent="."]
+z_index = 1
+scale = Vector2(1.3333334, 1.3333334)
+texture = ExtResource("t_cannon")
+offset = Vector2(0, 9.5)
+hframes = 7
+
+[node name="Turrets" type="Node2D" parent="."]
+z_index = 1
+
+[node name="Wagon2Single1" parent="Turrets" instance=ExtResource("turret")]
+position = Vector2(-30.7, 416.0)
+bullet_scene = ExtResource("shell")
+max_hp = 9
+score_value = 700
+burst_count = 3
+turn_speed = 100.0
+
+[node name="Sprite2D" parent="Turrets/Wagon2Single1" index="0"]
+scale = Vector2(1.3333334, 1.3333334)
+texture = ExtResource("t_single")
+offset = Vector2(0, 7)
+hframes = 7
+
+[node name="Muzzle" parent="Turrets/Wagon2Single1" index="1"]
+position = Vector2(0, 38)
+
+[node name="CollisionShape2D" parent="Turrets/Wagon2Single1" index="2"]
+shape = SubResource("shape_single")
+
+[node name="FireTimer" parent="Turrets/Wagon2Single1" index="3"]
+wait_time = 2.6
+
+[node name="Wagon2Single2" parent="Turrets" instance=ExtResource("turret")]
+position = Vector2(21.3, 416.0)
+bullet_scene = ExtResource("shell")
+max_hp = 9
+score_value = 700
+burst_count = 3
+turn_speed = 100.0
+
+[node name="Sprite2D" parent="Turrets/Wagon2Single2" index="0"]
+scale = Vector2(1.3333334, 1.3333334)
+texture = ExtResource("t_single")
+offset = Vector2(0, 7)
+hframes = 7
+
+[node name="Muzzle" parent="Turrets/Wagon2Single2" index="1"]
+position = Vector2(0, 38)
+
+[node name="CollisionShape2D" parent="Turrets/Wagon2Single2" index="2"]
+shape = SubResource("shape_single")
+
+[node name="FireTimer" parent="Turrets/Wagon2Single2" index="3"]
+wait_time = 2.6
+
+[node name="Wagon2Small1" parent="Turrets" instance=ExtResource("turret")]
+position = Vector2(-30.7, 478.7)
+bullet_scene = ExtResource("bullet")
+max_hp = 6
+score_value = 500
+burst_count = 3
+turn_speed = 100.0
+
+[node name="Sprite2D" parent="Turrets/Wagon2Small1" index="0"]
+scale = Vector2(1.3333334, 1.3333334)
+texture = ExtResource("t_small")
+offset = Vector2(0, 6)
+hframes = 6
+
+[node name="Muzzle" parent="Turrets/Wagon2Small1" index="1"]
+position = Vector2(0, 32)
+
+[node name="CollisionShape2D" parent="Turrets/Wagon2Small1" index="2"]
+shape = SubResource("shape_small")
+
+[node name="FireTimer" parent="Turrets/Wagon2Small1" index="3"]
+wait_time = 2.2
+
+[node name="Wagon2Small2" parent="Turrets" instance=ExtResource("turret")]
+position = Vector2(21.3, 478.7)
+bullet_scene = ExtResource("bullet")
+max_hp = 6
+score_value = 500
+burst_count = 3
+turn_speed = 100.0
+
+[node name="Sprite2D" parent="Turrets/Wagon2Small2" index="0"]
+scale = Vector2(1.3333334, 1.3333334)
+texture = ExtResource("t_small")
+offset = Vector2(0, 6)
+hframes = 6
+
+[node name="Muzzle" parent="Turrets/Wagon2Small2" index="1"]
+position = Vector2(0, 32)
+
+[node name="CollisionShape2D" parent="Turrets/Wagon2Small2" index="2"]
+shape = SubResource("shape_small")
+
+[node name="FireTimer" parent="Turrets/Wagon2Small2" index="3"]
+wait_time = 2.2
+
+[node name="Wagon3Small1" parent="Turrets" instance=ExtResource("turret")]
+position = Vector2(-33.3, 798.7)
+bullet_scene = ExtResource("bullet")
+max_hp = 6
+score_value = 500
+burst_count = 3
+turn_speed = 100.0
+
+[node name="Sprite2D" parent="Turrets/Wagon3Small1" index="0"]
+scale = Vector2(1.3333334, 1.3333334)
+texture = ExtResource("t_small")
+offset = Vector2(0, 6)
+hframes = 6
+
+[node name="Muzzle" parent="Turrets/Wagon3Small1" index="1"]
+position = Vector2(0, 32)
+
+[node name="CollisionShape2D" parent="Turrets/Wagon3Small1" index="2"]
+shape = SubResource("shape_small")
+
+[node name="FireTimer" parent="Turrets/Wagon3Small1" index="3"]
+wait_time = 2.2
+
+[node name="Wagon3Small2" parent="Turrets" instance=ExtResource("turret")]
+position = Vector2(18.7, 798.7)
+bullet_scene = ExtResource("bullet")
+max_hp = 6
+score_value = 500
+burst_count = 3
+turn_speed = 100.0
+
+[node name="Sprite2D" parent="Turrets/Wagon3Small2" index="0"]
+scale = Vector2(1.3333334, 1.3333334)
+texture = ExtResource("t_small")
+offset = Vector2(0, 6)
+hframes = 6
+
+[node name="Muzzle" parent="Turrets/Wagon3Small2" index="1"]
+position = Vector2(0, 32)
+
+[node name="CollisionShape2D" parent="Turrets/Wagon3Small2" index="2"]
+shape = SubResource("shape_small")
+
+[node name="FireTimer" parent="Turrets/Wagon3Small2" index="3"]
+wait_time = 2.2
+
+[node name="Wagon3Double1" parent="Turrets" instance=ExtResource("turret")]
+position = Vector2(-8.0, 902.7)
+bullet_scene = ExtResource("heavy")
+max_hp = 11
+score_value = 900
+burst_count = 2
+turn_speed = 100.0
+
+[node name="Sprite2D" parent="Turrets/Wagon3Double1" index="0"]
+scale = Vector2(1.3333334, 1.3333334)
+texture = ExtResource("t_double")
+offset = Vector2(0, 6)
+hframes = 6
+
+[node name="Muzzle" parent="Turrets/Wagon3Double1" index="1"]
+position = Vector2(0, 36)
+
+[node name="CollisionShape2D" parent="Turrets/Wagon3Double1" index="2"]
+shape = SubResource("shape_double")
+
+[node name="FireTimer" parent="Turrets/Wagon3Double1" index="3"]
+wait_time = 3.0
+
+[node name="Wagon3Single1" parent="Turrets" instance=ExtResource("turret")]
+position = Vector2(-8.0, 981.3)
+bullet_scene = ExtResource("shell")
+max_hp = 9
+score_value = 700
+burst_count = 3
+turn_speed = 100.0
+
+[node name="Sprite2D" parent="Turrets/Wagon3Single1" index="0"]
+scale = Vector2(1.3333334, 1.3333334)
+texture = ExtResource("t_single")
+offset = Vector2(0, 7)
+hframes = 7
+
+[node name="Muzzle" parent="Turrets/Wagon3Single1" index="1"]
+position = Vector2(0, 38)
+
+[node name="CollisionShape2D" parent="Turrets/Wagon3Single1" index="2"]
+shape = SubResource("shape_single")
+
+[node name="FireTimer" parent="Turrets/Wagon3Single1" index="3"]
+wait_time = 2.6
+
+[node name="Wagon0Double1" parent="Turrets" instance=ExtResource("turret")]
+position = Vector2(-32.0, 1185.3)
+bullet_scene = ExtResource("heavy")
+max_hp = 11
+score_value = 900
+burst_count = 2
+turn_speed = 100.0
+
+[node name="Sprite2D" parent="Turrets/Wagon0Double1" index="0"]
+scale = Vector2(1.3333334, 1.3333334)
+texture = ExtResource("t_double")
+offset = Vector2(0, 6)
+hframes = 6
+
+[node name="Muzzle" parent="Turrets/Wagon0Double1" index="1"]
+position = Vector2(0, 36)
+
+[node name="CollisionShape2D" parent="Turrets/Wagon0Double1" index="2"]
+shape = SubResource("shape_double")
+
+[node name="FireTimer" parent="Turrets/Wagon0Double1" index="3"]
+wait_time = 3.0
+
+[node name="Wagon0Double2" parent="Turrets" instance=ExtResource("turret")]
+position = Vector2(22.7, 1185.3)
+bullet_scene = ExtResource("heavy")
+max_hp = 11
+score_value = 900
+burst_count = 2
+turn_speed = 100.0
+
+[node name="Sprite2D" parent="Turrets/Wagon0Double2" index="0"]
+scale = Vector2(1.3333334, 1.3333334)
+texture = ExtResource("t_double")
+offset = Vector2(0, 6)
+hframes = 6
+
+[node name="Muzzle" parent="Turrets/Wagon0Double2" index="1"]
+position = Vector2(0, 36)
+
+[node name="CollisionShape2D" parent="Turrets/Wagon0Double2" index="2"]
+shape = SubResource("shape_double")
+
+[node name="FireTimer" parent="Turrets/Wagon0Double2" index="3"]
+wait_time = 3.0
+
+[node name="Wagon0Single1" parent="Turrets" instance=ExtResource("turret")]
+position = Vector2(-5.3, 1380.0)
+bullet_scene = ExtResource("shell")
+max_hp = 9
+score_value = 700
+burst_count = 3
+turn_speed = 100.0
+
+[node name="Sprite2D" parent="Turrets/Wagon0Single1" index="0"]
+scale = Vector2(1.3333334, 1.3333334)
+texture = ExtResource("t_single")
+offset = Vector2(0, 7)
+hframes = 7
+
+[node name="Muzzle" parent="Turrets/Wagon0Single1" index="1"]
+position = Vector2(0, 38)
+
+[node name="CollisionShape2D" parent="Turrets/Wagon0Single1" index="2"]
+shape = SubResource("shape_single")
+
+[node name="FireTimer" parent="Turrets/Wagon0Single1" index="3"]
+wait_time = 2.6
+
+[node name="Wagon1Single1" parent="Turrets" instance=ExtResource("turret")]
+position = Vector2(-49.3, 1554.7)
+bullet_scene = ExtResource("shell")
+max_hp = 9
+score_value = 700
+burst_count = 3
+turn_speed = 100.0
+
+[node name="Sprite2D" parent="Turrets/Wagon1Single1" index="0"]
+scale = Vector2(1.3333334, 1.3333334)
+texture = ExtResource("t_single")
+offset = Vector2(0, 7)
+hframes = 7
+
+[node name="Muzzle" parent="Turrets/Wagon1Single1" index="1"]
+position = Vector2(0, 38)
+
+[node name="CollisionShape2D" parent="Turrets/Wagon1Single1" index="2"]
+shape = SubResource("shape_single")
+
+[node name="FireTimer" parent="Turrets/Wagon1Single1" index="3"]
+wait_time = 2.6
+
+[node name="Wagon1Single2" parent="Turrets" instance=ExtResource("turret")]
+position = Vector2(30.7, 1554.7)
+bullet_scene = ExtResource("shell")
+max_hp = 9
+score_value = 700
+burst_count = 3
+turn_speed = 100.0
+
+[node name="Sprite2D" parent="Turrets/Wagon1Single2" index="0"]
+scale = Vector2(1.3333334, 1.3333334)
+texture = ExtResource("t_single")
+offset = Vector2(0, 7)
+hframes = 7
+
+[node name="Muzzle" parent="Turrets/Wagon1Single2" index="1"]
+position = Vector2(0, 38)
+
+[node name="CollisionShape2D" parent="Turrets/Wagon1Single2" index="2"]
+shape = SubResource("shape_single")
+
+[node name="FireTimer" parent="Turrets/Wagon1Single2" index="3"]
+wait_time = 2.6
+
+[node name="Wagon1Small1" parent="Turrets" instance=ExtResource("turret")]
+position = Vector2(-50.7, 1757.3)
+bullet_scene = ExtResource("bullet")
+max_hp = 6
+score_value = 500
+burst_count = 3
+turn_speed = 100.0
+
+[node name="Sprite2D" parent="Turrets/Wagon1Small1" index="0"]
+scale = Vector2(1.3333334, 1.3333334)
+texture = ExtResource("t_small")
+offset = Vector2(0, 6)
+hframes = 6
+
+[node name="Muzzle" parent="Turrets/Wagon1Small1" index="1"]
+position = Vector2(0, 32)
+
+[node name="CollisionShape2D" parent="Turrets/Wagon1Small1" index="2"]
+shape = SubResource("shape_small")
+
+[node name="FireTimer" parent="Turrets/Wagon1Small1" index="3"]
+wait_time = 2.2
+
+[node name="Wagon1Small2" parent="Turrets" instance=ExtResource("turret")]
+position = Vector2(-8.0, 1757.3)
+bullet_scene = ExtResource("bullet")
+max_hp = 6
+score_value = 500
+burst_count = 3
+turn_speed = 100.0
+
+[node name="Sprite2D" parent="Turrets/Wagon1Small2" index="0"]
+scale = Vector2(1.3333334, 1.3333334)
+texture = ExtResource("t_small")
+offset = Vector2(0, 6)
+hframes = 6
+
+[node name="Muzzle" parent="Turrets/Wagon1Small2" index="1"]
+position = Vector2(0, 32)
+
+[node name="CollisionShape2D" parent="Turrets/Wagon1Small2" index="2"]
+shape = SubResource("shape_small")
+
+[node name="FireTimer" parent="Turrets/Wagon1Small2" index="3"]
+wait_time = 2.2
+
+[node name="Wagon1Small3" parent="Turrets" instance=ExtResource("turret")]
+position = Vector2(34.7, 1757.3)
+bullet_scene = ExtResource("bullet")
+max_hp = 6
+score_value = 500
+burst_count = 3
+turn_speed = 100.0
+
+[node name="Sprite2D" parent="Turrets/Wagon1Small3" index="0"]
+scale = Vector2(1.3333334, 1.3333334)
+texture = ExtResource("t_small")
+offset = Vector2(0, 6)
+hframes = 6
+
+[node name="Muzzle" parent="Turrets/Wagon1Small3" index="1"]
+position = Vector2(0, 32)
+
+[node name="CollisionShape2D" parent="Turrets/Wagon1Small3" index="2"]
+shape = SubResource("shape_small")
+
+[node name="FireTimer" parent="Turrets/Wagon1Small3" index="3"]
+wait_time = 2.2
+
+[node name="EngineSideLeft" parent="Turrets" instance=ExtResource("turret")]
+position = Vector2(-77.3, 161.3)
+bullet_scene = ExtResource("bullet")
+max_hp = 8
+score_value = 600
+burst_count = 2
+aims = false
+
+[node name="Sprite2D" parent="Turrets/EngineSideLeft" index="0"]
+scale = Vector2(1.3333334, 1.3333334)
+texture = ExtResource("t_side_l")
+offset = Vector2(0, 0)
+hframes = 7
+
+[node name="Muzzle" parent="Turrets/EngineSideLeft" index="1"]
+position = Vector2(0, 14)
+
+[node name="CollisionShape2D" parent="Turrets/EngineSideLeft" index="2"]
+shape = SubResource("shape_side")
+
+[node name="FireTimer" parent="Turrets/EngineSideLeft" index="3"]
+wait_time = 2.4
+
+[node name="EngineSideRight" parent="Turrets" instance=ExtResource("turret")]
+position = Vector2(77.3, 161.3)
+bullet_scene = ExtResource("bullet")
+max_hp = 8
+score_value = 600
+burst_count = 2
+aims = false
+
+[node name="Sprite2D" parent="Turrets/EngineSideRight" index="0"]
+scale = Vector2(1.3333334, 1.3333334)
+texture = ExtResource("t_side_r")
+offset = Vector2(0, 0)
+hframes = 7
+
+[node name="Muzzle" parent="Turrets/EngineSideRight" index="1"]
+position = Vector2(0, 14)
+
+[node name="CollisionShape2D" parent="Turrets/EngineSideRight" index="2"]
+shape = SubResource("shape_side")
+
+[node name="FireTimer" parent="Turrets/EngineSideRight" index="3"]
+wait_time = 2.4
+
+[node name="Muzzles" type="Node2D" parent="."]
+
+[node name="MainGun0" type="Marker2D" parent="Muzzles"]
+position = Vector2(0, 62)
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 2.8
+
+[node name="GunSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("snd_gun")
+volume_db = -4.0
+max_polyphony = 4
+
+[editable path="Turrets/Wagon2Single1"]
+[editable path="Turrets/Wagon2Single2"]
+[editable path="Turrets/Wagon2Small1"]
+[editable path="Turrets/Wagon2Small2"]
+[editable path="Turrets/Wagon3Small1"]
+[editable path="Turrets/Wagon3Small2"]
+[editable path="Turrets/Wagon3Double1"]
+[editable path="Turrets/Wagon3Single1"]
+[editable path="Turrets/Wagon0Double1"]
+[editable path="Turrets/Wagon0Double2"]
+[editable path="Turrets/Wagon0Single1"]
+[editable path="Turrets/Wagon1Single1"]
+[editable path="Turrets/Wagon1Single2"]
+[editable path="Turrets/Wagon1Small1"]
+[editable path="Turrets/Wagon1Small2"]
+[editable path="Turrets/Wagon1Small3"]
+[editable path="Turrets/EngineSideLeft"]
+[editable path="Turrets/EngineSideRight"]

@@ -18,6 +18,13 @@ extends Node2D
 const CHUNK_HEIGHT := 512.0
 
 @export var camera: Camera2D
+## How much map (in pixels) is kept built above the top of the screen. A
+## vehicle can stick out past the bottom of its chunk (level 4's trains are
+## longer than a chunk), so new chunks go in well out of sight.
+@export var build_ahead := 800.0
+## Chunks are deleted this far below the bottom of the screen, for the same
+## reason: a long train can stick out above the top of its chunk.
+@export var keep_below := 800.0
 
 ## World y of the top edge of the highest chunk placed so far.
 var _top_y := 0.0
@@ -78,13 +85,13 @@ func _process(_delta: float) -> void:
 	var screen_top := camera.global_position.y
 	var screen_bottom := screen_top + get_viewport_rect().size.y
 
-	# Keep one full chunk ready above the screen, so enemies already exist
-	# before they scroll into view.
-	while _top_y > screen_top - CHUNK_HEIGHT:
+	# Keep map ready above the screen, so enemies already exist before they
+	# scroll into view.
+	while _top_y > screen_top - build_ahead:
 		_place(_pick_chunk())
 
 	for chunk in get_children():
-		if chunk.position.y > screen_bottom:
+		if chunk.position.y > screen_bottom + keep_below:
 			chunk.queue_free()
 
 
@@ -116,7 +123,11 @@ func _spawn_enemies(chunk: Node) -> void:
 	# slice() stops at the end of the array, so asking for more enemies than
 	# there are points just fills every point.
 	for point: SpawnPoint in points.slice(0, count):
-		var pool := _level.water_enemies if point.water else _level.ground_enemies
+		var pool := _level.ground_enemies
+		if point.water:
+			pool = _level.water_enemies
+		elif point.track:
+			pool = _level.rail_enemies
 		if pool.is_empty():
 			continue
 		# pick_random() can return anything, so name the type to get a typed

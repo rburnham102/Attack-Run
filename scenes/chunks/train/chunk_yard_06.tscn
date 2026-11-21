@@ -1,0 +1,46 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://tilesets/train stage/Stage_Lower_Layer.png" id="1_lower"]
+[ext_resource type="Texture2D" path="res://tilesets/train stage/Stage_Top_Layer.png" id="2_roofs"]
+[ext_resource type="Script" path="res://scenes/chunks/spawn_point.gd" id="3_spawn"]
+
+[node name="ChunkYard06" type="Node2D"]
+texture_filter = 1
+metadata/height = 512.0000
+
+[node name="Ground" type="Sprite2D" parent="."]
+scale = Vector2(2.6666667, 2.6666667)
+texture = ExtResource("1_lower")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 1418, 240, 192)
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="Track1" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(499, 227)
+script = ExtResource("3_spawn")
+track = true
+
+[node name="Track2" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(123, 144)
+script = ExtResource("3_spawn")
+track = true
+parked = true
+
+[node name="Ground1" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(579, 376)
+rotation = -1.5707963
+script = ExtResource("3_spawn")
+
+[node name="Ground2" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(53, 315)
+script = ExtResource("3_spawn")
+
+[node name="Roofs" type="Sprite2D" parent="."]
+z_index = 2
+scale = Vector2(2.6666667, 2.6666667)
+texture = ExtResource("2_roofs")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 1418, 240, 192)

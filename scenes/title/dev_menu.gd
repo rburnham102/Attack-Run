@@ -44,12 +44,13 @@ func _read_levels() -> Array[LevelData]:
 
 
 func _start_level(index: int) -> void:
-	# Every boss in the earlier levels would have raised Game.stage by one,
-	# so start at that stage: the level is exactly as tough as in a real
-	# playthrough.
+	# Every boss in the earlier levels would have raised Game.stage (usually
+	# by one), so start at that stage: the level is exactly as tough as in a
+	# real playthrough.
 	var stage := 1
 	for i in index:
-		stage += _levels[i].boss_scenes.size()
+		for boss in _levels[i].boss_scenes.size():
+			stage += _levels[i].stage_up_for(boss)
 	Game.start_new_game(Game.player_count, index, stage, _skip_to_boss.button_pressed)
 
 

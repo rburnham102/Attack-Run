@@ -26,6 +26,9 @@ const TWO_PLAYER_HP_SCALE := 1.7
 @export var fan_angle := 12.0
 ## Where the fan of bullets starts, relative to the boss's center.
 @export var fan_offset := Vector2(0, 50)
+## Fade away once the death explosions are over. Untick for a boss whose
+## wreck should stay in sight (level 4's trains roll away instead).
+@export var fade_out := true
 
 var _active := false
 var _max_hp := 0
@@ -149,7 +152,8 @@ func die(shooter_id: int) -> void:
 	for i in 8:
 		death.tween_callback(_small_explosion)
 		death.tween_interval(0.15)
-	death.tween_property(self, "modulate:a", 0.0, 0.5)
+	if fade_out:
+		death.tween_property(self, "modulate:a", 0.0, 0.5)
 	death.tween_callback(_finish_death)
 
 

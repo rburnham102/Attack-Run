@@ -1,0 +1,28 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/enemies/train/small_train.gd" id="script"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/train/engine.tscn" id="engine"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/train/gun_car.tscn" id="gun_car"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/train/short_car.tscn" id="short_car"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/train/tanker_white.tscn" id="tanker_white"]
+
+[node name="SmallTrainArmored" type="Node2D"]
+script = ExtResource("script")
+
+[node name="Engine" parent="." instance=ExtResource("engine")]
+position = Vector2(0, -95)
+
+[node name="ShortCar" parent="." instance=ExtResource("short_car")]
+position = Vector2(0, -231)
+
+[node name="GunCar1" parent="." instance=ExtResource("gun_car")]
+position = Vector2(0, -348)
+
+[node name="GunCar2" parent="." instance=ExtResource("gun_car")]
+position = Vector2(0, -492)
+
+[node name="TankerWhite" parent="." instance=ExtResource("tanker_white")]
+position = Vector2(0, -637)
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+rect = Rect2(-40, -707, 80, 707)

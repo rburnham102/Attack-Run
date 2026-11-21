@@ -1,0 +1,40 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/enemies/tank.gd" id="script"]
+[ext_resource type="AudioStream" path="res://sound effects/explosions/explosion_debris_01.ogg" id="snd"]
+[ext_resource type="Texture2D" path="res://tilesets/train stage/Small Train/SmallTrain_Wgn10_Strip2.png" id="t_ok"]
+[ext_resource type="Texture2D" path="res://tilesets/train stage/Small Train/SmallTrain_Wgn11_Strip2.png" id="t_rip"]
+
+[sub_resource type="AtlasTexture" id="frame_ok"]
+atlas = ExtResource("t_ok")
+region = Rect2(0, 0, 26, 37)
+
+[sub_resource type="AtlasTexture" id="frame_rip"]
+atlas = ExtResource("t_rip")
+region = Rect2(0, 0, 26, 37)
+
+[sub_resource type="RectangleShape2D" id="shape"]
+size = Vector2(54, 83)
+
+[node name="ShortCar" type="Area2D"]
+z_index = 1
+texture_filter = 1
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+script = ExtResource("script")
+move_speed = 0.0
+death_sound = ExtResource("snd")
+wreck_texture = SubResource("frame_rip")
+max_hp = 4
+score_value = 150
+explosion_scale = 1.4
+drop_chance = 0.05
+
+[node name="Base" type="Sprite2D" parent="."]
+scale = Vector2(2.6666667, 2.6666667)
+texture = SubResource("frame_ok")
+flip_v = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("shape")
