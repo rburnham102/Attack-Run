@@ -13,6 +13,9 @@ const EXPLOSION := preload("res://scenes/effects/explosion.tscn")
 @export var death_sound: AudioStream
 ## Chance (0 to 1) of dropping a random pickup when destroyed.
 @export_range(0.0, 1.0) var drop_chance := 0.0
+## Drops come from the wave-bonus list (power-ups and drones, no money)
+## instead of the normal one. Level 4's trucks use this with Drop Chance 1.
+@export var drop_upgrades_only := false
 
 var hp := 0
 ## True once shot down. A Wave reads this to tell kills from escapes.
@@ -51,7 +54,8 @@ func die(shooter_id: int) -> void:
 	destroyed = true
 	Game.add_score(shooter_id, score_value)
 	if randf() < drop_chance:
-		Game.spawn_pickup(Game.random_pickup_kind(), global_position)
+		var weights := Game.BONUS_WEIGHTS if drop_upgrades_only else Game.DROP_WEIGHTS
+		Game.spawn_pickup(Game.random_pickup_kind(weights), global_position)
 	var boom := EXPLOSION.instantiate()
 	boom.position = global_position
 	boom.scale = Vector2.ONE * explosion_scale

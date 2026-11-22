@@ -50,6 +50,14 @@ extends Resource
 ## laser). On from level 4.
 @export var specials_unlocked := false
 
+@export_group("Player")
+## Added to each plane's max health on this level (and to its health bar).
+## Levels 3 and 4 use 1, since they're much harder.
+@export_range(0, 5) var extra_player_hp := 0
+## The gun level each plane starts this level with. It isn't a floor:
+## dying still costs a level, down to 1. Level 4 starts at 2.
+@export_range(1, 5) var start_weapon_level := 1
+
 @export_group("Air Enemies")
 ## The planes that fly in waves. Leave empty to use the one set on the Main
 ## node (the red bomber). Level 3 uses a white winter version.

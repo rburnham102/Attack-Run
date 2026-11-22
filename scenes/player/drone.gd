@@ -125,7 +125,9 @@ func _recharge() -> void:
 ## Shows the charges on the drone's lights, turns the bubble's hitbox on or
 ## off, and redraws the bubble.
 func _update_shield() -> void:
-	_sprite.frame = shield  # the "charges" animation: frame 0-3 = 0-3 lights
+	# The "charges" animation has 4 frames: 0-3 lights. Scale the charges to
+	# fit, rounding up so the last light stays on until the very last charge.
+	_sprite.frame = ceili(3.0 * shield / max_shield)
 	# set_deferred: this can run inside a collision callback.
 	_bubble.set_deferred("disabled", shield == 0)
 	queue_redraw()

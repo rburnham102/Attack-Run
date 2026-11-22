@@ -121,6 +121,14 @@ func lose_life(player_id: int) -> int:
 	return lives[i]
 
 
+## Gives a player who is out of lives one life back (two-player mode, after
+## a mid-level boss). Main makes the new plane.
+func revive(player_id: int) -> void:
+	var i := player_id - 1
+	lives[i] = 1
+	lives_changed.emit(player_id, lives[i])
+
+
 ## Adds a node (bullet, explosion, enemy) to the current scene.
 ## Deferred because this is often called from inside a collision signal,
 ## and Godot doesn't allow adding physics objects while it's processing

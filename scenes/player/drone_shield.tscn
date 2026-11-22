@@ -40,6 +40,7 @@ collision_mask = 0
 monitoring = false
 script = ExtResource("1_script")
 kind = 2
+max_shield = 5
 death_sound = ExtResource("2_snd")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1056207525]

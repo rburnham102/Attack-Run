@@ -74,12 +74,8 @@ func _ready() -> void:
 		helicopter_scene = _level.helicopter_scene
 	_chunk_spawner.setup(_level)
 	_radio.level = _level
-	var screen := get_viewport_rect().size
-	if Game.player_count == 1:
-		_spawn_player(1, Vector2(screen.x * 0.5, screen.y - 140))
-	else:
-		_spawn_player(1, Vector2(screen.x * 0.33, screen.y - 140))
-		_spawn_player(2, Vector2(screen.x * 0.67, screen.y - 140))
+	for id in range(1, Game.player_count + 1):
+		_spawn_player(id, _start_spot(id))
 	_wave_timer.timeout.connect(_spawn_wave)
 	_helicopter_timer.timeout.connect(_spawn_helicopter)
 	_stage_timer.timeout.connect(_on_stage_timer_timeout)
@@ -88,11 +84,49 @@ func _ready() -> void:
 
 
 func _spawn_player(id: int, screen_pos: Vector2) -> void:
+	var player := _make_player(id, screen_pos)
+	_scroller.add_child(player)
+	_players.append(player)
+
+
+## Where a player's plane starts the level, in screen coordinates: the
+## middle for one player, a third of the way in from each side for two.
+func _start_spot(id: int) -> Vector2:
+	var screen := get_viewport_rect().size
+	var x := 0.5
+	if Game.player_count == 2:
+		x = 0.33 if id == 1 else 0.67
+	return Vector2(screen.x * x, screen.y - 140)
+
+
+## A new plane with this level's player settings. They're set before it's
+## added to the scene, because the plane fills its health from max_hp in
+## its _ready().
+func _make_player(id: int, screen_pos: Vector2) -> Node2D:
 	var player := player_scene.instantiate()
 	player.player_id = id
 	player.position = screen_pos  # screen coordinates, since the Scroller is its parent
-	_scroller.add_child(player)
-	_players.append(player)
+	player.max_hp += _level.extra_player_hp
+	player.weapon_level = _level.start_weapon_level
+	return player
+
+
+## Two-player only: a player who is out of lives gets a new plane, with one
+## life, at their start spot. Called after a mid-level boss falls.
+func _revive_dead_players() -> void:
+	if Game.player_count != 2:
+		return
+	for i in _players.size():
+		# is_instance_valid: a player out of lives is freed, but our list
+		# still points at the old plane.
+		if is_instance_valid(_players[i]) or Game.lives[i] > 0:
+			continue
+		var id := i + 1
+		var player := _make_player(id, _start_spot(id))
+		_scroller.add_child(player)
+		_players[i] = player
+		Game.revive(id)
+		player.start_respawn_invulnerability()
 
 
 ## The level opening, written top to bottom with await: each await waits for
@@ -239,6 +273,7 @@ func _on_boss_defeated() -> void:
 	_boss_index += 1
 	_chunk_spawner.use_boss_chunk(null)
 	if _boss_index < _level.boss_scenes.size():
+		_revive_dead_players()
 		_radio.say(lines, radio_defeated_delay)
 		get_tree().create_timer(boss_delay, false).timeout.connect(_start_stage)
 	else:

@@ -290,6 +290,12 @@ func _die() -> void:
 		queue_free()
 
 
+## Blinks and can't be hurt for a moment, as after losing a life. Main calls
+## this on a plane revived after a boss.
+func start_respawn_invulnerability() -> void:
+	_start_invulnerability(respawn_invuln_time)
+
+
 ## The spot this plane starts the level from, and respawns at.
 func get_spawn_position() -> Vector2:
 	return _spawn_position

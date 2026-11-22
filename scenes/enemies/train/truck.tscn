@@ -47,7 +47,8 @@ death_sound = ExtResource("snd")
 max_hp = 4
 score_value = 250
 explosion_scale = 1.6
-drop_chance = 0.4
+drop_chance = 1.0
+drop_upgrades_only = true
 
 [node name="Base" type="Sprite2D" parent="."]
 rotation = 1.5707964

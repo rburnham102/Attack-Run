@@ -86,6 +86,7 @@ water_enemies = Array[PackedScene]([ExtResource("14_mini_sub")])
 min_ground_enemies = 1
 max_ground_enemies = 3
 drones_unlocked = true
+extra_player_hp = 1
 enemy_plane_scene = ExtResource("15_plane")
 helicopter_scene = ExtResource("16_heli")
 boss_scenes = Array[PackedScene]([ExtResource("17_submarine"), ExtResource("18_sub_pen")])
