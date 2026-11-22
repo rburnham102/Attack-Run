@@ -14,12 +14,12 @@ signal finished
 ## The missile drone's homing missile (homing_bullet.gd).
 @export var missile_scene: PackedScene
 ## Total missiles in the barrage, shared between the two wings.
-@export var missile_count := 16
+@export var missile_count := 32
 ## Missiles per second.
-@export var launch_rate := 4.0
+@export var launch_rate := 8.0
 ## How far out from straight ahead each missile starts, in degrees. The
 ## missile's turning brings it round onto its target in an arc.
-@export var launch_angle := 70.0
+@export var launch_angle := 20.0
 
 ## Set by the plane before we're added.
 var player: Node2D
