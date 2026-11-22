@@ -239,7 +239,10 @@ func _add_drone(scene: PackedScene) -> void:
 	# Our parent is the Scroller, so the drone works in screen coordinates
 	# like we do. It isn't our child, so it can trail behind us smoothly
 	# instead of being locked to the plane.
-	get_parent().add_child(drone)
+	
+		# call_deferred: we got here from _on_area_entered, a physics callback,
+	# and Godot won't add a new Area2D to the physics world mid-callback.
+	get_parent().add_child.call_deferred(drone)
 	_drones[slot] = drone
 	# When it's shot down, update the HUD. call_deferred: it's still on its
 	# way out of the tree when tree_exited fires.

@@ -3,6 +3,10 @@ extends Node
 ## so any script can call Game.add_score(...) etc. It survives scene changes,
 ## which is why the score and player count live here and not in main.tscn.
 
+# These are emitted by other scripts (Game is an event bus), which
+# the unused-signal check can't see.
+@warning_ignore_start("unused_signal")
+
 signal score_changed(player_id: int, score: int)
 signal lives_changed(player_id: int, lives: int)
 ## stats holds "hp", "armor", "weapon" and "speed" for that player.
@@ -24,6 +28,8 @@ signal game_over
 signal level_complete
 ## The last level is done: the whole campaign is won.
 signal campaign_complete
+
+@warning_ignore_restore("unused_signal")
 
 const START_LIVES := 3
 const MAIN_SCENE := "res://scenes/main/main.tscn"
