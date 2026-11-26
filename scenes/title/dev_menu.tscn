@@ -56,6 +56,12 @@ size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 24
 text = "START AT BOSS"
 
+[node name="PlayAsP2" type="CheckButton" parent="Center/VBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 24
+text = "PLAY AS PLAYER 2"
+
 [node name="Back" type="Button" parent="Center/VBox"]
 custom_minimum_size = Vector2(200, 48)
 layout_mode = 2

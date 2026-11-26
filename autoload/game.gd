@@ -66,6 +66,10 @@ var drones_unlocked := false
 ## get their special weapon while this is true.
 var specials_unlocked := false
 var player_count := 1
+## In a one-player game, which plane you fly: 1 or 2. Picking 2 (dev menu's
+## PLAY AS PLAYER 2) gives you player 2's plane, special and controls, so P2
+## can be tested alone. Ignored in two-player games.
+var solo_player_id := 1
 # Index 0 is player 1, index 1 is player 2.
 var scores: Array[int] = [0, 0]
 var lives: Array[int] = [0, 0]
@@ -86,12 +90,17 @@ var _rng := RandomNumberGenerator.new()
 ## which can start at any level: first_level is the level to play (0 is
 ## level 1), and first_stage is the difficulty stage to start on, so a later
 ## level is as tough as it would be after beating the ones before it.
+## solo_id is which player a one-player game uses (see solo_player_id).
 ## The title screen leaves them all at their defaults.
 func start_new_game(count: int, first_level := 0, first_stage := 1,
-		skip_to_boss := false) -> void:
+		skip_to_boss := false, solo_id := 1) -> void:
 	player_count = count
+	solo_player_id = solo_id
 	scores = [0, 0]
-	lives = [START_LIVES, START_LIVES if count == 2 else 0]
+	# Only the players in the game get lives, so the others count as out.
+	lives = [0, 0]
+	for id in player_ids():
+		lives[id - 1] = START_LIVES
 	stage = first_stage
 	level_index = first_level
 	dev_skip_to_boss = skip_to_boss
@@ -103,6 +112,18 @@ func start_new_game(count: int, first_level := 0, first_stage := 1,
 func go_to_next_level() -> void:
 	level_index += 1
 	get_tree().change_scene_to_file(MAIN_SCENE)
+
+
+## The players in this game: [1, 2] for two players, otherwise just the
+## solo player ([1] normally, [2] when playing as player 2).
+func player_ids() -> Array[int]:
+	if player_count == 2:
+		return [1, 2]
+	return [solo_player_id]
+
+
+func has_player(player_id: int) -> bool:
+	return player_id in player_ids()
 
 
 func go_to_title() -> void:

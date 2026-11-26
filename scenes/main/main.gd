@@ -74,7 +74,7 @@ func _ready() -> void:
 		helicopter_scene = _level.helicopter_scene
 	_chunk_spawner.setup(_level)
 	_radio.level = _level
-	for id in range(1, Game.player_count + 1):
+	for id in Game.player_ids():
 		_spawn_player(id, _start_spot(id))
 	_wave_timer.timeout.connect(_spawn_wave)
 	_helicopter_timer.timeout.connect(_spawn_helicopter)

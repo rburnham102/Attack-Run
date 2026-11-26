@@ -24,10 +24,10 @@ func _show_results(title: String) -> void:
 	# Let the last explosion play out before freezing everything.
 	await get_tree().create_timer(1.0).timeout
 	get_tree().paused = true
-	var text := "P1  %07d" % Game.scores[0]
-	if Game.player_count == 2:
-		text += "\nP2  %07d" % Game.scores[1]
-	_scores.text = text
+	var lines: PackedStringArray = []
+	for id in Game.player_ids():
+		lines.append("P%d  %07d" % [id, Game.scores[id - 1]])
+	_scores.text = "\n".join(lines)
 	show()
 	# A short delay so a held fire key doesn't skip this screen instantly.
 	await get_tree().create_timer(1.0).timeout

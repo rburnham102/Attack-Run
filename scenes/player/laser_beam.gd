@@ -14,6 +14,13 @@ extends Area2D
 ##   - enemy bullets and shells (collision layer 5, "enemy shots") are wiped
 ##     out the moment they touch it, so the beam cuts a safe path.
 ## Nothing blocks the beam: it passes through everything.
+##
+## The beam picture is two AnimatedSprite2D segments stacked end to end
+## (Beam/Lower and Beam/Upper), each playing its own SpriteFrames on a loop.
+## Lower uses "laser_blue_strip custom.png", which has a rounded cap where
+## the beam leaves the nose; Upper uses the plain strip so no second cap shows
+## where the two meet. The animation speed is set in each SpriteFrames
+## (18 frames per second), not here.
 
 signal finished
 
@@ -26,8 +33,6 @@ signal finished
 ## Played on each target the beam hits.
 @export var hit_texture: Texture2D
 @export var hit_frames := 3
-## Beam animation speed, in frames per second.
-@export var beam_fps := 18.0
 ## Seconds for the beam to grow to full width, and to shrink away.
 @export var fade_time := 0.15
 
@@ -39,11 +44,9 @@ var player: Node2D
 
 var _firing := false
 var _tick_left := 0.0
-var _time := 0.0
 var _full_width := 1.0
 
 @onready var _beam: Node2D = $Beam
-@onready var _segments: Array[Node] = $Beam.get_children()
 @onready var _shape: RectangleShape2D = $CollisionShape2D.shape
 @onready var _collision: CollisionShape2D = $CollisionShape2D
 @onready var _fire_sound: AudioStreamPlayer2D = $FireSound
@@ -89,10 +92,6 @@ func _process(delta: float) -> void:
 	var length := player.position.y + 20.0
 	_shape.size.y = length
 	_collision.position.y = -length / 2.0
-	# Animate the beam: every segment shows the same frame.
-	_time += delta
-	for segment: Sprite2D in _segments:
-		segment.frame = int(_time * beam_fps) % segment.hframes
 	_tick_left -= delta
 	if _tick_left <= 0.0:
 		_tick_left += tick_time

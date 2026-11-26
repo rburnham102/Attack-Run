@@ -23,9 +23,12 @@ var _level_number := 1
 
 
 func _ready() -> void:
-	$Margin/HBox/P2Label.modulate.a = 1.0 if Game.player_count == 2 else 0.0
-	# modulate.a hides player 2's corner but keeps its space, like the label.
-	_statuses[1].modulate.a = 1.0 if Game.player_count == 2 else 0.0
+	# Only show the players in this game. modulate.a hides a player's label
+	# and corner but keeps their space, so the layout doesn't shift.
+	for i in 2:
+		var shown := 1.0 if Game.has_player(i + 1) else 0.0
+		_labels[i].modulate.a = shown
+		_statuses[i].modulate.a = shown
 	_boss_bar.hide()
 	_banner.hide()
 	Game.score_changed.connect(func(_id, _score): _refresh())

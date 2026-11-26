@@ -2,9 +2,152 @@
 
 [ext_resource type="Script" path="res://scenes/player/laser_beam.gd" id="1_script"]
 [ext_resource type="Texture2D" path="res://assets/Lasers/laser_blue_strip9.png" id="2_beam"]
+[ext_resource type="Texture2D" path="res://assets/Lasers/laser_blue_strip custom.png" id="6_beam_tip"]
 [ext_resource type="Texture2D" path="res://assets/Lasers/laserv3_hit_strip3.png" id="3_hit"]
 [ext_resource type="AudioStream" path="res://sound effects/Sci-Fi Weapons & Impacts/01_Energy_Burst.wav.wav" id="4_fire"]
 [ext_resource type="AudioStream" path="res://sound effects/Sci-Fi Weapons & Impacts/02_Energy_Hit.wav.wav" id="5_hit"]
+
+[sub_resource type="AtlasTexture" id="tip_0"]
+atlas = ExtResource("6_beam_tip")
+region = Rect2(0, 0, 32, 272)
+
+[sub_resource type="AtlasTexture" id="tip_1"]
+atlas = ExtResource("6_beam_tip")
+region = Rect2(32, 0, 32, 272)
+
+[sub_resource type="AtlasTexture" id="tip_2"]
+atlas = ExtResource("6_beam_tip")
+region = Rect2(64, 0, 32, 272)
+
+[sub_resource type="AtlasTexture" id="tip_3"]
+atlas = ExtResource("6_beam_tip")
+region = Rect2(96, 0, 32, 272)
+
+[sub_resource type="AtlasTexture" id="tip_4"]
+atlas = ExtResource("6_beam_tip")
+region = Rect2(128, 0, 32, 272)
+
+[sub_resource type="AtlasTexture" id="tip_5"]
+atlas = ExtResource("6_beam_tip")
+region = Rect2(160, 0, 32, 272)
+
+[sub_resource type="AtlasTexture" id="tip_6"]
+atlas = ExtResource("6_beam_tip")
+region = Rect2(192, 0, 32, 272)
+
+[sub_resource type="AtlasTexture" id="tip_7"]
+atlas = ExtResource("6_beam_tip")
+region = Rect2(224, 0, 32, 272)
+
+[sub_resource type="AtlasTexture" id="tip_8"]
+atlas = ExtResource("6_beam_tip")
+region = Rect2(256, 0, 32, 272)
+
+[sub_resource type="SpriteFrames" id="tip_frames"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("tip_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("tip_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("tip_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("tip_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("tip_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("tip_5")
+}, {
+"duration": 1.0,
+"texture": SubResource("tip_6")
+}, {
+"duration": 1.0,
+"texture": SubResource("tip_7")
+}, {
+"duration": 1.0,
+"texture": SubResource("tip_8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 18.0
+}]
+
+[sub_resource type="AtlasTexture" id="beam_0"]
+atlas = ExtResource("2_beam")
+region = Rect2(0, 0, 32, 272)
+
+[sub_resource type="AtlasTexture" id="beam_1"]
+atlas = ExtResource("2_beam")
+region = Rect2(32, 0, 32, 272)
+
+[sub_resource type="AtlasTexture" id="beam_2"]
+atlas = ExtResource("2_beam")
+region = Rect2(64, 0, 32, 272)
+
+[sub_resource type="AtlasTexture" id="beam_3"]
+atlas = ExtResource("2_beam")
+region = Rect2(96, 0, 32, 272)
+
+[sub_resource type="AtlasTexture" id="beam_4"]
+atlas = ExtResource("2_beam")
+region = Rect2(128, 0, 32, 272)
+
+[sub_resource type="AtlasTexture" id="beam_5"]
+atlas = ExtResource("2_beam")
+region = Rect2(160, 0, 32, 272)
+
+[sub_resource type="AtlasTexture" id="beam_6"]
+atlas = ExtResource("2_beam")
+region = Rect2(192, 0, 32, 272)
+
+[sub_resource type="AtlasTexture" id="beam_7"]
+atlas = ExtResource("2_beam")
+region = Rect2(224, 0, 32, 272)
+
+[sub_resource type="AtlasTexture" id="beam_8"]
+atlas = ExtResource("2_beam")
+region = Rect2(256, 0, 32, 272)
+
+[sub_resource type="SpriteFrames" id="beam_frames"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("beam_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("beam_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("beam_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("beam_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("beam_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("beam_5")
+}, {
+"duration": 1.0,
+"texture": SubResource("beam_6")
+}, {
+"duration": 1.0,
+"texture": SubResource("beam_7")
+}, {
+"duration": 1.0,
+"texture": SubResource("beam_8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 18.0
+}]
 
 [sub_resource type="RectangleShape2D" id="shape"]
 size = Vector2(60, 400)
@@ -22,17 +165,17 @@ hit_texture = ExtResource("3_hit")
 texture_filter = 1
 scale = Vector2(2.5, 1)
 
-[node name="Lower" type="Sprite2D" parent="Beam"]
+[node name="Lower" type="AnimatedSprite2D" parent="Beam"]
 position = Vector2(0, -272)
 scale = Vector2(1, 2)
-texture = ExtResource("2_beam")
-hframes = 9
+sprite_frames = SubResource("tip_frames")
+autoplay = "default"
 
-[node name="Upper" type="Sprite2D" parent="Beam"]
+[node name="Upper" type="AnimatedSprite2D" parent="Beam"]
 position = Vector2(0, -816)
 scale = Vector2(1, 2)
-texture = ExtResource("2_beam")
-hframes = 9
+sprite_frames = SubResource("beam_frames")
+autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -200)
